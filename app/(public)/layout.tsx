@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Noto_Sans_TC as notoSansTC } from 'next/font/google';
 
 import Header from '@/components/Header';
 import SideNavigation from '@/components/SideNavigation';
 import '@/styles/globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const notoSans = notoSansTC({
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap'
+});
 
 export const metadata: Metadata = {
   title: 'orangeLife App',
@@ -20,12 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} relative flex min-h-screen flex-col bg-primary-0 text-primary-700`}
+        className={`${notoSans.className} relative flex min-h-screen flex-col bg-primary-0 text-primary-700`}
       >
         <Header />
         <main className="flex flex-1">
           <SideNavigation />
-          <main className="w-full px-16 pt-10">{children}</main>
+          <main className="mx-auto w-full max-w-screen-md px-4 pt-10">
+            {children}
+          </main>
         </main>
       </body>
     </html>

@@ -9,17 +9,17 @@ const navLinks = [
   {
     name: '首頁',
     href: '/',
-    icon: <HomeIcon className="size-5 text-primary-600" />
+    icon: <HomeIcon />
   },
   {
     name: '食品',
     href: '/food',
-    icon: <CakeIcon className="size-5 text-primary-600" />
+    icon: <CakeIcon />
   },
   {
     name: '運動',
     href: '/sport',
-    icon: <LifebuoyIcon className="size-5 text-primary-600" />
+    icon: <LifebuoyIcon />
   }
 ];
 
@@ -32,10 +32,14 @@ export default function SideNavigation() {
         {navLinks.map((link) => (
           <li key={link.name}>
             <Link
-              className={`flex min-h-12 items-center gap-6 rounded-sm px-2 py-1 font-semibold leading-none text-primary-600 transition-colors hover:bg-primary-100 ${pathname === link.href ? 'bg-primary-200' : ''}`}
-              href="/"
+              className={`flex min-h-12 items-center gap-6 rounded px-2 py-1 font-semibold leading-none text-primary-600 transition-colors hover:bg-primary-100 ${pathname === link.href ? 'bg-primary-200 text-primary-800' : ''}`}
+              href={link.href}
             >
-              {link.icon}
+              <span
+                className={`size-5 text-primary-600 ${pathname === link.href ? 'text-primary-800' : ''}`}
+              >
+                {link.icon}
+              </span>
               <span className="text-sm">{link.name}</span>
             </Link>
           </li>
