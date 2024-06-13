@@ -1,17 +1,17 @@
-import BaseCard from '@/components/BaseCard';
+import FoodCard from '@/components/FoodCard';
 
 export default function Page() {
   return (
     <div className="mx-auto max-w-screen-xl">
       <ul className="grid grid-cols-3 gap-8">
         <li>
-          <BaseCard />
+          <FoodCard />
         </li>
         <li>
-          <BaseCard />
+          <FoodCard />
         </li>
         <li>
-          <BaseCard />
+          <FoodCard />
         </li>
       </ul>
     </div>
