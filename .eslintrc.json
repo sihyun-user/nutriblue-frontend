@@ -23,6 +23,9 @@
         "alwaysTryTypes": true,
         "project": "./tsconfig.json"
       }
+    },
+    "tailwindcss": {
+      "config": "./tailwind.config.ts"
     }
   },
   

@@ -5,8 +5,7 @@ interface ButtonProps {
 
 const variations = {
   primary: 'text-white bg-blue-600 hover:bg-blue-700',
-  secondary:
-    'text-gray-600 bg-gray-100 border border-gray-200 hover:bg-gray-200'
+  secondary: 'text-gray-600 bg-gray-50 border border-gray-200 hover:bg-gray-200'
 };
 
 export default function Button({

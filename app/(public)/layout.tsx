@@ -24,14 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${notoSans.className} relative flex min-h-screen flex-col bg-primary-0 text-primary-700`}
+        className={`${notoSans.className} relative flex min-h-screen flex-col bg-blue-100 text-primary-700`}
       >
         <Header />
         <main className="flex flex-1">
           <SideNavigation />
-          <main className="mx-auto w-full max-w-screen-md px-4 pt-10">
-            {children}
-          </main>
+          <main className="w-full px-4 pt-10">{children}</main>
         </main>
       </body>
     </html>
