@@ -6,7 +6,7 @@ import { BookmarkIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
 export default function FoodCard() {
   return (
-    <div className="relative overflow-hidden rounded-lg border-2 border-white bg-white p-4 shadow-md hover:border-blue-400">
+    <div className="relative overflow-hidden rounded-lg border-2 border-white bg-white p-4 shadow-md hover:shadow-lg">
       <div className="mb-4 flex items-center gap-3">
         <h3 className="text-xl font-bold">芹菜(黃梗)</h3>
         <CheckCircleIcon className="size-6 text-green-600" />
