@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_TC as notoSansTC } from 'next/font/google';
 
-import Header from '@/components/Header';
-import SideNavigation from '@/components/SideNavigation';
+import NavigationLayout from '@/components/NavigationLayout';
 import '@/styles/globals.css';
 
 const notoSans = notoSansTC({
@@ -26,11 +25,8 @@ export default function RootLayout({
       <body
         className={`${notoSans.className} relative flex min-h-screen flex-col bg-blue-100 text-primary-700`}
       >
-        <Header />
-        <main className="flex flex-1">
-          <SideNavigation />
-          <main className="w-full px-4 pt-10">{children}</main>
-        </main>
+        <NavigationLayout />
+        <main className="w-full px-4 pt-10">{children}</main>
       </body>
     </html>
   );
