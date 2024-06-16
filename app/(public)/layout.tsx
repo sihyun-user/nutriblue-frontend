@@ -26,7 +26,9 @@ export default function RootLayout({
         className={`${notoSans.className} relative flex min-h-screen flex-col bg-blue-100 text-primary-700`}
       >
         <NavigationLayout />
-        <main className="w-full px-4 pt-10">{children}</main>
+        <main className="layout-padding mx-auto w-full max-w-2xl pt-10 lg:max-w-4xl xl:max-w-5xl">
+          {children}
+        </main>
       </body>
     </html>
   );

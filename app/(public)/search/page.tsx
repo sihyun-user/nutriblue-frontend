@@ -2,8 +2,9 @@ import FoodCard from '@/components/FoodCard';
 
 export default function Page() {
   return (
-    <div className="mx-auto lg:max-w-7xl">
-      <ul className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+    // mx-auto max-w-6xl
+    <div className="">
+      <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         <li>
           <FoodCard />
         </li>

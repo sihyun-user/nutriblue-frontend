@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.layout-padding {
+  padding-left: 63px;
+  padding-right: 0;
+
+  @media (max-width: 767px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

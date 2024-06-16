@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import SideNavigation from '@/components/SideNavigation';
 
 export default function NavigationLayout() {
-  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     const checkWindowSize = () => {
@@ -29,11 +29,13 @@ export default function NavigationLayout() {
   return (
     <>
       <Header onIconClick={() => setIsNavOpen(!isNavOpen)} />
-      {isNavOpen && <SideNavigation isNavOpen={isNavOpen} />}
-      <div
-        onClick={() => setIsNavOpen(!isNavOpen)}
-        className={`fixed left-0 top-0 z-20 block min-h-screen w-full bg-black opacity-20 md:hidden ${isNavOpen ? '' : 'hidden'}`}
-      />
+      <SideNavigation isNavOpen={isNavOpen} />
+      {isNavOpen && (
+        <div
+          onClick={() => setIsNavOpen(!isNavOpen)}
+          className={`fixed left-0 top-0 z-20 block min-h-screen w-full bg-black transition-opacity duration-500 md:hidden ${isNavOpen ? 'pointer-events-auto opacity-20' : 'pointer-events-none opacity-0'}`}
+        />
+      )}
     </>
   );
 }

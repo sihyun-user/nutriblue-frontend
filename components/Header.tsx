@@ -6,13 +6,13 @@ interface HeaderProps {
 
 export default function Header({ onIconClick }: HeaderProps) {
   return (
-    <header className="flex h-16 flex-row items-center justify-between border-b border-b-blue-200 px-4 py-3">
+    <header className="layout-padding flex h-16 flex-row items-center justify-between border-b border-b-blue-200 py-3">
       <Bars3Icon
-        className="block size-6 cursor-pointer"
+        className="block size-6 cursor-pointer md:pointer-events-none md:opacity-0"
         onClick={onIconClick}
       />
       <div className="flex justify-center">Logo</div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 pr-0 md:pr-4">
         <UserIcon className="size-6 cursor-pointer text-primary-600" />
         <MoonIcon className="size-6 cursor-pointer text-primary-600" />
       </div>
