@@ -28,7 +28,7 @@
       "config": "./tailwind.config.ts"
     }
   },
-  
+
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
@@ -36,12 +36,19 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:tailwindcss/recommended", 
+    "plugin:tailwindcss/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": ["react", "tailwindcss" ,"@typescript-eslint", "prettier", "import"],
+  "plugins": [
+    "react",
+    "tailwindcss",
+    "@typescript-eslint",
+    "prettier",
+    "import"
+  ],
   "rules": {
+    "camelcase": "off",
     "no-console": "error",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
