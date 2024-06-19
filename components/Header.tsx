@@ -6,7 +6,7 @@ interface HeaderProps {
 
 export default function Header({ onIconClick }: HeaderProps) {
   return (
-    <header className="layout-padding flex h-16 flex-row items-center justify-between border-b border-b-blue-200 py-3">
+    <header className="layout-padding sticky top-0 z-20 flex h-16 flex-row items-center justify-between border-b border-b-blue-200 bg-blue-100 py-3">
       <Bars3Icon
         className="block size-6 cursor-pointer md:pointer-events-none md:opacity-0"
         onClick={onIconClick}
