@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
-import Header from '@/components/Header';
-import SideNavigation from '@/components/SideNavigation';
+import Header from '../Header';
+import Navigation from './Navigation';
 
 export default function NavigationLayout() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function NavigationLayout() {
   return (
     <>
       <Header onIconClick={() => setIsNavOpen(!isNavOpen)} />
-      <SideNavigation isNavOpen={isNavOpen} />
+      <Navigation isNavOpen={isNavOpen} />
       {isNavOpen && (
         <div
           onClick={() => setIsNavOpen(!isNavOpen)}
