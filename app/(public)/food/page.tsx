@@ -4,7 +4,7 @@ import SearchBar from '@/components/SearchBar';
 import FoodList from '@/components/Food/FoodList';
 import Loading from '../loading';
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export default function Page() {
   return (
