@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_TC as notoSansTC } from 'next/font/google';
 
+import Provider from '@/lib/provider';
 import SetNavigation from '@/components/Navigation/SetNavigation';
 import '@/styles/globals.css';
 
@@ -25,10 +26,12 @@ export default function RootLayout({
       <body
         className={`${notoSans.className} relative flex min-h-screen flex-col bg-blue-100 text-primary-700`}
       >
-        <SetNavigation />
-        <main className="layout-padding mx-auto w-full max-w-2xl pt-10 lg:max-w-4xl xl:max-w-5xl">
-          {children}
-        </main>
+        <Provider>
+          <SetNavigation />
+          <main className="layout-padding mx-auto w-full max-w-2xl pt-10 lg:max-w-4xl xl:max-w-5xl">
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );

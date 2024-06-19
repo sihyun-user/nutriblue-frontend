@@ -1,8 +1,10 @@
+'use server';
+
 import { IFood } from '@/types/food';
-import { formatNutritions } from '@/utils';
+import { formatNutritions } from '@/lib/utils';
 import getApi from '.';
 
-export async function getFood() {
+export async function getFoods() {
   const data = await getApi('food');
 
   const formattedElements = data.data.elements.map((item: IFood) =>
