@@ -28,9 +28,7 @@ export default function RootLayout({
       >
         <Provider>
           <SetNavigation />
-          <main className="layout-padding mx-auto w-full max-w-2xl pt-10 lg:max-w-4xl xl:max-w-5xl">
-            {children}
-          </main>
+          <main className="container-page container mx-auto">{children}</main>
         </Provider>
       </body>
     </html>

@@ -21,7 +21,7 @@ export default function Dashboard() {
               <span className="mr-2 text-2xl">1</span>連續天數
             </div>
           </div>
-          <div className="flex h-[230px] gap-12 bg-white px-4 py-3">
+          <div className="flex h-[230px] gap-12 bg-primary-50 px-4 py-3">
             <div className="flex flex-col items-center">
               <div className="flex size-[140px] flex-col items-center">
                 <span className="text-sm text-primary-600">尚可攝取</span>
