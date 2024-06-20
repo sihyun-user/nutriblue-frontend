@@ -18,3 +18,5 @@ export async function getFoods() {
 
   return result;
 }
+
+export async function createFood() {}
