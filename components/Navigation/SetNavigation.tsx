@@ -31,13 +31,9 @@ export default function NavigationLayout() {
     <>
       <Header onIconClick={() => setIsNavOpen(!isNavOpen)} />
       <Navigation isNavOpen={isNavOpen} />
-      {isNavOpen && (
-        // <div
-        //   onClick={() => setIsNavOpen(!isNavOpen)}
-        //   className={`fixed left-0 top-0 z-20 block min-h-screen w-full bg-black transition-opacity duration-500 md:hidden ${isNavOpen ? 'pointer-events-auto opacity-20' : 'pointer-events-none opacity-0'}`}
-        // />
-        <Overlay onClose={() => setIsNavOpen(!isNavOpen)} />
-      )}
+      <div className="md:hidden">
+        <Overlay open={isNavOpen} onClose={() => setIsNavOpen(false)} />
+      </div>
     </>
   );
 }
