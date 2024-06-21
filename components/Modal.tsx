@@ -1,6 +1,6 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/20/solid';
 
-import BaseButton from './BaseButton';
 import Overlay from './Overlay';
 
 interface Props {
@@ -8,16 +8,9 @@ interface Props {
   isOpen: boolean;
   children: React.ReactNode;
   onClose: () => void;
-  // onConfirm: () => void;
 }
 
-export default function Modal({
-  title,
-  isOpen,
-  onClose,
-  children
-  // onConfirm
-}: Props) {
+export default function Modal({ title, isOpen, onClose, children }: Props) {
   return (
     // <>
     //   <Dialog open={isOpen} onClose={onClose} className="relative z-50">
@@ -44,17 +37,15 @@ export default function Modal({
       <Dialog open={isOpen} onClose={onClose} className="relative z-50">
         <div className="fixed inset-0 flex w-screen items-center justify-center">
           <div className="overflow-hidden rounded-lg bg-white shadow-md">
-            <DialogPanel className="w-full max-w-[520px]">
+            <DialogPanel className="relative w-full max-w-[520px]">
+              <XMarkIcon
+                className="absolute right-3 top-3 size-8 cursor-pointer"
+                onClick={onClose}
+              />
               <DialogTitle className="border-b border-primary-200 px-6 py-3 text-2xl font-bold">
                 {title}
               </DialogTitle>
-              <div className="max-h-[600px] overflow-auto p-6">
-                <div className="space-y-6">{children}</div>
-                <div className="mt-9 flex gap-4">
-                  <BaseButton onClick={onClose}>取消</BaseButton>
-                  <BaseButton onClick={onClose}>確認</BaseButton>
-                </div>
-              </div>
+              <div className="max-h-[600px] overflow-auto p-6">{children}</div>
             </DialogPanel>
           </div>
         </div>

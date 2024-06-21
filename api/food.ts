@@ -19,4 +19,8 @@ export async function getFoods() {
   return result;
 }
 
-export async function createFood() {}
+export async function createFood(newFood: IFood) {
+  const data = await getApi('food', newFood);
+
+  return data;
+}

@@ -1,22 +1,22 @@
 interface INutritions {
-  [key: string]: number;
   calories: number;
   protein: number;
+  carbohydrates: number;
+  sugar: number;
   fat: number;
   saturated_fat: number;
-  carbohydrates: number;
-  fiber: number;
-  sugar: number;
+  trans_fat: number;
   sodium: number;
   potassium: number;
   calcium: number;
   iron: number;
+  cholesterol: number;
 }
 
 export interface IFood {
-  id: string;
-  publiced: boolean;
-  verified: boolean;
+  id?: string;
+  verified?: boolean;
+  publiced?: boolean;
   name: string;
   common_name: string;
   brand_name: string;
@@ -26,4 +26,11 @@ export interface IFood {
     value: number;
   };
   nutritions: INutritions;
+}
+export interface IFormInput extends INutritions {
+  name: string;
+  common_name: string;
+  brand_name: string;
+  value: number;
+  unit: number;
 }

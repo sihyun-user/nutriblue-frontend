@@ -100,13 +100,13 @@ export default function Dashboard() {
         </header>
         <div className="flex flex-col gap-4">
           <div className="min-h-[100px] rounded-lg bg-blue-200 px-4 py-3">
-            <time className="font-bold text-blue-950">
+            <time className="font-bold text-primary-900">
               June 12, 2024 at 8:40 PM
             </time>
             <p className="mt-3 text-primary-600">我的每日營養日記</p>
           </div>
           <div className="min-h-[100px] rounded-lg bg-blue-200 px-4 py-3">
-            <time className="font-bold text-blue-950">
+            <time className="font-bold text-primary-900">
               June 12, 2024 at 8:40 PM
             </time>
             <p className="mt-3 text-primary-600">我的每日營養日記</p>

@@ -1,23 +1,50 @@
 'use client';
 
 import { useState } from 'react';
-import { Field, Label, Input, Radio, RadioGroup } from '@headlessui/react';
+import { useForm } from 'react-hook-form';
+import { QueryClient, useMutation } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
+import { Input } from '@headlessui/react';
 import { PlusIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 
+import { createFood } from '@/api/food';
 import BaseButton from '../BaseButton';
 import Modal from '../Modal';
 
-const inputTextStyle = clsx(
-  'mt-3 block w-full rounded-lg border border-primary-200 bg-white px-3 py-2.5 text-sm text-primary-800',
+import FormRow from './FormRow';
+
+const inputStyle = clsx(
+  'w-full rounded-lg border border-primary-200 bg-white px-3 py-2.5 text-sm text-primary-800',
   'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-blue-200'
 );
 
-const plans = ['g', 'ml'];
+const radioStyle = clsx(
+  'flex size-[40px] cursor-pointer items-center justify-center rounded-lg border border-primary-200 bg-primary-200 text-sm font-medium text-primary-800',
+  'data-[checked]:bg-blue-400 data-[checked]:text-white'
+);
 
 export default function FoodModal() {
+  const queryClient = new QueryClient();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: createFood,
+    onSuccess: () => {
+      toast.success('新增食品成功');
+      queryClient.invalidateQueries({ queryKey: ['foods'] });
+    },
+    onError: () => {
+      toast.error('新增食品失敗，請稍後再試');
+    }
+  });
+
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(plans[0]);
+  const { register, handleSubmit } = useForm();
+
+  function onSubmit(data) {
+    console.log(data);
+    // mutate(data);
+  }
 
   return (
     <>
@@ -26,171 +53,168 @@ export default function FoodModal() {
         新增食品
       </BaseButton>
       <Modal title="建立食品" isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <div className="flex flex-wrap justify-between gap-4">
-          <Field className="w-[48%]">
-            <Label>食品名稱</Label>
-            <Input className={inputTextStyle} />
-          </Field>
-          <Field className="w-[48%]">
-            <Label>其他名稱</Label>
-            <Input className={inputTextStyle} />
-          </Field>
-          <Field className="w-[48%]">
-            <Label>品牌名稱</Label>
-            <Input className={inputTextStyle} />
-          </Field>
-        </div>
-        <div className="flex flex-wrap justify-between gap-4">
-          <Field className="w-[48%]">
-            <Label>每一份量含</Label>
-            <Input className={inputTextStyle} />
-          </Field>
-          <Field className="w-[48%]">
-            <Label>單位</Label>
-            <RadioGroup
-              value={selected}
-              onChange={setSelected}
-              aria-label="server_size"
-              className="mt-3 flex items-center gap-4"
-            >
-              {plans.map((plan) => (
-                <Field key={plan}>
-                  <Radio
-                    value={plan}
-                    className={clsx(
-                      'flex size-[40px] cursor-pointer items-center justify-center rounded-lg border border-primary-200 bg-primary-200 text-sm font-medium text-primary-800',
-                      'data-[checked]:bg-blue-400 data-[checked]:text-white'
-                    )}
-                  >
-                    {plan}
-                  </Radio>
-                </Field>
-              ))}
-            </RadioGroup>
-          </Field>
-        </div>
-        <div>
-          <h6 className="mb-2 text-lg font-semibold">營養成分</h6>
-          <div className="flex flex-wrap justify-between gap-4">
-            <Field className="w-[48%]">
-              <Label>熱量</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  kcal
-                </span>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <FormRow label="食品名稱">
+                <Input
+                  className={inputStyle}
+                  type="text"
+                  id="name"
+                  {...register('name')}
+                />
+              </FormRow>
+              <FormRow label="其他名稱">
+                <Input
+                  className={inputStyle}
+                  type="text"
+                  id="common_name"
+                  {...register('common_name')}
+                />
+              </FormRow>
+              <FormRow label="品牌名稱">
+                <Input
+                  className={inputStyle}
+                  type="text"
+                  id="brand_name"
+                  {...register('brand_name')}
+                />
+              </FormRow>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <FormRow label="每一份量含">
+                <Input
+                  className={inputStyle}
+                  type="text"
+                  id="value"
+                  {...register('serving_size.value')}
+                />
+              </FormRow>
+              {/* <FormRow label="單位">
+                <Radio className={radioStyle} value="ml"></Radio>
+              </FormRow> */}
+            </div>
+            <div>
+              <h6 className="mb-2 text-lg font-semibold">營養成分</h6>
+              <div className="grid grid-cols-2 gap-4">
+                <FormRow label="熱量" unit="克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="calories"
+                    defaultValue={0}
+                    {...register('nutritions.calories')}
+                  />
+                </FormRow>
+                <FormRow label="蛋白質" unit="克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="protein"
+                    defaultValue={0}
+                    {...register('nutritions.protein')}
+                  />
+                </FormRow>
+                <FormRow label="碳水化合物" unit="克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="carbohydrates"
+                    defaultValue={0}
+                    {...register('nutritions.carbohydrates')}
+                  />
+                </FormRow>
+                <FormRow label="糖" unit="克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="sugar"
+                    defaultValue={0}
+                    {...register('nutritions.sugar')}
+                  />
+                </FormRow>
+                <FormRow label="脂肪" unit="克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="fat"
+                    defaultValue={0}
+                    {...register('nutritions.fat')}
+                  />
+                </FormRow>
+                <FormRow label="飽和脂肪" unit="克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="saturated_fat"
+                    defaultValue={0}
+                    {...register('nutritions.saturated_fat')}
+                  />
+                </FormRow>
+                <FormRow label="反式脂肪" unit="克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="trans_fat"
+                    defaultValue={0}
+                    {...register('nutritions.trans_fat')}
+                  />
+                </FormRow>
+                <FormRow label="納" unit="毫克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="sodium"
+                    defaultValue={0}
+                    {...register('nutritions.sodium')}
+                  />
+                </FormRow>
+                <FormRow label="鉀" unit="毫克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="potassium"
+                    defaultValue={0}
+                    {...register('nutritions.potassium')}
+                  />
+                </FormRow>
+                <FormRow label="膽固醇" unit="毫克">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="cholesterol"
+                    defaultValue={0}
+                    {...register('nutritions.cholesterol')}
+                  />
+                </FormRow>
+                <FormRow label="鈣" unit="%">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="calcium"
+                    defaultValue={0}
+                    {...register('nutritions.calcium')}
+                  />
+                </FormRow>
+                <FormRow label="鐵" unit="%">
+                  <Input
+                    className={inputStyle}
+                    type="text"
+                    id="iron"
+                    defaultValue={0}
+                    {...register('nutritions.iron')}
+                  />
+                </FormRow>
               </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>蛋白質</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>碳水化合物</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>脂肪</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>飽和脂肪</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>反式脂肪</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>糖</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>納</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>鉀</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>鈣</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>鐵</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>膽固醇</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
-            <Field className="w-[48%]">
-              <Label>纖維</Label>
-              <div className="relative">
-                <Input className={inputTextStyle} />
-                <span className="absolute right-3 top-1/2 -translate-y-1/2">
-                  g
-                </span>
-              </div>
-            </Field>
+            </div>
           </div>
-        </div>
+          <div className="mt-9 flex gap-4">
+            <BaseButton variation="gray" type="reset">
+              重置
+            </BaseButton>
+            <BaseButton type="submit">確認</BaseButton>
+          </div>
+        </form>
       </Modal>
     </>
   );
