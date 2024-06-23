@@ -1,26 +1,30 @@
-'use server';
-
-import { IFood } from '@/types/food';
+import { IFood, IFormValues } from '@/types/food';
 import { formatNutritions } from '@/lib/utils';
-import getApi from '.';
+import axios from '@/lib/axios';
 
 export async function getFoods() {
-  const data = await getApi('food');
+  const res = await axios.get('food');
 
-  const formattedElements = data.data.elements.map((item: IFood) =>
+  const { data } = res.data;
+
+  const formattedElements = data.elements.map((item: IFood) =>
     formatNutritions(item)
   );
 
   const result = {
-    ...data.data,
+    ...data,
     elements: formattedElements
   };
 
   return result;
 }
 
-export async function createFood(newFood: IFood) {
-  const data = await getApi('food', newFood);
+export async function createFood(newFood: IFormValues) {
+  const res = await axios.post('food', newFood);
+
+  const { data } = res.data;
+
+  if (data.status) throw new Error(data.message);
 
   return data;
 }

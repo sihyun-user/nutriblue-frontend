@@ -1,14 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
-import { Input } from '@headlessui/react';
-import { PlusIcon } from '@heroicons/react/20/solid';
+import {
+  Input,
+  RadioGroup,
+  Radio,
+  Checkbox,
+  Field,
+  Label
+} from '@headlessui/react';
+import { PlusIcon, CheckIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 
 import { createFood } from '@/api/food';
+import { IFormValues } from '@/types/food';
 import BaseButton from '../BaseButton';
 import Modal from '../Modal';
 
@@ -25,6 +33,9 @@ const radioStyle = clsx(
 );
 
 export default function FoodModal() {
+  const { register, reset, control, handleSubmit } = useForm<IFormValues>();
+  const [isOpen, setIsOpen] = useState(false);
+
   const queryClient = new QueryClient();
 
   const { mutate, isPending } = useMutation({
@@ -32,19 +43,14 @@ export default function FoodModal() {
     onSuccess: () => {
       toast.success('新增食品成功');
       queryClient.invalidateQueries({ queryKey: ['foods'] });
+      reset();
     },
     onError: () => {
       toast.error('新增食品失敗，請稍後再試');
     }
   });
 
-  const [isOpen, setIsOpen] = useState(false);
-  const { register, handleSubmit } = useForm();
-
-  function onSubmit(data) {
-    console.log(data);
-    // mutate(data);
-  }
+  const onSubmit: SubmitHandler<IFormValues> = (data) => mutate(data);
 
   return (
     <>
@@ -87,15 +93,36 @@ export default function FoodModal() {
                   className={inputStyle}
                   type="text"
                   id="value"
-                  {...register('serving_size.value')}
+                  defaultValue={0}
+                  {...register('serving_size.value', {
+                    valueAsNumber: true
+                  })}
                 />
               </FormRow>
-              {/* <FormRow label="單位">
-                <Radio className={radioStyle} value="ml"></Radio>
-              </FormRow> */}
+              <FormRow label="單位">
+                <Controller
+                  control={control}
+                  defaultValue="g"
+                  name="serving_size.unit"
+                  render={({ field: { value, onChange } }) => (
+                    <RadioGroup
+                      value={value}
+                      onChange={onChange}
+                      className="flex items-center gap-4"
+                    >
+                      <Radio value="g" className={radioStyle}>
+                        g
+                      </Radio>
+                      <Radio value="ml" className={radioStyle}>
+                        ml
+                      </Radio>
+                    </RadioGroup>
+                  )}
+                />
+              </FormRow>
             </div>
             <div>
-              <h6 className="mb-2 text-lg font-semibold">營養成分</h6>
+              <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
               <div className="grid grid-cols-2 gap-4">
                 <FormRow label="熱量" unit="克">
                   <Input
@@ -103,7 +130,9 @@ export default function FoodModal() {
                     type="text"
                     id="calories"
                     defaultValue={0}
-                    {...register('nutritions.calories')}
+                    {...register('nutritions.calories', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="蛋白質" unit="克">
@@ -112,7 +141,9 @@ export default function FoodModal() {
                     type="text"
                     id="protein"
                     defaultValue={0}
-                    {...register('nutritions.protein')}
+                    {...register('nutritions.protein', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="碳水化合物" unit="克">
@@ -121,7 +152,9 @@ export default function FoodModal() {
                     type="text"
                     id="carbohydrates"
                     defaultValue={0}
-                    {...register('nutritions.carbohydrates')}
+                    {...register('nutritions.carbohydrates', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="糖" unit="克">
@@ -130,7 +163,9 @@ export default function FoodModal() {
                     type="text"
                     id="sugar"
                     defaultValue={0}
-                    {...register('nutritions.sugar')}
+                    {...register('nutritions.sugar', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="脂肪" unit="克">
@@ -139,7 +174,9 @@ export default function FoodModal() {
                     type="text"
                     id="fat"
                     defaultValue={0}
-                    {...register('nutritions.fat')}
+                    {...register('nutritions.fat', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="飽和脂肪" unit="克">
@@ -148,7 +185,9 @@ export default function FoodModal() {
                     type="text"
                     id="saturated_fat"
                     defaultValue={0}
-                    {...register('nutritions.saturated_fat')}
+                    {...register('nutritions.saturated_fat', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="反式脂肪" unit="克">
@@ -157,7 +196,9 @@ export default function FoodModal() {
                     type="text"
                     id="trans_fat"
                     defaultValue={0}
-                    {...register('nutritions.trans_fat')}
+                    {...register('nutritions.trans_fat', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="納" unit="毫克">
@@ -166,7 +207,9 @@ export default function FoodModal() {
                     type="text"
                     id="sodium"
                     defaultValue={0}
-                    {...register('nutritions.sodium')}
+                    {...register('nutritions.sodium', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="鉀" unit="毫克">
@@ -175,7 +218,9 @@ export default function FoodModal() {
                     type="text"
                     id="potassium"
                     defaultValue={0}
-                    {...register('nutritions.potassium')}
+                    {...register('nutritions.potassium', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="膽固醇" unit="毫克">
@@ -184,7 +229,9 @@ export default function FoodModal() {
                     type="text"
                     id="cholesterol"
                     defaultValue={0}
-                    {...register('nutritions.cholesterol')}
+                    {...register('nutritions.cholesterol', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="鈣" unit="%">
@@ -193,7 +240,9 @@ export default function FoodModal() {
                     type="text"
                     id="calcium"
                     defaultValue={0}
-                    {...register('nutritions.calcium')}
+                    {...register('nutritions.calcium', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
                 <FormRow label="鐵" unit="%">
@@ -202,17 +251,43 @@ export default function FoodModal() {
                     type="text"
                     id="iron"
                     defaultValue={0}
-                    {...register('nutritions.iron')}
+                    {...register('nutritions.iron', {
+                      valueAsNumber: true
+                    })}
                   />
                 </FormRow>
               </div>
+            </div>
+            <div>
+              <h6 className="mb-3 text-lg font-semibold">
+                協助我們增加食品資料庫內容
+              </h6>
+              <Controller
+                control={control}
+                name="publiced"
+                defaultValue={false}
+                render={({ field: { value, onChange } }) => (
+                  <Field className="flex items-center gap-3">
+                    <Checkbox
+                      checked={value}
+                      onChange={onChange}
+                      className="group size-6 rounded-md bg-primary-200 p-1 data-[checked]:bg-cyan-400"
+                    >
+                      <CheckIcon className="hidden size-4 font-bold text-white group-data-[checked]:block" />
+                    </Checkbox>
+                    <Label>是，我同意讓其他會員使用此食品。</Label>
+                  </Field>
+                )}
+              />
             </div>
           </div>
           <div className="mt-9 flex gap-4">
             <BaseButton variation="gray" type="reset">
               重置
             </BaseButton>
-            <BaseButton type="submit">確認</BaseButton>
+            <BaseButton type="submit" disabled={isPending}>
+              確認
+            </BaseButton>
           </div>
         </form>
       </Modal>

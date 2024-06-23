@@ -14,9 +14,9 @@ interface INutritions {
 }
 
 export interface IFood {
-  id?: string;
-  verified?: boolean;
-  publiced?: boolean;
+  id: string;
+  verified: boolean;
+  publiced: boolean;
   name: string;
   common_name: string;
   brand_name: string;
@@ -27,10 +27,16 @@ export interface IFood {
   };
   nutritions: INutritions;
 }
-export interface IFormInput extends INutritions {
+
+export interface IFormValues {
+  publiced: boolean;
   name: string;
   common_name: string;
   brand_name: string;
-  value: number;
-  unit: number;
+  serving_size: {
+    nutrition_multiplier?: number;
+    unit: string;
+    value: number;
+  };
+  nutritions: INutritions;
 }
