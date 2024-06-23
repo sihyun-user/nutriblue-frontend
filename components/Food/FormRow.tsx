@@ -23,7 +23,7 @@ export default function FormRow({ label, error, unit, children }: Props) {
       ) : (
         children
       )}
-      {error && <span>{error}</span>}
+      {error && <span className="pt-1 text-sm text-red-500">{error}</span>}
     </div>
   );
 }
