@@ -20,7 +20,9 @@ export default async function Page() {
         <FoodModal />
       </div>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <ListFoods />
+        <div className="grid w-full max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <ListFoods />
+        </div>
       </HydrationBoundary>
     </div>
   );

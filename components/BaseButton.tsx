@@ -4,6 +4,7 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   variation?: 'primary' | 'secondary' | 'gray';
+  full?: boolean;
   children: React.ReactNode;
   onClick?: () => void;
 }
@@ -17,6 +18,7 @@ const variations = {
 export default function BaseButton({
   type = 'button',
   disabled = false,
+  full = false,
   variation = 'primary',
   onClick = () => {},
   children
@@ -28,7 +30,7 @@ export default function BaseButton({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`flex h-10 min-w-24 items-center justify-center gap-1 rounded px-2 text-sm text-white transition-all duration-200 ${variationClass}`}
+      className={`flex h-10 min-w-24 items-center justify-center gap-1 rounded px-2 text-sm text-white transition-all duration-200 ${variationClass} ${full ? 'w-full' : ''}`}
     >
       {children}
     </Button>

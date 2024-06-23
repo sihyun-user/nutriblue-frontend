@@ -24,7 +24,7 @@ export async function createFood(newFood: IFormValues) {
 
   const { data } = res.data;
 
-  if (data.status) throw new Error(data.message);
+  if (!data.status) throw new Error(data.message);
 
   return data;
 }

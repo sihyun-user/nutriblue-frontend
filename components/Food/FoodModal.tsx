@@ -19,7 +19,7 @@ import { createFood } from '@/api/food';
 import { IFormValues } from '@/types/food';
 import BaseButton from '../BaseButton';
 import Modal from '../Modal';
-import FormRow from './FormRow';
+import FormRow from '../FormRow';
 
 const inputStyle = clsx(
   'w-full rounded-lg border border-primary-200 bg-white px-3 py-2.5 text-sm text-primary-800',
