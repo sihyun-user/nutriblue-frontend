@@ -1,15 +1,25 @@
 interface Props {
   label?: string;
+  lebelStyle?: string;
   error?: string;
   unit?: string;
   children: React.ReactElement;
 }
 
-export default function FormRow({ label, error, unit, children }: Props) {
+export default function FormRow({
+  label,
+  lebelStyle,
+  error,
+  unit,
+  children
+}: Props) {
   return (
     <div className="flex flex-col">
       {label && (
-        <label className="mb-3" htmlFor={children.props?.id}>
+        <label
+          className={`mb-2 ${lebelStyle || ''}`}
+          htmlFor={children.props?.id}
+        >
           {label}
         </label>
       )}

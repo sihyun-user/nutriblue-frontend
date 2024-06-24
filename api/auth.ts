@@ -1,23 +1,21 @@
 import axios from '@/lib/axios';
 
 export async function login(payload: { email: string; password: string }) {
-  const res = await axios.post('auth/login', payload);
-
-  const { data } = res.data;
+  const { data } = await axios.post('auth/login', payload);
 
   if (!data.status) throw new Error(data.message);
 
-  return data;
+  return data.data;
 }
 
-export async function register(payload: {
+export async function signup(payload: {
   name: string;
   email: string;
   password: string;
 }) {
-  const res = await axios.post('auth/register', payload);
+  const { data } = await axios.post('auth/signup', payload);
 
-  const { data } = res.data;
+  if (!data.status) throw new Error(data.message);
 
-  return data;
+  return data.data;
 }

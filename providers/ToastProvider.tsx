@@ -19,8 +19,8 @@ export default function toaster() {
         style: {
           fontSize: '16px',
           maxWidth: '500px',
-          padding: '16px 24px',
-          fontWeight: '600',
+          padding: '16px',
+          fontWeight: '500',
           color: '#4F5964',
           backgroundColor: '#FFFFFF'
         }
