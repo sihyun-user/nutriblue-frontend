@@ -1,4 +1,5 @@
 interface INutritions {
+  [key: string]: number;
   calories: number;
   protein: number;
   carbohydrates: number;

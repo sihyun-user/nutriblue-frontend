@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_TC as notoSansTC } from 'next/font/google';
 
-import Provider from '@/lib/provider';
-import Toaster from '@/lib/toaster';
+import Providers from '@/providers/Providers';
 import SetNavigation from '@/components/Navigation/SetNavigation';
 import '@/styles/globals.css';
 
@@ -27,11 +26,10 @@ export default function RootLayout({
       <body
         className={`${notoSans.className} relative flex min-h-screen flex-col bg-blue-100 text-primary-700`}
       >
-        <Provider>
-          <Toaster />
+        <Providers>
           <SetNavigation />
           <main className="container-page container mx-auto">{children}</main>
-        </Provider>
+        </Providers>
       </body>
     </html>
   );

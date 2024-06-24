@@ -1,6 +1,8 @@
 import { IFood } from '@/types/food';
 
-export function formatNutritions(foods: IFood[] | IFood): IFood[] | IFood {
+export default function formatNutritions(
+  foods: IFood[] | IFood
+): IFood[] | IFood {
   const inputIsArray = Array.isArray(foods);
   const foodArray = inputIsArray ? (foods as IFood[]) : [foods as IFood];
 
