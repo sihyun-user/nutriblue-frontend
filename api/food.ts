@@ -1,5 +1,5 @@
 import { IFood, IFormValues } from '@/types/food';
-import { formatNutritions } from '@/lib/utils';
+import formatNutritions from '@/utils/formatNutritions';
 import axios from '@/lib/axios';
 
 export async function getFoods() {

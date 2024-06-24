@@ -14,16 +14,18 @@ export default async function Page() {
   });
 
   return (
-    <div className="relative flex flex-col items-center gap-10">
-      <SearchBar />
-      <div className="absolute right-0 top-[7px]">
-        <FoodModal />
+    <>
+      <div className="relative flex items-center justify-between gap-4 md:block">
+        <SearchBar />
+        <div className="md:absolute md:right-0 md:top-[4px]">
+          <FoodModal />
+        </div>
       </div>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <div className="grid w-full max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
           <ListFoods />
         </div>
       </HydrationBoundary>
-    </div>
+    </>
   );
 }

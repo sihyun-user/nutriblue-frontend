@@ -7,10 +7,10 @@ export default function SearchBar() {
         <MagnifyingGlassIcon className="mr-3 size-7" />
         <input
           type="text"
-          className="bg-white placeholder:text-primary-500 focus:outline-none"
+          className="w-full bg-white placeholder:text-primary-500 focus:outline-none"
           placeholder="搜尋"
         />
-        ctrl + k
+        <span className="whitespace-nowrap">ctrl + k</span>
       </div>
     </form>
   );
