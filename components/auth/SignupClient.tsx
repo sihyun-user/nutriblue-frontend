@@ -87,7 +87,7 @@ export default function SignupClient() {
           >
             <Input
               className={inputStyle}
-              type="text"
+              type="password"
               id="password"
               placeholder="密碼"
               {...register('password', {

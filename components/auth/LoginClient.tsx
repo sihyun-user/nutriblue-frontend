@@ -74,7 +74,7 @@ export default function LoginClient() {
             >
               <Input
                 className={inputStyle}
-                type="text"
+                type="password"
                 id="password"
                 placeholder="密碼"
                 {...register('password', {

@@ -1,12 +1,12 @@
 'use cleint';
 
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
 import { createFood as createFoodApi } from '@/api/food';
 
 export default function useCreateFood() {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { mutate: createFood, isPending } = useMutation({
     mutationFn: createFoodApi,
     onSuccess: () => {
