@@ -35,15 +35,11 @@ body {
 }
 
 .container-page {
-  padding-left: 64px;
+  padding-left: 80px;
   padding-right: 16px;
   padding-top: 16px;
 
   @media (max-width: 767px) {
     padding-left: 16px;
   }
-}
-
-.min-h-page {
-  min-height: calc(100vh - 65px);
 }

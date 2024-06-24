@@ -29,7 +29,7 @@ export interface IFood {
   nutritions: INutritions;
 }
 
-export interface IFormValues {
+export interface IFoodForm {
   publiced: boolean;
   name: string;
   common_name: string;

@@ -1,4 +1,4 @@
-import { IFood, IFormValues } from '@/types/food';
+import { IFood, IFoodForm } from '@/types/food';
 import formatNutritions from '@/utils/formatNutritions';
 import axios from '@/lib/axios';
 
@@ -19,7 +19,7 @@ export async function getFoods() {
   return result;
 }
 
-export async function createFood(newFood: IFormValues) {
+export async function createFood(newFood: IFoodForm) {
   const res = await axios.post('food', newFood);
 
   const { data } = res.data;

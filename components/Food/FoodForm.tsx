@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { QueryClient, useMutation } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 import {
   Input,
   RadioGroup,
@@ -15,47 +13,42 @@ import {
 import { PlusIcon, CheckIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 
-import { createFood } from '@/api/food';
-import { IFormValues } from '@/types/food';
+import { IFoodForm } from '@/types/food';
+import useCreateFood from '@/feature/food/useCreateFood';
 import BaseButton from '../BaseButton';
 import Modal from '../Modal';
 import FormRow from '../FormRow';
 
 const inputStyle = clsx(
-  'w-full rounded-lg border border-primary-200 bg-white px-3 py-2.5 text-sm text-primary-800',
-  'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-blue-200'
+  'w-full rounded-lg bg-white px-3 py-2.5 text-sm text-primary-800 outline-none outline-1 -outline-offset-1 outline-primary-200',
+  'transition-all duration-200 hover:bg-primary-100 focus:bg-white focus:outline-2 focus:outline-blue-200'
 );
 
 const radioStyle = clsx(
-  'flex size-[40px] cursor-pointer items-center justify-center rounded-lg border border-primary-200 bg-primary-200 text-sm font-medium text-primary-800',
+  'flex size-[40px] cursor-pointer items-center justify-center rounded-lg border border-primary-200 bg-primary-200 text-sm text-primary-600',
   'data-[checked]:bg-blue-400 data-[checked]:text-white'
 );
 
-export default function FoodModal() {
+export default function FoodForm() {
   const {
     register,
     reset,
     handleSubmit,
     control,
     formState: { errors }
-  } = useForm<IFormValues>();
+  } = useForm<IFoodForm>();
   const [isOpen, setIsOpen] = useState(false);
 
-  const queryClient = new QueryClient();
-  const { mutate, isPending } = useMutation({
-    mutationFn: createFood,
-    onSuccess: () => {
-      toast.success('新增食品成功');
-      queryClient.invalidateQueries({ queryKey: ['foods'] });
-      setIsOpen(false);
-      reset();
-    },
-    onError: () => {
-      toast.error('新增食品失敗，請稍後再試');
-    }
-  });
+  const { createFood, isPending } = useCreateFood();
 
-  const onSubmit: SubmitHandler<IFormValues> = (data) => mutate(data);
+  const onSubmit: SubmitHandler<IFoodForm> = (data) => {
+    createFood(data, {
+      onSuccess: () => {
+        setIsOpen(false);
+        reset();
+      }
+    });
+  };
   return (
     <>
       <BaseButton
@@ -77,7 +70,7 @@ export default function FoodModal() {
                   type="text"
                   id="name"
                   {...register('name', {
-                    required: '請輸入食品名稱'
+                    required: '此欄位必填'
                   })}
                 />
               </FormRow>
@@ -110,7 +103,7 @@ export default function FoodModal() {
                   defaultValue={0}
                   {...register('serving_size.value', {
                     valueAsNumber: true,
-                    required: '請輸入數值',
+                    required: '此欄位必填',
                     min: { value: 0, message: '數值不能小於 0' }
                   })}
                 />
@@ -152,8 +145,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.calories', {
                       valueAsNumber: true,
-                      required: '請輸入熱量',
-                      min: { value: 0, message: '熱量不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -169,8 +162,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.protein', {
                       valueAsNumber: true,
-                      required: '請輸入蛋白質',
-                      min: { value: 0, message: '蛋白質不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -186,8 +179,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.carbohydrates', {
                       valueAsNumber: true,
-                      required: '請輸入碳水化合物',
-                      min: { value: 0, message: '碳水化合物不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -203,8 +196,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.sugar', {
                       valueAsNumber: true,
-                      required: '請輸入糖',
-                      min: { value: 0, message: '糖不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -220,8 +213,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.fat', {
                       valueAsNumber: true,
-                      required: '請輸入脂肪',
-                      min: { value: 0, message: '脂肪不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -237,8 +230,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.saturated_fat', {
                       valueAsNumber: true,
-                      required: '請輸入飽和脂肪',
-                      min: { value: 0, message: '飽和脂肪不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -254,8 +247,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.trans_fat', {
                       valueAsNumber: true,
-                      required: '請輸入反式脂肪',
-                      min: { value: 0, message: '反式脂肪不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -271,8 +264,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.sodium', {
                       valueAsNumber: true,
-                      required: '請輸入納',
-                      min: { value: 0, message: '納不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -288,8 +281,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.potassium', {
                       valueAsNumber: true,
-                      required: '請輸入鉀',
-                      min: { value: 0, message: '鉀不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -305,8 +298,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.cholesterol', {
                       valueAsNumber: true,
-                      required: '請輸入膽固醇',
-                      min: { value: 0, message: '膽固醇不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -322,8 +315,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.calcium', {
                       valueAsNumber: true,
-                      required: '請輸入鈣',
-                      min: { value: 0, message: '鈣不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>
@@ -339,8 +332,8 @@ export default function FoodModal() {
                     defaultValue={0}
                     {...register('nutritions.iron', {
                       valueAsNumber: true,
-                      required: '請輸入鐵',
-                      min: { value: 0, message: '鐵不能小於 0' }
+                      required: '此欄位必填',
+                      min: { value: 0, message: '數值不能小於 0' }
                     })}
                   />
                 </FormRow>

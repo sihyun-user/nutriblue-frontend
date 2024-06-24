@@ -4,7 +4,7 @@ import { dehydrate } from '@tanstack/query-core';
 import { getFoods } from '@/api/food';
 import SearchBar from '@/components/SearchBar';
 import ListFoods from '@/components/Food/ListFoods';
-import FoodModal from '@/components/Food/FoodModal';
+import FoodForm from '@/components/Food/FoodForm';
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -14,18 +14,18 @@ export default async function Page() {
   });
 
   return (
-    <>
-      <div className="relative flex items-center justify-between gap-4 md:block">
+    <div className="mx-auto w-full max-w-6xl">
+      <div className="relative mb-8 flex items-center justify-between gap-4 md:block">
         <SearchBar />
         <div className="md:absolute md:right-0 md:top-[4px]">
-          <FoodModal />
+          <FoodForm />
         </div>
       </div>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <div className="grid w-full max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <HydrationBoundary state={dehydrate(queryClient)}>
           <ListFoods />
-        </div>
-      </HydrationBoundary>
-    </>
+        </HydrationBoundary>
+      </div>
+    </div>
   );
 }
