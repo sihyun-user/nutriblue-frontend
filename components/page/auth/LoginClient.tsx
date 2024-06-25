@@ -5,8 +5,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input } from '@headlessui/react';
 import clsx from 'clsx';
 
-import FormRow from '@/components/FormRow';
-import BaseButton from '@/components/BaseButton';
+import FormRow from '@/components/ui/FormRow';
+import BaseButton from '@/components/ui/BaseButton';
 import useLogin from '@/feature/ahth/useLogin';
 
 interface ILoginForm {

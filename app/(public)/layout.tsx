@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import SetNavigation from '@/components/Navigation/SetNavigation';
+import NavBar from '@/components/navbar/NavBar';
 
 export const metadata: Metadata = {
   title: {
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <SetNavigation />
+      <NavBar />
       <section className="container-page">{children}</section>
     </>
   );

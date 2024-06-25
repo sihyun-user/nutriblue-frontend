@@ -1,7 +1,7 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 
-import Overlay from './Overlay';
+import Overlay from '../Overlay';
 
 interface Props {
   title: string;
@@ -10,7 +10,12 @@ interface Props {
   onClose: () => void;
 }
 
-export default function Modal({ title, isOpen, onClose, children }: Props) {
+export default function DialogModal({
+  title,
+  isOpen,
+  onClose,
+  children
+}: Props) {
   return (
     // <>
     //   <Dialog open={isOpen} onClose={onClose} className="relative z-50">

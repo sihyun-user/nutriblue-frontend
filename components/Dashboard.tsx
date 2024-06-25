@@ -7,7 +7,7 @@ import {
   Bars3BottomLeftIcon
 } from '@heroicons/react/20/solid';
 
-import Button from '@/components/Button';
+import BaseButton from '@/components/ui/BaseButton';
 
 export default function Dashboard() {
   return (
@@ -43,14 +43,14 @@ export default function Dashboard() {
             </div>
             <div className="flex flex-1 flex-col gap-7">
               <div className="flex justify-end gap-3">
-                <Button variation="primary">
+                <BaseButton variation="secondary">
                   <PlusIcon className="size-5" />
                   新增運動
-                </Button>
-                <Button variation="primary">
+                </BaseButton>
+                <BaseButton variation="secondary">
                   <PlusIcon className="size-5" />
                   新增食品
-                </Button>
+                </BaseButton>
               </div>
               <div className="flex gap-10">
                 <div className="flex flex-col gap-1">

@@ -2,9 +2,9 @@ import { QueryClient, HydrationBoundary } from '@tanstack/react-query';
 import { dehydrate } from '@tanstack/query-core';
 
 import { getFoods } from '@/api/food';
-import SearchBar from '@/components/SearchBar';
-import ListFoods from '@/components/Food/ListFoods';
-import FoodForm from '@/components/Food/FoodForm';
+import SearchBar from '@/components/ui/SearchBar';
+import ListFoods from '@/components/page/food/ListFoods';
+import FoodForm from '@/components/page/food/FoodForm';
 
 export default async function Page() {
   const queryClient = new QueryClient();

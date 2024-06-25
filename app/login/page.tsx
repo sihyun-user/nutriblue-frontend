@@ -1,4 +1,4 @@
-import LoginClient from '@/components/auth/LoginClient';
+import LoginClient from '@/components/page/auth/LoginClient';
 
 export default function Auth() {
   return (

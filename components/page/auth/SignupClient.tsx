@@ -6,7 +6,7 @@ import { Input } from '@headlessui/react';
 import clsx from 'clsx';
 
 import FormRow from '@/components/FormRow';
-import BaseButton from '@/components/BaseButton';
+import BaseButton from '@/components/ui/BaseButton';
 import useSignup from '@/feature/ahth/useSignup';
 
 interface ISignupForm {

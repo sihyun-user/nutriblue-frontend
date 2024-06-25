@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 
-import Header from '../Header';
+import Header from './Header';
 import Navigation from './Navigation';
 import Overlay from '../Overlay';
 
-export default function NavigationLayout() {
+export default function NavBar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {

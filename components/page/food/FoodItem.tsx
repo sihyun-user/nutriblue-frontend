@@ -2,7 +2,7 @@ import { BookmarkIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
 import { IFood } from '@/types/food';
 
-export default function FoodCard({ food }: { food: IFood }) {
+export default function FoodItem({ food }: { food: IFood }) {
   const { name, verified, serving_size, nutritions } = food;
 
   return (

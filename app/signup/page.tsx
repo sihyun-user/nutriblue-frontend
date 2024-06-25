@@ -1,4 +1,4 @@
-import SignupClient from '@/components/auth/SignupClient';
+import SignupClient from '@/components/page/auth/SignupClient';
 
 export default function Auth() {
   return (

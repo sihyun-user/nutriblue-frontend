@@ -15,9 +15,9 @@ import clsx from 'clsx';
 
 import { IFoodForm } from '@/types/food';
 import useCreateFood from '@/feature/food/useCreateFood';
-import BaseButton from '../BaseButton';
-import Modal from '../Modal';
-import FormRow from '../FormRow';
+import BaseButton from '../../ui/BaseButton';
+import Modal from '../../dialog/Dialog';
+import FormRow from '../../ui/FormRow';
 
 const inputStyle = clsx(
   'w-full rounded-lg bg-white px-3 py-2.5 text-sm text-primary-800 outline-none outline-1 -outline-offset-1 outline-primary-200',
