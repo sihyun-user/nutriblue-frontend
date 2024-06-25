@@ -5,13 +5,13 @@ import { Button } from '@headlessui/react';
 interface Props {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  variation?: 'primary' | 'secondary' | 'gray';
+  variation?: string;
   full?: boolean;
   children: React.ReactNode;
   onClick?: () => void;
 }
 
-const variations = {
+const variations: { [key: string]: string } = {
   primary: 'bg-blue-400 data-[hover]:bg-blue-500',
   secondary: 'bg-blue-600 data-[hover]:bg-blue-700',
   gray: 'bg-gray-400 data-[hover]:bg-gray-500'

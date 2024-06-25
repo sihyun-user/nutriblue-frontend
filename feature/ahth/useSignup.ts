@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import notifyError from '@/utils/notifyError';
 import { signup as signupApi } from '@/api/auth';
 
-interface ISignup {
+interface SignupData {
   name: string;
   email: string;
   password: string;
@@ -17,7 +17,7 @@ export default function useSignup() {
   const router = useRouter();
 
   const { mutate: signup, isPending } = useMutation({
-    mutationFn: (data: ISignup) => signupApi(data),
+    mutationFn: (data: SignupData) => signupApi(data),
     onSuccess: (user) => {
       queryClient.setQueryData(['user'], user);
       router.push('/');

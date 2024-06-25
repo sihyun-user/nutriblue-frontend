@@ -1,0 +1,40 @@
+import { z } from 'zod';
+
+const requiredString = () => z.string().min(1, { message: '欄位未填寫正確' });
+const requiredNumber = () => z.number({ required_error: '欄位未填寫正確' });
+const requiredBoolean = () => z.boolean({ required_error: '欄位未填寫正確' });
+
+const numValidator = (field: string, minLength = 0) =>
+  requiredNumber().refine(
+    (value) => value >= minLength,
+    `${field}不可小於${minLength}`
+  );
+
+const nutritionsValidator = z.object({
+  calories: numValidator('卡路里'),
+  protein: numValidator('蛋白質'),
+  fat: numValidator('脂肪'),
+  saturated_fat: numValidator('飽和脂肪'),
+  trans_fat: numValidator('反式脂肪'),
+  carbohydrates: numValidator('碳水化合物'),
+  sugar: numValidator('糖'),
+  sodium: numValidator('鈉'),
+  potassium: numValidator('鉀'),
+  calcium: numValidator('鈣'),
+  iron: numValidator('鐵'),
+  cholesterol: numValidator('膽固醇')
+});
+
+export const createFoodSchema = z.object({
+  name: requiredString(),
+  publiced: requiredBoolean(),
+  common_name: z.string(),
+  brand_name: z.string(),
+  serving_size: z.object({
+    unit: requiredString().regex(/^(g|ml)$/, '單位只能為 g 或 ml'),
+    value: numValidator('份量值')
+  }),
+  nutritions: nutritionsValidator
+});
+
+export type CreateFoodSchemaType = z.infer<typeof createFoodSchema>;

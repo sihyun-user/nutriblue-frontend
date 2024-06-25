@@ -1,24 +1,35 @@
 'use client';
 
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Input } from '@headlessui/react';
-import clsx from 'clsx';
 
-import FormRow from '@/components/FormRow';
 import BaseButton from '@/components/ui/BaseButton';
 import useSignup from '@/feature/ahth/useSignup';
+import InputRow from '@/components/ui/InputRow';
 
-interface ISignupForm {
-  name: string;
-  email: string;
-  password: string;
-}
+const signupSchema = z.object({
+  name: z
+    .string({ required_error: '名稱為必填欄位' })
+    .refine(
+      (value) =>
+        value.length >= 2 &&
+        value.length <= 12 &&
+        /[^\s!@#$%^&*()+=\-[\]\\';,./{}|":<>?~_]/.test(value),
+      {
+        message: '名稱需為2到12個字元，且不可包含空白及特殊符號'
+      }
+    ),
+  email: z
+    .string({ required_error: 'Email為必填欄位' })
+    .email('請輸入正確的Eamil格式'),
+  password: z
+    .string({ required_error: '密碼為必填欄位' })
+    .min(6, '密碼長度需大於 6 個字元')
+});
 
-const inputStyle = clsx(
-  'w-full rounded-lg bg-primary-100 px-3 py-2.5 text-sm text-primary-800 outline-none outline-1 -outline-offset-1 outline-primary-100',
-  'transition-all duration-200 hover:bg-primary-200 focus:bg-white'
-);
+type SignupSchemaType = z.infer<typeof signupSchema>;
 
 export default function SignupClient() {
   const router = useRouter();
@@ -28,9 +39,11 @@ export default function SignupClient() {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<ISignupForm>();
+  } = useForm<SignupSchemaType>({
+    resolver: zodResolver(signupSchema)
+  });
 
-  const onSubmit: SubmitHandler<ISignupForm> = (data) => signup(data);
+  const onSubmit: SubmitHandler<SignupSchemaType> = (data) => signup(data);
 
   return (
     <form
@@ -40,62 +53,25 @@ export default function SignupClient() {
       <h1 className="mb-4 text-2xl font-medium">註冊</h1>
       <div className="space-y-5">
         <div className="space-y-4">
-          <FormRow
+          <InputRow
+            register={register}
             label="名稱"
-            lebelStyle="text-sm"
-            error={errors?.name?.message}
-          >
-            <Input
-              className={inputStyle}
-              type="text"
-              id="name"
-              placeholder="名稱"
-              {...register('name', {
-                required: '請輸入名稱',
-                validate: (value) =>
-                  (value !== undefined &&
-                    value.length >= 2 &&
-                    value.length <= 12 &&
-                    /^[^\s!@#$%^&*()+=\-[\]\\';,./{}|":<>?~_]+$/.test(value)) ||
-                  '名稱需為2到12個字元，且不可包含空白及特殊符號'
-              })}
-            />
-          </FormRow>
-          <FormRow
+            id="name"
+            errors={errors}
+          />
+          <InputRow
+            register={register}
             label="Email"
-            lebelStyle="text-sm"
-            error={errors?.email?.message}
-          >
-            <Input
-              className={inputStyle}
-              type="text"
-              id="email"
-              placeholder="Email"
-              {...register('email', {
-                required: '請輸入Email',
-                pattern: {
-                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                  message: '請輸入正確的Email格式'
-                }
-              })}
-            />
-          </FormRow>
-          <FormRow
+            id="email"
+            errors={errors}
+          />
+          <InputRow
+            register={register}
             label="密碼"
-            lebelStyle="text-sm"
-            error={errors?.password?.message}
-          >
-            <Input
-              className={inputStyle}
-              type="password"
-              id="password"
-              placeholder="密碼"
-              {...register('password', {
-                required: '請輸入密碼',
-                minLength: { value: 6, message: '密碼長度需大於 6 個字元' }
-              })}
-            />
-          </FormRow>
+            id="password"
+            type="password"
+            errors={errors}
+          />
         </div>
         <BaseButton full type="submit" disabled={isPending}>
           註冊
