@@ -1,7 +1,17 @@
 import { z } from 'zod';
 
-const requiredString = () => z.string().min(1, { message: '欄位未填寫正確' });
-const requiredNumber = () => z.number({ required_error: '欄位未填寫正確' });
+const requiredString = () =>
+  z
+    .string({
+      required_error: '此欄位為必填欄位',
+      invalid_type_error: '欄位未填寫正確'
+    })
+    .min(1, { message: '不可為空值' });
+const requiredNumber = () =>
+  z.number({
+    required_error: '此欄位為必填欄位',
+    invalid_type_error: '欄位未填寫正確'
+  });
 const requiredBoolean = () => z.boolean({ required_error: '欄位未填寫正確' });
 
 const numValidator = (field: string, minLength = 0) =>
@@ -11,7 +21,7 @@ const numValidator = (field: string, minLength = 0) =>
   );
 
 const nutritionsValidator = z.object({
-  calories: numValidator('卡路里'),
+  calories: numValidator('熱量'),
   protein: numValidator('蛋白質'),
   fat: numValidator('脂肪'),
   saturated_fat: numValidator('飽和脂肪'),

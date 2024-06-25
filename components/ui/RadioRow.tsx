@@ -32,7 +32,7 @@ export default function RadioRow<T extends FieldValues>({
         name={id}
         render={({ field }) => (
           <RadioGroup
-            defaultValue={defaultValue}
+            defaultValue={defaultValue || radious[0]}
             id={id}
             {...field}
             className="flex items-center gap-4"

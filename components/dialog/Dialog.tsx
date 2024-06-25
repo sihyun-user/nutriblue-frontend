@@ -41,8 +41,8 @@ export default function DialogModal({
     <>
       <Dialog open={isOpen} onClose={onClose} className="relative z-50">
         <div className="fixed inset-0 flex w-screen items-center justify-center">
-          <div className="overflow-hidden rounded-lg bg-white shadow-md">
-            <DialogPanel className="relative w-full min-w-[400px] max-w-[520px]">
+          <div className="w-full max-w-[520px] overflow-hidden rounded-lg bg-white shadow-md">
+            <DialogPanel className="relative">
               <XMarkIcon
                 className="absolute right-3 top-3 size-8 cursor-pointer"
                 onClick={onClose}

@@ -28,7 +28,7 @@ export default function CreateFood() {
   const { createFood, isPending } = useCreateFood();
 
   const onSubmit: SubmitHandler<CreateFoodSchemaType> = (data) => {
-      console.log(data);
+    console.log(data);
     // createFood(data, {
     //   onSuccess: () => {
     //     setIsOpen(false);
@@ -58,15 +58,16 @@ export default function CreateFood() {
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <InputRow
+                variation="secondary"
                 register={register}
-                label="Email"
+                label="食品名稱"
                 id="name"
                 errors={errors}
               />
               <InputRow
                 variation="secondary"
                 register={register}
-                label="食品名稱"
+                label="其他名稱"
                 id="common_name"
                 errors={errors}
               />
@@ -83,7 +84,9 @@ export default function CreateFood() {
                 variation="secondary"
                 register={register}
                 label="每一份量含"
+                type="number"
                 id="serving_size.value"
+                defaultValue={0}
                 errors={errors}
               />
               <RadioRow
@@ -101,6 +104,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="熱量"
+                  type="number"
                   fixedRight="kcal"
                   id="nutritions.calories"
                   defaultValue={0}
@@ -110,6 +114,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="蛋白質"
+                  type="number"
                   fixedRight="g"
                   id="nutritions.protein"
                   defaultValue={0}
@@ -119,6 +124,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="碳水化合物"
+                  type="number"
                   fixedRight="g"
                   id="nutritions.carbohydrates"
                   defaultValue={0}
@@ -128,6 +134,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="糖"
+                  type="number"
                   fixedRight="g"
                   id="nutritions.sugar"
                   defaultValue={0}
@@ -137,6 +144,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="脂肪"
+                  type="number"
                   fixedRight="g"
                   id="nutritions.fat"
                   defaultValue={0}
@@ -146,6 +154,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="飽和脂肪"
+                  type="number"
                   fixedRight="g"
                   id="nutritions.saturated_fat"
                   defaultValue={0}
@@ -155,6 +164,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="反式脂肪"
+                  type="number"
                   fixedRight="g"
                   id="nutritions.trans_fat"
                   defaultValue={0}
@@ -164,6 +174,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="納"
+                  type="number"
                   fixedRight="mg"
                   id="nutritions.sodium"
                   defaultValue={0}
@@ -173,6 +184,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="鉀"
+                  type="number"
                   fixedRight="mg"
                   id="nutritions.potassium"
                   defaultValue={0}
@@ -182,6 +194,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="膽固醇"
+                  type="number"
                   fixedRight="mg"
                   id="nutritions.cholesterol"
                   defaultValue={0}
@@ -191,6 +204,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="鈣"
+                  type="number"
                   fixedRight="%"
                   id="nutritions.calcium"
                   defaultValue={0}
@@ -200,6 +214,7 @@ export default function CreateFood() {
                   variation="secondary"
                   register={register}
                   label="鐵"
+                  type="number"
                   fixedRight="%"
                   id="nutritions.iron"
                   defaultValue={0}

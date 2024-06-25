@@ -18,6 +18,11 @@ const variations: { [key: string]: string } = {
   )
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getValueByPath(obj: any, path: string) {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+}
+
 interface Props<T extends FieldValues> {
   id: Path<T>;
   label: string;
@@ -40,6 +45,8 @@ export default function InputRow<T extends FieldValues>({
   errors,
   register
 }: Props<T>) {
+  const errorMessage = getValueByPath(errors, id)?.message;
+
   return (
     <div className="flex flex-col">
       <label className="mb-2" htmlFor={id}>
@@ -51,7 +58,14 @@ export default function InputRow<T extends FieldValues>({
           type={type}
           id={id}
           defaultValue={defaultValue}
-          {...register(id)}
+          {...register(id, {
+            setValueAs: (value) => {
+              if (type === 'number') {
+                return value !== '' ? Number(value) : null;
+              }
+              return value;
+            }
+          })}
         />
         {fixedRight && (
           <span className="absolute inset-y-0 right-2 flex items-center text-sm text-primary-400">
@@ -59,10 +73,8 @@ export default function InputRow<T extends FieldValues>({
           </span>
         )}
       </div>
-      {errors[id] && (
-        <span className="pt-1 text-sm text-red-500">
-          {errors[id]?.message as string}
-        </span>
+      {errorMessage && (
+        <span className="pt-1 text-sm text-red-500">{errorMessage}</span>
       )}
     </div>
   );
