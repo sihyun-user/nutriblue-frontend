@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { login as loginApi } from '@/api/auth';
@@ -12,15 +12,11 @@ interface ILogin {
 }
 
 export default function useLogin() {
-  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutate: login, isPending } = useMutation({
     mutationFn: (data: ILogin) => loginApi(data),
-    onSuccess: (user) => {
-      queryClient.setQueryData(['user'], user);
-      router.push('/');
-    },
+    onSuccess: () => router.push('/'),
     onError: (error) => notifyError(error)
   });
 

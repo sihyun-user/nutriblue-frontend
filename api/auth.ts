@@ -8,6 +8,7 @@ export async function login(payload: { email: string; password: string }) {
   const { token, refreshToken } = data.data;
   localStorage.setItem('token', token);
   localStorage.setItem('refreshToken', refreshToken);
+  return data.data;
 }
 
 export async function signup(payload: {
@@ -22,4 +23,5 @@ export async function signup(payload: {
   const { token, refreshToken } = data.data;
   localStorage.setItem('token', token);
   localStorage.setItem('refreshToken', refreshToken);
+  return data.data;
 }

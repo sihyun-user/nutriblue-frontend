@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import notifyError from '@/utils/notifyError';
@@ -13,15 +13,11 @@ interface SignupData {
 }
 
 export default function useSignup() {
-  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutate: signup, isPending } = useMutation({
     mutationFn: (data: SignupData) => signupApi(data),
-    onSuccess: (user) => {
-      queryClient.setQueryData(['user'], user);
-      router.push('/');
-    },
+    onSuccess: () => router.push('/'),
     onError: (error) => notifyError(error)
   });
 

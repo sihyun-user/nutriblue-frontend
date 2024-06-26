@@ -27,17 +27,12 @@ export default function LoginClient() {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors }
   } = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema)
   });
 
-  const onSubmit: SubmitHandler<LoginSchemaType> = (data) => {
-    login(data, {
-      onSettled: () => reset()
-    });
-  };
+  const onSubmit: SubmitHandler<LoginSchemaType> = (data) => login(data);
 
   return (
     <form

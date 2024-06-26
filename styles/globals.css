@@ -51,3 +51,11 @@ body {
     padding-left: 16px;
   }
 }
+
+.full-page {
+  height: 100vh;
+  background-color: theme('colors.primary.400');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

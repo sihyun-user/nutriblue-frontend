@@ -1,7 +1,12 @@
+'use client';
+
 import axios from 'axios';
+import notifyError from '@/utils/notifyError';
+
+const baseURL = `${process.env.NEXT_PUBLIC_BASE_API}/api/v1`;
 
 const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_BASE_API}/api/v1`
+  baseURL
 });
 
 api.interceptors.request.use(
@@ -23,12 +28,24 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response.status === 401 && !originalRequest.set_retry) {
+    if (
+      (error.response.status === 401 || error.response.status === 403) &&
+      !originalRequest.set_retry
+    ) {
+      originalRequest.set_retry = true;
+
       try {
-        originalRequest.set_retry = true;
         const refreshToken = localStorage.getItem('refreshToken');
-        const res = await axios.post('/api/refresh-token', { refreshToken });
-        const { token } = res.data.data;
+
+        if (!refreshToken) {
+          return notifyError(error, '登入時效過時,請重新登入');
+        }
+
+        const { data } = await axios.post(`${baseURL}/auth/refresh-token`, {
+          refreshToken
+        });
+
+        const { token } = data.data;
 
         localStorage.setItem('token', token);
 

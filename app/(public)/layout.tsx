@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { UserProvider } from '@/providers/UserProvider';
 import NavBar from '@/components/navbar/NavBar';
 
 export const metadata: Metadata = {
@@ -14,9 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <UserProvider>
       <NavBar />
       <section className="container-page">{children}</section>
-    </>
+    </UserProvider>
   );
 }
