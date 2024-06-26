@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusIcon } from '@heroicons/react/20/solid';
 
-import { foodSchema, type foodSchemaType } from '@/utils/schemas';
+import { foodSchema, type FoodType } from '@/schemas/food';
 import useCreateFood from '@/feature/food/useCreateFood';
 import InputRow from '@/components/ui/InputRow';
 import CheckboxRow from '@/components/ui/CheckboxRow';
@@ -33,7 +33,7 @@ export default function CreateFood() {
     handleSubmit,
     reset,
     formState: { errors }
-  } = useForm<foodSchemaType>({
+  } = useForm<FoodType>({
     resolver: zodResolver(foodSchema),
     defaultValues: {
       name: '',
@@ -62,7 +62,7 @@ export default function CreateFood() {
 
   const { createFood, isPending } = useCreateFood();
 
-  const onSubmit: SubmitHandler<foodSchemaType> = (data) => {
+  const onSubmit: SubmitHandler<FoodType> = (data) => {
     createFood(data, {
       onSuccess: () => {
         setIsOpen(false);
@@ -135,7 +135,7 @@ export default function CreateFood() {
                     label={item.name}
                     type="number"
                     fixedRight={item.unit}
-                    id={`nutritions.${item.id}` as keyof foodSchemaType}
+                    id={`nutritions.${item.id}` as keyof FoodType}
                     errors={errors}
                   />
                 ))}

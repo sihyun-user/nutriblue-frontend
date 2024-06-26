@@ -1,5 +1,4 @@
-import { type foodSchemaType } from '@/utils/schemas';
-import { INutritions } from '@/types/food';
+import { IFood, INutritions } from '@/types/food';
 import InputRow from '@/components/ui/InputRow';
 
 const nutritionList = [
@@ -25,7 +24,7 @@ export default function NutritionRows({ data }: { data: INutritions }) {
           type="number"
           disabled
           fixedRight={item.unit}
-          id={`nutritions.${item.id}` as keyof foodSchemaType}
+          id={`nutritions.${item.id}` as keyof IFood}
           defaultValue={data[item.id]}
         />
       ))}

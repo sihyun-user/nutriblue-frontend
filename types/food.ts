@@ -26,16 +26,3 @@ export interface IFood {
   };
   nutritions: INutritions;
 }
-
-export interface IFoodForm {
-  publiced: boolean;
-  name: string;
-  common_name: string;
-  brand_name: string;
-  serving_size: {
-    nutrition_multiplier?: number;
-    unit: string;
-    value: number;
-  };
-  nutritions: INutritions;
-}

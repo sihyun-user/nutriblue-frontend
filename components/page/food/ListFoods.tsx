@@ -5,8 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { IFood } from '@/types/food';
 import { getFoods } from '@/api/food';
+import FoodCard from './FoodCard';
 import FoodItem from './FoodItem';
-import AddFood from './AddFood';
 
 export default function ListFoods() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,10 +32,10 @@ export default function ListFoods() {
       <>
         {data.elements.map((food: IFood) => (
           <div onClick={() => handleOpen(food)} key={food.id}>
-            <FoodItem food={food} />
+            <FoodCard food={food} />
           </div>
         ))}
-        <AddFood
+        <FoodItem
           isOpen={isOpen}
           onClose={() => handleClose()}
           data={selectedFood}

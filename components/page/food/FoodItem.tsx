@@ -1,46 +1,108 @@
-import { BookmarkIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+'use client';
+
+import { useState, useEffect } from 'react';
+import { Select } from '@headlessui/react';
+import { PlusIcon, CheckCircleIcon } from '@heroicons/react/20/solid';
 
 import { IFood } from '@/types/food';
+import Dialog from '@/components/dialog/Dialog';
+import InputRow from '@/components/ui/InputRow';
+import BaseButton from '@/components/ui/BaseButton';
+import NutritionRows from './NutritionRows';
 
-export default function FoodItem({ food }: { food: IFood }) {
-  const { name, verified, serving_size, nutritions } = food;
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  data: IFood | null;
+}
 
-  return (
-    <div className="relative cursor-pointer overflow-hidden rounded-lg border-2 border-white bg-white p-4 shadow-md hover:shadow-lg">
-      <div className="mb-4 flex items-center gap-3">
-        <h3 className="text-xl font-bold">{name}</h3>
-        {verified && <CheckCircleIcon className="size-6 text-green-600" />}
-      </div>
-      <div className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-xl hover:bg-cyan-100">
-        <BookmarkIcon className="size-7 text-cyan-500" />
-      </div>
-      <div className="mb-2 flex items-center gap-2">
-        <div className="text-blue-400">
-          <span className="text-xl font-bold">{nutritions.calories}</span> kcal
+export default function AddFood({ isOpen, onClose, data }: Props) {
+  const [newDiary, setNewDiary] = useState(false);
+
+  useEffect(() => {
+    setNewDiary(false);
+  }, [isOpen]);
+
+  if (data)
+    return (
+      <Dialog title="食品的營養成分" isOpen={isOpen} onClose={onClose}>
+        <div className="mb-6 space-y-2 rounded-lg bg-blue-100 p-4">
+          <div className="flex justify-between">
+            <div className="space-y-3">
+              <div>
+                <h1 className="text-xl font-semibold text-primary-800">
+                  {data.name}
+                </h1>
+                {data.brand_name && (
+                  <span className="mt-1 text-sm font-medium">
+                    ({data.brand_name})
+                  </span>
+                )}
+              </div>
+              {data.verified && (
+                <div className="group flex cursor-pointer items-center gap-1">
+                  <CheckCircleIcon className="size-5 text-green-600" />
+                  <span className="text-xs font-medium text-green-600 group-hover:text-green-700">
+                    了解更多
+                  </span>
+                </div>
+              )}
+            </div>
+            {!newDiary && (
+              <BaseButton onClick={() => setNewDiary(true)}>
+                <PlusIcon className="size-5" />
+                加入日記
+              </BaseButton>
+            )}
+          </div>
+          <div className="space-y-4">
+            <div>
+              份數:
+              <div className="grid grid-cols-2 gap-4">
+                <InputRow
+                  variation="secondary"
+                  id="nutrition_multiplier"
+                  defaultValue={data.serving_size.nutrition_multiplier}
+                />
+                <Select name="status" aria-label="Project status">
+                  <option value="active">Active</option>
+                  <option value="paused">Paused</option>
+                  <option value="delayed">Delayed</option>
+                  <option value="canceled">Canceled</option>
+                </Select>
+              </div>
+            </div>
+            {newDiary && (
+              <div>
+                <div className="grid grid-cols-2 gap-4">
+                  <InputRow
+                    variation="secondary"
+                    id="diary_name"
+                    label="餐飲名稱"
+                  />
+                  <InputRow
+                    variation="secondary"
+                    id="diary_date"
+                    label="日期"
+                  />
+                </div>
+                <div className="mt-8 flex justify-end gap-6">
+                  <BaseButton
+                    variation="gray"
+                    onClick={() => setNewDiary(false)}
+                  >
+                    取消
+                  </BaseButton>
+                  <BaseButton>確定</BaseButton>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="text-sm">/</div>
-        <div className="text-sm">
-          {serving_size.value}
-          {serving_size.unit}
+        <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
+        <div className="grid grid-cols-2 gap-4">
+          <NutritionRows data={data.nutritions} />
         </div>
-      </div>
-      <ul className="flex flex-wrap gap-x-4 gap-y-1">
-        <li className="flex gap-2">
-          碳水化合物<span>{nutritions.carbohydrates}g</span>
-        </li>
-        <li className="flex gap-2">
-          蛋白質 <span>{nutritions.protein}g</span>
-        </li>
-        <li className="flex gap-2">
-          脂肪 <span>{nutritions.protein}g</span>
-        </li>
-        <li className="flex gap-2">
-          糖 <span>{nutritions.sugar}g</span>
-        </li>
-        <li className="flex gap-2">
-          納 <span>{nutritions.sodium}g</span>
-        </li>
-      </ul>
-    </div>
-  );
+      </Dialog>
+    );
 }
