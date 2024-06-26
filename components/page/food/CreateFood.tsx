@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusIcon } from '@heroicons/react/20/solid';
 
-import { createFoodSchema, type CreateFoodSchemaType } from '@/utils/schemas';
+import { foodSchema, type foodSchemaType } from '@/utils/schemas';
 import useCreateFood from '@/feature/food/useCreateFood';
 import InputRow from '@/components/ui/InputRow';
 import CheckboxRow from '@/components/ui/CheckboxRow';
@@ -13,33 +13,62 @@ import RadioRow from '@/components/ui/RadioRow';
 import BaseButton from '@/components/ui/BaseButton';
 import Dialog from '@/components/dialog/Dialog';
 
+const nutritionList = [
+  { id: 'calories', name: '熱量', unit: 'kcal' },
+  { id: 'protein', name: '蛋白質', unit: 'g' },
+  { id: 'carbohydrates', name: '碳水化合物', unit: 'g' },
+  { id: 'sugar', name: '糖', unit: 'g' },
+  { id: 'fat', name: '脂肪', unit: 'g' },
+  { id: 'saturated_fat', name: '飽和脂肪', unit: 'g' },
+  { id: 'trans_fat', name: '反式脂肪', unit: 'g' },
+  { id: 'sodium', name: '納', unit: 'mg' },
+  { id: 'potassium', name: '鉀', unit: 'mg' },
+  { id: 'cholesterol', name: '膽固醇', unit: 'mg' }
+];
+
 export default function CreateFood() {
   const {
     register,
+    control,
     handleSubmit,
     reset,
-    control,
     formState: { errors }
-  } = useForm<CreateFoodSchemaType>({
-    resolver: zodResolver(createFoodSchema)
+  } = useForm<foodSchemaType>({
+    resolver: zodResolver(foodSchema),
+    defaultValues: {
+      name: '',
+      common_name: '',
+      brand_name: '',
+      publiced: false,
+      serving_size: {
+        value: 0,
+        unit: 'g'
+      },
+      nutritions: {
+        calories: 0,
+        protein: 0,
+        carbohydrates: 0,
+        sugar: 0,
+        fat: 0,
+        saturated_fat: 0,
+        trans_fat: 0,
+        sodium: 0,
+        potassium: 0,
+        cholesterol: 0
+      }
+    }
   });
   const [isOpen, setIsOpen] = useState(false);
 
   const { createFood, isPending } = useCreateFood();
 
-  const onSubmit: SubmitHandler<CreateFoodSchemaType> = (data) => {
-    console.log(data);
-    // createFood(data, {
-    //   onSuccess: () => {
-    //     setIsOpen(false);
-    //     reset();
-    //   }
-    // });
-  };
-
-  const onError = (error: unknown) => {
-    // eslint-disable-next-line no-console
-    console.log(error);
+  const onSubmit: SubmitHandler<foodSchemaType> = (data) => {
+    createFood(data, {
+      onSuccess: () => {
+        setIsOpen(false);
+        reset();
+      }
+    });
   };
 
   return (
@@ -54,7 +83,7 @@ export default function CreateFood() {
         新增食品
       </BaseButton>
       <Dialog title="建立食品" isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <form onSubmit={handleSubmit(onSubmit, onError)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <InputRow
@@ -86,147 +115,37 @@ export default function CreateFood() {
                 label="每一份量含"
                 type="number"
                 id="serving_size.value"
-                defaultValue={0}
                 errors={errors}
               />
               <RadioRow
                 control={control}
                 label="單位"
                 id="serving_size.unit"
-                radious={['g', 'ml']}
-                defaultValue="g"
+                list={['g', 'ml']}
               />
             </div>
             <div>
               <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
               <div className="grid grid-cols-2 gap-4">
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="熱量"
-                  type="number"
-                  fixedRight="kcal"
-                  id="nutritions.calories"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="蛋白質"
-                  type="number"
-                  fixedRight="g"
-                  id="nutritions.protein"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="碳水化合物"
-                  type="number"
-                  fixedRight="g"
-                  id="nutritions.carbohydrates"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="糖"
-                  type="number"
-                  fixedRight="g"
-                  id="nutritions.sugar"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="脂肪"
-                  type="number"
-                  fixedRight="g"
-                  id="nutritions.fat"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="飽和脂肪"
-                  type="number"
-                  fixedRight="g"
-                  id="nutritions.saturated_fat"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="反式脂肪"
-                  type="number"
-                  fixedRight="g"
-                  id="nutritions.trans_fat"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="納"
-                  type="number"
-                  fixedRight="mg"
-                  id="nutritions.sodium"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="鉀"
-                  type="number"
-                  fixedRight="mg"
-                  id="nutritions.potassium"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="膽固醇"
-                  type="number"
-                  fixedRight="mg"
-                  id="nutritions.cholesterol"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="鈣"
-                  type="number"
-                  fixedRight="%"
-                  id="nutritions.calcium"
-                  defaultValue={0}
-                  errors={errors}
-                />
-                <InputRow
-                  variation="secondary"
-                  register={register}
-                  label="鐵"
-                  type="number"
-                  fixedRight="%"
-                  id="nutritions.iron"
-                  defaultValue={0}
-                  errors={errors}
-                />
+                {nutritionList.map((item) => (
+                  <InputRow
+                    key={item.id}
+                    variation="secondary"
+                    register={register}
+                    label={item.name}
+                    type="number"
+                    fixedRight={item.unit}
+                    id={`nutritions.${item.id}` as keyof foodSchemaType}
+                    errors={errors}
+                  />
+                ))}
               </div>
             </div>
             <div>
               <h6 className="mb-3 text-lg font-semibold">
                 協助我們增加食品資料庫內容
               </h6>
-              <CheckboxRow id="publiced" defaultChecked register={register}>
+              <CheckboxRow id="publiced" control={control}>
                 是，我同意讓其他會員使用此食品。
               </CheckboxRow>
             </div>

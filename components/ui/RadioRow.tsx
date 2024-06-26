@@ -1,5 +1,5 @@
+import { Path, FieldValues, Control, Controller } from 'react-hook-form';
 import { RadioGroup, Radio } from '@headlessui/react';
-import { Path, FieldValues, Controller, Control } from 'react-hook-form';
 import clsx from 'clsx';
 
 const radioStyle = clsx(
@@ -10,16 +10,14 @@ const radioStyle = clsx(
 interface Props<T extends FieldValues> {
   id: Path<T>;
   label: string;
-  radious: string[];
-  defaultValue?: string;
+  list: string[];
   control: Control<T>;
 }
 
 export default function RadioRow<T extends FieldValues>({
   id,
   label,
-  radious,
-  defaultValue,
+  list,
   control
 }: Props<T>) {
   return (
@@ -31,15 +29,10 @@ export default function RadioRow<T extends FieldValues>({
         control={control}
         name={id}
         render={({ field }) => (
-          <RadioGroup
-            defaultValue={defaultValue || radious[0]}
-            id={id}
-            {...field}
-            className="flex items-center gap-4"
-          >
-            {radious.map((radio) => (
-              <Radio key={radio} value={radio} className={radioStyle}>
-                {radio}
+          <RadioGroup {...field} id={id} className="flex items-center gap-4">
+            {list.map((item) => (
+              <Radio key={item} value={item} className={radioStyle}>
+                {item}
               </Radio>
             ))}
           </RadioGroup>

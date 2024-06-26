@@ -1,3 +1,5 @@
+'use client';
+
 import { Input } from '@headlessui/react';
 import {
   Path,
@@ -25,14 +27,15 @@ function getValueByPath(obj: any, path: string) {
 
 interface Props<T extends FieldValues> {
   id: Path<T>;
-  label: string;
+  label?: string;
   type?: string;
   required?: boolean;
   fixedRight?: string;
   variation?: string;
+  disabled?: boolean;
   defaultValue?: string | number;
-  errors: FieldErrors;
-  register: UseFormRegister<T>;
+  errors?: FieldErrors;
+  register?: UseFormRegister<T>;
 }
 
 export default function InputRow<T extends FieldValues>({
@@ -40,12 +43,24 @@ export default function InputRow<T extends FieldValues>({
   label,
   variation = 'primary',
   type = 'text',
+  disabled = false,
   fixedRight,
   defaultValue,
   errors,
   register
 }: Props<T>) {
   const errorMessage = getValueByPath(errors, id)?.message;
+
+  const registerProps = register
+    ? register(id, {
+        setValueAs: (value) => {
+          if (type === 'number') {
+            return value !== '' ? Number(value) : null;
+          }
+          return value;
+        }
+      })
+    : {};
 
   return (
     <div className="flex flex-col">
@@ -57,15 +72,9 @@ export default function InputRow<T extends FieldValues>({
           className={variation ? variations[variation] : ''}
           type={type}
           id={id}
+          disabled={disabled}
           defaultValue={defaultValue}
-          {...register(id, {
-            setValueAs: (value) => {
-              if (type === 'number') {
-                return value !== '' ? Number(value) : null;
-              }
-              return value;
-            }
-          })}
+          {...registerProps}
         />
         {fixedRight && (
           <span className="absolute inset-y-0 right-2 flex items-center text-sm text-primary-400">

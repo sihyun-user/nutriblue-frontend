@@ -30,16 +30,14 @@ const nutritionsValidator = z.object({
   sugar: numValidator('糖'),
   sodium: numValidator('鈉'),
   potassium: numValidator('鉀'),
-  calcium: numValidator('鈣'),
-  iron: numValidator('鐵'),
   cholesterol: numValidator('膽固醇')
 });
 
-export const createFoodSchema = z.object({
+export const foodSchema = z.object({
   name: requiredString(),
-  publiced: requiredBoolean(),
   common_name: z.string(),
   brand_name: z.string(),
+  publiced: requiredBoolean(),
   serving_size: z.object({
     unit: requiredString().regex(/^(g|ml)$/, '單位只能為 g 或 ml'),
     value: numValidator('份量值')
@@ -47,4 +45,4 @@ export const createFoodSchema = z.object({
   nutritions: nutritionsValidator
 });
 
-export type CreateFoodSchemaType = z.infer<typeof createFoodSchema>;
+export type foodSchemaType = z.infer<typeof foodSchema>;

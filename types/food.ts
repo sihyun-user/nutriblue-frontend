@@ -1,4 +1,4 @@
-interface INutritions {
+export interface INutritions {
   [key: string]: number;
   calories: number;
   protein: number;
@@ -9,8 +9,6 @@ interface INutritions {
   trans_fat: number;
   sodium: number;
   potassium: number;
-  calcium: number;
-  iron: number;
   cholesterol: number;
 }
 

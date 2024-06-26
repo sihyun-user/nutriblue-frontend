@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-import Header from './Header';
+import Heading from './Heading';
 import Navigation from './Navigation';
 import Overlay from '../Overlay';
 
@@ -29,7 +29,7 @@ export default function NavBar() {
 
   return (
     <>
-      <Header onIconClick={() => setIsNavOpen(!isNavOpen)} />
+      <Heading onIconClick={() => setIsNavOpen(!isNavOpen)} />
       <Navigation isNavOpen={isNavOpen} />
       <div className="md:hidden">
         <Overlay open={isNavOpen} onClose={() => setIsNavOpen(false)} />
