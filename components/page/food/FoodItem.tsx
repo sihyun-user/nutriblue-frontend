@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Select } from '@headlessui/react';
 import { PlusIcon, CheckCircleIcon } from '@heroicons/react/20/solid';
 
 import { IFood } from '@/types/food';
 import Dialog from '@/components/dialog/Dialog';
 import InputRow from '@/components/ui/InputRow';
 import BaseButton from '@/components/ui/BaseButton';
+import SelectRows from '@/components/ui/SelectRows';
 import NutritionRows from './NutritionRows';
 
 interface Props {
@@ -57,29 +57,20 @@ export default function AddFood({ isOpen, onClose, data }: Props) {
           </div>
           <div className="space-y-4">
             <div>
-              份數:
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 items-end gap-4">
                 <InputRow
                   variation="secondary"
                   id="nutrition_multiplier"
+                  label="份數"
                   defaultValue={data.serving_size.nutrition_multiplier}
                 />
-                <Select name="status" aria-label="Project status">
-                  <option value="active">Active</option>
-                  <option value="paused">Paused</option>
-                  <option value="delayed">Delayed</option>
-                  <option value="canceled">Canceled</option>
-                </Select>
+                <SelectRows />
               </div>
             </div>
             {newDiary && (
               <div>
-                <div className="grid grid-cols-2 gap-4">
-                  <InputRow
-                    variation="secondary"
-                    id="diary_name"
-                    label="餐飲名稱"
-                  />
+                <div className="grid grid-cols-2 items-end gap-4">
+                  <SelectRows label="餐點名稱" />
                   <InputRow
                     variation="secondary"
                     id="diary_date"

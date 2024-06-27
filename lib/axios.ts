@@ -1,7 +1,4 @@
-'use client';
-
 import axios from 'axios';
-import notifyError from '@/utils/notifyError';
 
 const baseURL = `${process.env.NEXT_PUBLIC_BASE_API}/api/v1`;
 
@@ -28,18 +25,11 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      (error.response.status === 401 || error.response.status === 403) &&
-      !originalRequest.set_retry
-    ) {
+    if (error.response.status === 401 && !originalRequest.set_retry) {
       originalRequest.set_retry = true;
 
       try {
         const refreshToken = localStorage.getItem('refreshToken');
-
-        if (!refreshToken) {
-          return notifyError(error, '登入時效過時,請重新登入');
-        }
 
         const { data } = await axios.post(`${baseURL}/auth/refresh-token`, {
           refreshToken
@@ -51,13 +41,12 @@ api.interceptors.response.use(
 
         originalRequest.headers.Authorization = `Bearer ${token}`;
         return axios(originalRequest);
-      } catch (refreshError) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
+      } catch {
+        // 處理刷新令牌錯誤或重定向到登入頁面
         window.location.href = '/login';
-        return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   }
 );

@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={notoSans.className}>
         <Providers>
-          <main className="relative">{children}</main>
+          <main className="relative h-screen">{children}</main>
         </Providers>
       </body>
     </html>

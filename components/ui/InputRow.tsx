@@ -11,11 +11,11 @@ import clsx from 'clsx';
 
 const variations: { [key: string]: string } = {
   primary: clsx(
-    'w-full rounded-lg bg-primary-100 px-3 py-2.5 text-sm text-primary-800 outline-none outline-1 -outline-offset-1 outline-primary-100',
+    'h-[40px] w-full rounded-lg bg-primary-100 px-3 text-sm text-primary-800 outline-none outline-1 -outline-offset-1 outline-primary-100',
     'transition-all duration-200 hover:bg-primary-200 focus:bg-white'
   ),
   secondary: clsx(
-    'w-full rounded-lg bg-white px-3 py-2.5 text-sm text-primary-800 outline-none outline-1 -outline-offset-1 outline-primary-200',
+    'h-[40px] w-full rounded-lg bg-white px-3 text-sm text-primary-800 outline-none outline-1 -outline-offset-1 outline-primary-200',
     'transition-all duration-200 hover:bg-primary-100 focus:bg-white focus:outline-2 focus:outline-blue-200'
   )
 };

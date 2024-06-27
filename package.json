@@ -29,7 +29,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
-    "@headlessui/react": "^2.0.4",
+    "@headlessui/react": "^0.0.0-insiders.abd86fc",
     "@heroicons/react": "^2.1.3",
     "@hookform/resolvers": "^3.6.0",
     "@tanstack/query-core": "^5.45.0",
