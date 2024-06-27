@@ -5,9 +5,8 @@ import { PlusIcon, CheckCircleIcon } from '@heroicons/react/20/solid';
 
 import { IFood } from '@/types/food';
 import Dialog from '@/components/dialog/Dialog';
-import InputRow from '@/components/ui/InputRow';
 import BaseButton from '@/components/ui/BaseButton';
-import SelectRows from '@/components/ui/SelectRows';
+import NewRecord from './NewRecord';
 import NutritionRows from './NutritionRows';
 
 interface Props {
@@ -17,17 +16,17 @@ interface Props {
 }
 
 export default function AddFood({ isOpen, onClose, data }: Props) {
-  const [newDiary, setNewDiary] = useState(false);
+  const [newRecord, setNewRecord] = useState(false);
 
   useEffect(() => {
-    setNewDiary(false);
+    setNewRecord(false);
   }, [isOpen]);
 
   if (data)
     return (
       <Dialog title="食品的營養成分" isOpen={isOpen} onClose={onClose}>
-        <div className="mb-6 space-y-2 rounded-lg bg-blue-100 p-4">
-          <div className="flex justify-between">
+        <div className="mb-6 rounded-lg bg-blue-100 p-4">
+          <div className="flex min-h-[40px] justify-between">
             <div className="space-y-3">
               <div>
                 <h1 className="text-xl font-semibold text-primary-800">
@@ -48,47 +47,17 @@ export default function AddFood({ isOpen, onClose, data }: Props) {
                 </div>
               )}
             </div>
-            {!newDiary && (
-              <BaseButton onClick={() => setNewDiary(true)}>
+            {!newRecord && (
+              <BaseButton onClick={() => setNewRecord(true)}>
                 <PlusIcon className="size-5" />
-                加入日記
+                新增紀錄
               </BaseButton>
             )}
           </div>
-          <div className="space-y-4">
-            <div>
-              <div className="grid grid-cols-2 items-end gap-4">
-                <InputRow
-                  variation="secondary"
-                  id="nutrition_multiplier"
-                  label="份數"
-                  defaultValue={data.serving_size.nutrition_multiplier}
-                />
-                <SelectRows />
-              </div>
-            </div>
-            {newDiary && (
-              <div>
-                <div className="grid grid-cols-2 items-end gap-4">
-                  <SelectRows label="餐點名稱" />
-                  <InputRow
-                    variation="secondary"
-                    id="diary_date"
-                    label="日期"
-                  />
-                </div>
-                <div className="mt-8 flex justify-end gap-6">
-                  <BaseButton
-                    variation="gray"
-                    onClick={() => setNewDiary(false)}
-                  >
-                    取消
-                  </BaseButton>
-                  <BaseButton>確定</BaseButton>
-                </div>
-              </div>
-            )}
-          </div>
+          <NewRecord
+            newRecord={newRecord}
+            closeNewRecord={() => setNewRecord(false)}
+          />
         </div>
         <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
         <div className="grid grid-cols-2 gap-4">

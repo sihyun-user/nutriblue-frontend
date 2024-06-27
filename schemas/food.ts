@@ -21,8 +21,9 @@ export const foodSchema = z.object({
   brand_name: z.string(),
   publiced: requiredBoolean(),
   serving_size: z.object({
-    unit: requiredString().regex(/^(g|ml)$/, '單位只能為 g 或 ml'),
-    value: numValidator('份量值')
+    value: z.number(), // 每一份量數值
+    unit: z.string(), // 每一份量單位
+    container: z.number() // 每包裝份數
   }),
   nutritions: nutritionsValidator
 });

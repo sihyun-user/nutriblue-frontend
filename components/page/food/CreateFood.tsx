@@ -42,7 +42,8 @@ export default function CreateFood() {
       publiced: false,
       serving_size: {
         value: 0,
-        unit: 'g'
+        unit: 'g',
+        container: 1
       },
       nutritions: {
         calories: 0,
@@ -123,9 +124,20 @@ export default function CreateFood() {
                 id="serving_size.unit"
                 list={['g', 'ml']}
               />
+              <InputRow
+                variation="secondary"
+                register={register}
+                label="每包裝份數"
+                type="number"
+                id="serving_size.container"
+                errors={errors}
+              />
             </div>
             <div>
-              <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
+              <div className="mb-3">
+                <span className="text-lg font-semibold">營養成分</span>
+                <span className="ml-1 text-sm">(每一份量含)</span>
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 {nutritionList.map((item) => (
                   <InputRow
