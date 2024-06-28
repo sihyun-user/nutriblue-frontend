@@ -74,6 +74,7 @@ export default function InputRow<T extends FieldValues>({
           id={id}
           disabled={disabled}
           defaultValue={defaultValue}
+          step={type === 'number' ? '0.1' : ''}
           {...registerProps}
         />
         {fixedRight && (

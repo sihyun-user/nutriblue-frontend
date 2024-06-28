@@ -20,7 +20,7 @@ export default function FoodCard({ food }: { food: IFood }) {
         </div>
         <div className="text-sm">/</div>
         <div className="text-sm">
-          {serving_size.value}
+          {serving_size.value * serving_size.container}
           {serving_size.unit}
         </div>
       </div>

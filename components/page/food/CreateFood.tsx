@@ -29,9 +29,9 @@ const nutritionList = [
 export default function CreateFood() {
   const {
     register,
-    control,
     handleSubmit,
     reset,
+    control,
     formState: { errors }
   } = useForm<FoodType>({
     resolver: zodResolver(foodSchema),

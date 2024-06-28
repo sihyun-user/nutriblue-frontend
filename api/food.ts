@@ -1,6 +1,4 @@
-import { IFood } from '@/types/food';
 import { FoodType } from '@/schemas/food';
-import formatNutritions from '@/utils/formatNutritions';
 import axios from '@/lib/axios';
 
 export async function getFoods() {
@@ -8,16 +6,7 @@ export async function getFoods() {
 
   if (!data.status) throw new Error(data.message);
 
-  const formattedElements = data.data.elements.map((item: IFood) =>
-    formatNutritions(item)
-  );
-
-  const result = {
-    ...data,
-    elements: formattedElements
-  };
-
-  return result;
+  return data.data;
 }
 
 export async function createFood(newFood: FoodType) {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useMemo, useEffect } from 'react';
 import { Path, FieldValues, Control, Controller } from 'react-hook-form';
 import { format, getMonth, getYear } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -23,14 +23,12 @@ export default function DateSelector<T extends FieldValues>({
   control,
   initDate
 }: Props<T>) {
-  const newDate = new Date();
-  const initSelectedDate =
-    initDate === '' ? format(newDate, 'MM/dd/yyyy') : initDate;
+  // const initSetDate = initDate === '' ? new Date() : new Date(initDate);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
-  const [month, setMonth] = useState(getMonth(newDate));
-  const [year, setYear] = useState(getYear(newDate));
-  const [inputValue, setInputValue] = useState(initSelectedDate);
+  const [inputValue, setInputValue] = useState<string>('');
+  const [month, setMonth] = useState<number>(1);
+  const [year, setYear] = useState<number>(2024);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleDayPickerSelect = (
@@ -44,12 +42,17 @@ export default function DateSelector<T extends FieldValues>({
     fieldOnChange(formatDate); // 更新 useForm 的值
   };
 
+  const initSetDate = useMemo(
+    () => (initDate === '' ? new Date() : new Date(initDate)),
+    [initDate]
+  );
+
   useEffect(() => {
-    const date = new Date(initSelectedDate);
-    setSelectedDate(date);
-    setMonth(getMonth(date));
-    setYear(getYear(date));
-  }, [initSelectedDate]);
+    setSelectedDate(initSetDate);
+    setInputValue(format(initSetDate, 'MM/dd/yyyy'));
+    setMonth(getMonth(initSetDate));
+    setYear(getYear(initSetDate));
+  }, [initSetDate]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

@@ -20,9 +20,9 @@ export interface IFood {
   common_name: string;
   brand_name: string;
   serving_size: {
-    nutrition_multiplier: number;
-    unit: string;
     value: number;
+    unit: string;
+    container: number;
   };
   nutritions: INutritions;
 }

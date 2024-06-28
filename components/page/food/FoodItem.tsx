@@ -57,6 +57,7 @@ export default function AddFood({ isOpen, onClose, data }: Props) {
           <NewRecord
             newRecord={newRecord}
             closeNewRecord={() => setNewRecord(false)}
+            serving_size={data.serving_size}
           />
         </div>
         <h6 className="mb-3 text-lg font-semibold">營養成分</h6>

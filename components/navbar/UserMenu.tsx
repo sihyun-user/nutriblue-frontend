@@ -16,7 +16,7 @@ const buttonStyle = clsx(
 
 const panelStyle = clsx(
   'z-20 flex w-[320px] flex-col rounded-lg bg-white p-2 shadow-xl',
-  'origin-top-right transition duration-150 ease-out data-[closed]:scale-75 data-[open]:scale-100 data-[closed]:opacity-0 data-[open]:opacity-100'
+  'origin-top-right transition duration-200 data-[closed]:scale-75 data-[open]:scale-100 data-[closed]:opacity-0 data-[open]:opacity-100'
 );
 
 const ItemStyle =
