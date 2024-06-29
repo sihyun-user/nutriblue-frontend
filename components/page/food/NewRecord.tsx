@@ -1,56 +1,86 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
 
+import { IFood } from '@/types/food';
 import { newRecordSchema, type NewRecordSchemaType } from '@/schemas/record';
 import BaseButton from '@/components/ui/BaseButton';
 import InputRow from '@/components/ui/InputRow';
 import SelectRows from '@/components/ui/SelectRows';
 import DateSelector from '@/components/ui/DateSelector';
+import useCreateRecord from '@/feature/record/useCreateRecord';
+
+const mealList = [
+  { id: 'breakfast', name: '早餐' },
+  { id: 'lunch', name: '午餐' },
+  { id: 'dinner', name: '晚餐' },
+  { id: 'dessert', name: '點心' }
+];
 
 interface Props {
+  food: IFood;
   newRecord: boolean;
   closeNewRecord: () => void;
-  serving_size: {
-    value: number;
-    unit: string;
-    container: number;
-  };
+  handleClose: () => void;
+  handleMultiplier: (value: number) => void;
 }
 
 export default function NewRecord({
+  food,
   newRecord,
   closeNewRecord,
-  serving_size
+  handleClose,
+  handleMultiplier
 }: Props) {
-  const { unit, value, container } = serving_size;
-  const containerVlaue = `${value * container}`;
+  const {
+    id,
+    serving_size: { value, unit, container }
+  } = food;
+  const [containerValue, setContainerValue] = useState(0);
+
+  const { createRecord, isPending } = useCreateRecord();
 
   const {
     register,
     handleSubmit,
     getValues,
     reset,
+    watch,
     control,
     formState: { errors }
   } = useForm<NewRecordSchemaType>({
     resolver: zodResolver(newRecordSchema),
+    mode: 'onChange',
     defaultValues: {
+      food_id: id,
       multiplier: 1,
       meal_name: 'breakfast',
-      record_date: '06/27/2024'
+      record_date: format(new Date(), 'yyyy-MM-dd')
     }
   });
 
-  const onSubmit: SubmitHandler<NewRecordSchemaType> = (data) => {
-    console.log(data);
-  };
+  const multiplier = watch('multiplier');
+
+  useEffect(() => {
+    const newValue = value * container * multiplier;
+    const calculatedValue = Math.round(newValue);
+    setContainerValue(calculatedValue);
+
+    handleMultiplier(multiplier);
+  }, [multiplier, handleMultiplier, value, container]);
 
   useEffect(() => {
     if (!newRecord) reset();
   }, [reset, newRecord]);
+
+  const onSubmit: SubmitHandler<NewRecordSchemaType> = (data) => {
+    createRecord(data, {
+      onSettled: () => handleClose()
+    });
+  };
 
   return (
     <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
@@ -68,16 +98,21 @@ export default function NewRecord({
           id="container"
           label="本包裝含"
           disabled
-          defaultValue={containerVlaue}
+          setValue={containerValue}
           fixedRight={unit}
         />
       </div>
       {newRecord && (
         <>
           <div className="mt-4 grid grid-cols-2 items-end gap-4">
-            <SelectRows label="餐點名稱" />
+            <SelectRows
+              id="meal_name"
+              label="餐點名稱"
+              list={mealList}
+              control={control}
+            />
             <DateSelector
-              initDate={getValues().record_date}
+              initDate={getValues('record_date')}
               control={control}
               id="record_date"
             />
@@ -86,7 +121,9 @@ export default function NewRecord({
             <BaseButton variation="gray" onClick={closeNewRecord}>
               取消
             </BaseButton>
-            <BaseButton type="submit">確定</BaseButton>
+            <BaseButton type="submit" disabled={isPending}>
+              確定
+            </BaseButton>
           </div>
         </>
       )}

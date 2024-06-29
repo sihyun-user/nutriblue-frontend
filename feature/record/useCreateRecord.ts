@@ -3,20 +3,20 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { createFood as createFoodApi } from '@/api/food';
+import { createRecord as createRecordApi } from '@/api/record';
 
-export default function useCreateFood() {
+export default function useCreateRecord() {
   const queryClient = useQueryClient();
-  const { mutate: createFood, isPending } = useMutation({
-    mutationFn: createFoodApi,
+  const { mutate: createRecord, isPending } = useMutation({
+    mutationFn: createRecordApi,
     onSuccess: () => {
       toast.success('新增食品紀錄成功');
-      queryClient.invalidateQueries({ queryKey: ['foods'] });
+      queryClient.invalidateQueries({ queryKey: ['records'] });
     },
     onError: () => {
       toast.error('新增食品紀錄失敗，請稍後再試');
     }
   });
 
-  return { createFood, isPending };
+  return { createRecord, isPending };
 }

@@ -34,7 +34,7 @@ export default function BaseButton({
       onClick={onClick}
       className={`flex h-10 min-w-24 items-center justify-center gap-1 rounded px-2 text-sm text-white transition-all duration-200 ${variationClass} ${full ? 'w-full' : ''}`}
     >
-      {children}
+      {disabled ? <div className="spinner-mini" /> : children}
     </Button>
   );
 }

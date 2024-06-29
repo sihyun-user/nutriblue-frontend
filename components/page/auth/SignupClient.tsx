@@ -40,7 +40,8 @@ export default function SignupClient() {
     handleSubmit,
     formState: { errors }
   } = useForm<SignupSchemaType>({
-    resolver: zodResolver(signupSchema)
+    resolver: zodResolver(signupSchema),
+    mode: 'onChange'
   });
 
   const onSubmit: SubmitHandler<SignupSchemaType> = (data) => signup(data);

@@ -35,6 +35,7 @@ export default function CreateFood() {
     formState: { errors }
   } = useForm<FoodType>({
     resolver: zodResolver(foodSchema),
+    mode: 'onChange',
     defaultValues: {
       name: '',
       common_name: '',

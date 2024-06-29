@@ -29,7 +29,8 @@ export default function LoginClient() {
     handleSubmit,
     formState: { errors }
   } = useForm<LoginSchemaType>({
-    resolver: zodResolver(loginSchema)
+    resolver: zodResolver(loginSchema),
+    mode: 'onChange'
   });
 
   const onSubmit: SubmitHandler<LoginSchemaType> = (data) => login(data);

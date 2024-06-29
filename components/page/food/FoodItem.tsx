@@ -17,6 +17,7 @@ interface Props {
 
 export default function AddFood({ isOpen, onClose, data }: Props) {
   const [newRecord, setNewRecord] = useState(false);
+  const [multiplier, setMultiplier] = useState(1);
 
   useEffect(() => {
     setNewRecord(false);
@@ -55,14 +56,16 @@ export default function AddFood({ isOpen, onClose, data }: Props) {
             )}
           </div>
           <NewRecord
+            food={data}
             newRecord={newRecord}
             closeNewRecord={() => setNewRecord(false)}
-            serving_size={data.serving_size}
+            handleClose={onClose}
+            handleMultiplier={(value) => setMultiplier(value)}
           />
         </div>
         <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
         <div className="grid grid-cols-2 gap-4">
-          <NutritionRows data={data.nutritions} />
+          <NutritionRows multiplier={multiplier} data={data.nutritions} />
         </div>
       </Dialog>
     );

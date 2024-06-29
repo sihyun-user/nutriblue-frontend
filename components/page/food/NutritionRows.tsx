@@ -14,7 +14,12 @@ const nutritionList = [
   { id: 'cholesterol', name: '膽固醇', unit: 'mg' }
 ];
 
-export default function NutritionRows({ data }: { data: INutritions }) {
+interface Props {
+  multiplier: number;
+  data: INutritions;
+}
+
+export default function NutritionRows({ multiplier, data }: Props) {
   return (
     <>
       {nutritionList.map((item) => (
@@ -25,7 +30,11 @@ export default function NutritionRows({ data }: { data: INutritions }) {
           disabled
           fixedRight={item.unit}
           id={`nutritions.${item.id}` as keyof IFood}
-          defaultValue={data[item.id]}
+          setValue={
+            data[item.id] === 0
+              ? 0
+              : Math.round(data[item.id] * multiplier * 10) / 10
+          }
         />
       ))}
     </>

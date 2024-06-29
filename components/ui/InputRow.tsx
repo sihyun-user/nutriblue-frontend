@@ -33,7 +33,7 @@ interface Props<T extends FieldValues> {
   fixedRight?: string;
   variation?: string;
   disabled?: boolean;
-  defaultValue?: string | number;
+  setValue?: string | number;
   errors?: FieldErrors;
   register?: UseFormRegister<T>;
 }
@@ -45,7 +45,7 @@ export default function InputRow<T extends FieldValues>({
   type = 'text',
   disabled = false,
   fixedRight,
-  defaultValue,
+  setValue,
   errors,
   register
 }: Props<T>) {
@@ -73,7 +73,7 @@ export default function InputRow<T extends FieldValues>({
           type={type}
           id={id}
           disabled={disabled}
-          defaultValue={defaultValue}
+          value={setValue}
           step={type === 'number' ? '0.1' : ''}
           {...registerProps}
         />

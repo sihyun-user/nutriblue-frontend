@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useMemo, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Path, FieldValues, Control, Controller } from 'react-hook-form';
 import { format, getMonth, getYear } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
@@ -15,7 +15,7 @@ const inputStyle = clsx(
 interface Props<T extends FieldValues> {
   id: Path<T>;
   control: Control<T>;
-  initDate: string;
+  initDate: string | Date;
 }
 
 export default function DateSelector<T extends FieldValues>({
@@ -23,36 +23,34 @@ export default function DateSelector<T extends FieldValues>({
   control,
   initDate
 }: Props<T>) {
-  // const initSetDate = initDate === '' ? new Date() : new Date(initDate);
+  const newDate = new Date();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [month, setMonth] = useState<number>(getMonth(newDate));
+  const [year, setYear] = useState<number>(getYear(newDate));
   const [inputValue, setInputValue] = useState<string>('');
-  const [month, setMonth] = useState<number>(1);
-  const [year, setYear] = useState<number>(2024);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const handleDayPickerSelect = (
+  const handlePickerSelect = (
     date: Date | undefined,
     fieldOnChange: (value: string) => void
   ) => {
-    setSelectedDate(date);
-    const formatDate = date ? format(date, 'MM/dd/yyyy') : '';
-    setInputValue(formatDate);
-    setIsOpen(false);
-    fieldOnChange(formatDate); // 更新 useForm 的值
+    if (date) {
+      const formatDate = format(date, 'MM/dd/yyyy');
+      setSelectedDate(date);
+      setInputValue(formatDate);
+      fieldOnChange(formatDate); // 更新 useForm 的值
+      setIsOpen(false);
+    }
   };
 
-  const initSetDate = useMemo(
-    () => (initDate === '' ? new Date() : new Date(initDate)),
-    [initDate]
-  );
-
   useEffect(() => {
-    setSelectedDate(initSetDate);
-    setInputValue(format(initSetDate, 'MM/dd/yyyy'));
-    setMonth(getMonth(initSetDate));
-    setYear(getYear(initSetDate));
-  }, [initSetDate]);
+    const defaultDate = new Date(initDate);
+    setSelectedDate(defaultDate);
+    setMonth(getMonth(defaultDate));
+    setYear(getYear(defaultDate));
+    setInputValue(format(defaultDate, 'MM/dd/yyyy'));
+  }, [initDate]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -85,13 +83,11 @@ export default function DateSelector<T extends FieldValues>({
               </div>
               {isOpen && (
                 <DayPicker
-                  className="absolute right-0 z-10 rounded-lg border border-gray-200 bg-white shadow-md"
+                  className="absolute right-0 z-10 rounded-lg border border-gray-200 bg-white p-2 shadow-md"
                   mode="single"
                   defaultMonth={new Date(year, month)}
                   selected={selectedDate}
-                  onSelect={(date) =>
-                    handleDayPickerSelect(date, field.onChange)
-                  }
+                  onSelect={(date) => handlePickerSelect(date, field.onChange)}
                 />
               )}
             </>
