@@ -10,7 +10,7 @@ export default async function Page() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ['foods'],
-    queryFn: getFoods
+    queryFn: () => getFoods({ pageIndex: 1 })
   });
 
   return (
@@ -21,11 +21,9 @@ export default async function Page() {
           <CreateFood />
         </div>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <ListFoods />
-        </HydrationBoundary>
-      </div>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ListFoods />
+      </HydrationBoundary>
     </div>
   );
 }
