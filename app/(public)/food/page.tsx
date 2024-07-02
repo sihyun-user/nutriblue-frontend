@@ -1,18 +1,8 @@
-import { QueryClient, HydrationBoundary } from '@tanstack/react-query';
-import { dehydrate } from '@tanstack/query-core';
-
-import { getFoods } from '@/api/food';
 import SearchBar from '@/components/ui/SearchBar';
 import ListFoods from '@/components/page/food/ListFoods';
 import CreateFood from '@/components/page/food/CreateFood';
 
 export default async function Page() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['foods'],
-    queryFn: () => getFoods({ pageIndex: 1 })
-  });
-
   return (
     <div className="mx-auto w-full max-w-6xl">
       <div className="relative mb-8 flex items-center justify-between gap-4 md:block">
@@ -21,9 +11,7 @@ export default async function Page() {
           <CreateFood />
         </div>
       </div>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ListFoods />
-      </HydrationBoundary>
+      <ListFoods />
     </div>
   );
 }

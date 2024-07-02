@@ -2,13 +2,13 @@ import { FoodType } from '@/schemas/food';
 import axios from '@/lib/axios';
 
 export async function getFoods({
-  pageSize,
+  query,
   pageIndex
 }: {
-  pageSize?: number;
-  pageIndex?: number;
+  query: string;
+  pageIndex: number;
 }) {
-  const params = `?${pageSize ? `pageSize=${pageSize}` : ''}${pageSize && pageIndex ? '&' : ''}${pageIndex ? `pageIndex=${pageIndex}` : ''}`;
+  const params = `?query=${query}&pageIndex=${pageIndex}&pageSize=9`;
 
   const { data } = await axios.get(`/food${params}`);
 

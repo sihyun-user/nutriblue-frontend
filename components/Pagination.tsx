@@ -1,38 +1,41 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useState, useCallback, useEffect } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 
 import { IPagination } from '@/types';
 
+interface PaginatedNumbers {
+  totalPages: number;
+  targetPage: number;
+  maxPageNumberLimit: number;
+  minPageNumberLimit: number;
+  handleCurrentPage: (pageNumber: number) => void;
+}
+
 const PaginatedNumbers = ({
   totalPages,
   targetPage,
-  handleCurrentPage,
   maxPageNumberLimit,
-  minPageNumberLimit
-}: {
-  totalPages: number;
-  targetPage: number;
-  handleCurrentPage: (pageNumber: number) => void;
-  maxPageNumberLimit: number;
-  minPageNumberLimit: number;
-}) => {
+  minPageNumberLimit,
+  handleCurrentPage
+}: PaginatedNumbers) => {
   return Array.from({ length: totalPages }, (num, index) => {
-    if (index < maxPageNumberLimit + 1 && index > minPageNumberLimit)
+    const pageNumber = index + 1;
+    if (pageNumber < maxPageNumberLimit && pageNumber >= minPageNumberLimit)
       return (
         <button
           type="button"
-          key={index}
-          onClick={() => handleCurrentPage(index)}
+          key={pageNumber}
+          onClick={() => handleCurrentPage(pageNumber)}
           className={`${
-            targetPage === index
+            targetPage === pageNumber
               ? 'bg-cyan-500 text-white'
               : 'bg-white hover:bg-gray-100'
           } flex items-center border border-gray-300 px-4 py-2 text-sm font-medium`}
         >
-          {index}{' '}
+          {pageNumber}{' '}
         </button>
       );
 
@@ -63,20 +66,23 @@ export default function Pagination({ data }: { data: IPagination }) {
   function nextPage() {
     const next = lastPage ? targetPage : targetPage + 1;
     handleCurrentPage(next);
-    if (next > maxPageNumberLimit) {
-      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
-      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
-    }
   }
 
   function prevPage() {
     const prev = firstPage ? 1 : targetPage - 1;
     handleCurrentPage(prev);
-    if (prev % pageNumberLimit === 0) {
+  }
+
+  useEffect(() => {
+    if (targetPage > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
+    if (targetPage <= minPageNumberLimit) {
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
-  }
+  }, [targetPage, minPageNumberLimit, maxPageNumberLimit]);
 
   if (!empty)
     return (
@@ -103,9 +109,9 @@ export default function Pagination({ data }: { data: IPagination }) {
             <PaginatedNumbers
               totalPages={totalPages}
               targetPage={targetPage}
-              handleCurrentPage={handleCurrentPage}
               minPageNumberLimit={minPageNumberLimit}
               maxPageNumberLimit={maxPageNumberLimit}
+              handleCurrentPage={handleCurrentPage}
             />
             <button
               type="button"
