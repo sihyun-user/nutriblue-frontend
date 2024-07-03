@@ -13,7 +13,6 @@ export default function SearchBar() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!keyword) return;
 
     handleSetParams('query', keyword);
   }

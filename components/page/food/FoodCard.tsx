@@ -4,8 +4,8 @@ import { BookmarkIcon as OutlineBookmarkIcon } from '@heroicons/react/24/outline
 import { type UserInfoType } from '@/types/user';
 import { IFood } from '@/types/food';
 import { useUserInfo } from '@/providers/UserProvider';
-import useCreateFoodBookmark from '@/feature/food/useCreateBookmark';
-import useDeleteFoodBookmark from '@/feature/food/useDeleteBookmark';
+import useCreateFoodBookmark from '@/feature/bookmark/useCreateBookmark';
+import useDeleteFoodBookmark from '@/feature/bookmark/useDeleteBookmark';
 
 interface Props {
   food: IFood;
@@ -14,8 +14,8 @@ interface Props {
 
 export default function FoodCard({ food, onFoodClick }: Props) {
   const { id: userId } = useUserInfo() as UserInfoType;
-  const { createFoodBookmark } = useCreateFoodBookmark();
-  const { deleteFoodBookmark } = useDeleteFoodBookmark();
+  const { createBookmark } = useCreateFoodBookmark();
+  const { deleteBookmark } = useDeleteFoodBookmark();
 
   const {
     id: food_id,
@@ -30,9 +30,9 @@ export default function FoodCard({ food, onFoodClick }: Props) {
     e.stopPropagation();
 
     if (bookmark_collects.includes(userId)) {
-      deleteFoodBookmark({ food_id });
+      deleteBookmark({ food_id });
     } else {
-      createFoodBookmark({ food_id });
+      createBookmark({ food_id });
     }
   }
 

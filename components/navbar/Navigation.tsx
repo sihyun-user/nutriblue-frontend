@@ -59,8 +59,8 @@ const navList = [
     navItem: '管理',
     navLinks: [
       {
-        name: '書籤',
-        href: '/bookmarks',
+        name: '食品書籤',
+        href: '/bookmark',
         icon: <BookmarkIcon />
       },
       {

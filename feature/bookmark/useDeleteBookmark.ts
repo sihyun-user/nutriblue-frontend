@@ -3,20 +3,21 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { deleteFoodBookmark as deleteFoodBookmarkApi } from '@/api/food';
+import { deleteBookmark as deleteBookmarkApi } from '@/api/bookmark';
 
-export default function useDeleteFoodBookmark() {
+export default function useDeleteBookmark() {
   const queryClient = useQueryClient();
-  const { mutate: deleteFoodBookmark } = useMutation({
-    mutationFn: deleteFoodBookmarkApi,
+  const { mutate: deleteBookmark } = useMutation({
+    mutationFn: deleteBookmarkApi,
     onSuccess: () => {
       toast.success('刪除食品書籤成功');
       queryClient.invalidateQueries({ queryKey: ['foods'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
     },
     onError: () => {
       toast.error('刪除食品書籤失敗，請稍後再試');
     }
   });
 
-  return { deleteFoodBookmark };
+  return { deleteBookmark };
 }

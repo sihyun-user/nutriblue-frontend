@@ -32,7 +32,7 @@ export default function BaseButton({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`flex h-10 min-w-24 items-center justify-center gap-1 rounded px-2 text-sm text-white transition-all duration-200 ${variationClass} ${full ? 'w-full' : ''}`}
+      className={`flex h-10 min-w-24 items-center justify-center gap-1 rounded px-3 text-sm text-white transition-all duration-200 ${variationClass} ${full ? 'w-full' : ''}`}
     >
       {disabled ? <div className="spinner-mini" /> : children}
     </Button>

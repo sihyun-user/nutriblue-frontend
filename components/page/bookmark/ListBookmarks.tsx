@@ -3,18 +3,18 @@
 import { useState } from 'react';
 
 import { IFood } from '@/types/food';
-import useFoods from '@/feature/food/useFoods';
+import useBookmarks from '@/feature/bookmark/useBookmarks';
 import Spinner from '@/components/Spinner';
 import PageResults from '@/components/PageResults';
 import Pagination from '@/components/Pagination';
-import FoodCard from './FoodCard';
-import FoodItem from './FoodItem';
-import EmptyFood from './EmptyFood';
+import FoodCard from '../food/FoodCard';
+import FoodItem from '../food/FoodItem';
+import EmptyBookmark from './EmptyBookmark';
 
 export default function ListFoods() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFood, setSelectedFood] = useState<IFood | null>(null);
-  const { data, isLoading, pageSize } = useFoods();
+  const { data, isLoading, pageSize } = useBookmarks();
 
   function handleOpen(food: IFood) {
     setIsOpen(true);
@@ -28,7 +28,7 @@ export default function ListFoods() {
 
   if (isLoading) return <Spinner />;
 
-  if (!data) return <EmptyFood />;
+  if (!data || data.empty) return <EmptyBookmark />;
 
   return (
     <>
