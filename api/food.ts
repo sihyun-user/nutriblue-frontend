@@ -1,4 +1,4 @@
-import { FoodType } from '@/schemas/food';
+import { FoodFormType } from '@/schemas/food';
 import axios from '@/lib/axios';
 
 export async function getFoods({
@@ -17,7 +17,7 @@ export async function getFoods({
   return data.data;
 }
 
-export async function createFood(newFood: FoodType) {
+export async function createFood(newFood: FoodFormType) {
   const { data } = await axios.post('/food', newFood);
 
   if (!data.status) throw new Error(data.message);

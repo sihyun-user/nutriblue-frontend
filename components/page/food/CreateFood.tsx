@@ -5,26 +5,14 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PlusIcon } from '@heroicons/react/20/solid';
 
-import { foodSchema, type FoodType } from '@/schemas/food';
+import { foodFormSchema, type FoodFormType } from '@/schemas/food';
 import useCreateFood from '@/feature/food/useCreateFood';
 import InputRow from '@/components/ui/InputRow';
 import CheckboxRow from '@/components/ui/CheckboxRow';
 import RadioRow from '@/components/ui/RadioRow';
 import BaseButton from '@/components/ui/BaseButton';
 import Dialog from '@/components/dialog/Dialog';
-
-const nutritionList = [
-  { id: 'calories', name: '熱量', unit: 'kcal' },
-  { id: 'protein', name: '蛋白質', unit: 'g' },
-  { id: 'carbohydrates', name: '碳水化合物', unit: 'g' },
-  { id: 'sugar', name: '糖', unit: 'g' },
-  { id: 'fat', name: '脂肪', unit: 'g' },
-  { id: 'saturated_fat', name: '飽和脂肪', unit: 'g' },
-  { id: 'trans_fat', name: '反式脂肪', unit: 'g' },
-  { id: 'sodium', name: '納', unit: 'mg' },
-  { id: 'potassium', name: '鉀', unit: 'mg' },
-  { id: 'cholesterol', name: '膽固醇', unit: 'mg' }
-];
+import nutritionList from '@/utils/nutritionList';
 
 export default function CreateFood() {
   const {
@@ -33,8 +21,8 @@ export default function CreateFood() {
     reset,
     control,
     formState: { errors }
-  } = useForm<FoodType>({
-    resolver: zodResolver(foodSchema),
+  } = useForm<FoodFormType>({
+    resolver: zodResolver(foodFormSchema),
     mode: 'onChange',
     defaultValues: {
       name: '',
@@ -64,7 +52,7 @@ export default function CreateFood() {
 
   const { createFood, isPending } = useCreateFood();
 
-  const onSubmit: SubmitHandler<FoodType> = (data) => {
+  const onSubmit: SubmitHandler<FoodFormType> = (data) => {
     createFood(data, {
       onSuccess: () => {
         setIsOpen(false);
@@ -148,7 +136,7 @@ export default function CreateFood() {
                     label={item.name}
                     type="number"
                     fixedRight={item.unit}
-                    id={`nutritions.${item.id}` as keyof FoodType}
+                    id={`nutritions.${item.id}` as keyof FoodFormType}
                     errors={errors}
                   />
                 ))}

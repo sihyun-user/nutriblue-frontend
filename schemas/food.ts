@@ -15,17 +15,17 @@ export const nutritionsValidator = z.object({
   cholesterol: numValidator('膽固醇')
 });
 
-export const foodSchema = z.object({
+export const foodFormSchema = z.object({
   name: requiredString(),
   common_name: z.string(),
   brand_name: z.string(),
   publiced: requiredBoolean(),
   serving_size: z.object({
-    value: z.number(), // 每一份量數值
+    value: numValidator('每一份量含'), // 每一份量數值
     unit: z.string(), // 每一份量單位
-    container: z.number() // 每包裝份數
+    container: numValidator('每包裝份數') // 每包裝份數
   }),
   nutritions: nutritionsValidator
 });
 
-export type FoodType = z.infer<typeof foodSchema>;
+export type FoodFormType = z.infer<typeof foodFormSchema>;
