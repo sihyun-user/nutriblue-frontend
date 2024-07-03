@@ -6,13 +6,19 @@ import { IFood } from '@/types/food';
 import { useUserInfo } from '@/providers/UserProvider';
 import useCreateFoodBookmark from '@/feature/bookmark/useCreateBookmark';
 import useDeleteFoodBookmark from '@/feature/bookmark/useDeleteBookmark';
+import SelectMenu from './SelectMenu';
 
 interface Props {
   food: IFood;
+  selectMenu?: boolean;
   onFoodClick: () => void;
 }
 
-export default function FoodCard({ food, onFoodClick }: Props) {
+export default function FoodCard({
+  food,
+  selectMenu = false,
+  onFoodClick
+}: Props) {
   const { id: userId } = useUserInfo() as UserInfoType;
   const { createBookmark } = useCreateFoodBookmark();
   const { deleteBookmark } = useDeleteFoodBookmark();
@@ -36,6 +42,10 @@ export default function FoodCard({ food, onFoodClick }: Props) {
     }
   }
 
+  function handleEdit(e: React.MouseEvent<HTMLDivElement>) {
+    e.stopPropagation();
+  }
+
   return (
     <div
       onClick={onFoodClick}
@@ -47,16 +57,27 @@ export default function FoodCard({ food, onFoodClick }: Props) {
           <CheckCircleIcon className="size-6 min-w-6 text-green-600" />
         )}
       </div>
-      <div
-        onClick={(e) => handleBookmark(e)}
-        className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-xl hover:bg-cyan-100"
-      >
-        {bookmark_collects.includes(userId) ? (
-          <BookmarkIcon className="size-7 text-cyan-500" />
-        ) : (
-          <OutlineBookmarkIcon className="size-7 text-cyan-500" />
-        )}
-      </div>
+      {selectMenu && (
+        <div
+          onClick={(e) => handleEdit(e)}
+          className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-xl hover:bg-cyan-100"
+        >
+          {/* <EllipsisVerticalIcon className="size-7 text-cyan-500" /> */}
+          <SelectMenu />
+        </div>
+      )}
+      {!selectMenu && (
+        <div
+          onClick={(e) => handleBookmark(e)}
+          className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-xl hover:bg-cyan-100"
+        >
+          {bookmark_collects.includes(userId) ? (
+            <BookmarkIcon className="size-7 text-cyan-500" />
+          ) : (
+            <OutlineBookmarkIcon className="size-7 text-cyan-500" />
+          )}
+        </div>
+      )}
       <div className="mb-2 flex items-center gap-2">
         <div className="text-blue-400">
           <span className="text-xl font-bold">{nutritions.calories}</span> kcal

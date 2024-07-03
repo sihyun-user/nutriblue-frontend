@@ -7,8 +7,8 @@ import useBookmarks from '@/feature/bookmark/useBookmarks';
 import Spinner from '@/components/Spinner';
 import PageResults from '@/components/PageResults';
 import Pagination from '@/components/Pagination';
-import FoodCard from '../food/FoodCard';
-import FoodItem from '../food/FoodItem';
+import FoodCard from '@/components/foods/FoodCard';
+import FoodItem from '@/components/foods/FoodItem';
 import EmptyBookmark from './EmptyBookmark';
 
 export default function ListFoods() {

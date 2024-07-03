@@ -1,5 +1,5 @@
 import SearchBar from '@/components/ui/SearchBar';
-import ListFoods from '@/components/page/food/ListFoods';
+import ListLookups from '@/components/page/lookup/ListLookups';
 import CreateFood from '@/components/foods/CreateFood';
 
 export default async function Page() {
@@ -11,7 +11,7 @@ export default async function Page() {
           <CreateFood />
         </div>
       </div>
-      <ListFoods />
+      <ListLookups />
     </div>
   );
 }

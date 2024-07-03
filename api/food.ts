@@ -10,6 +10,22 @@ export async function getFoods({
 }) {
   const params = `?query=${query}&pageIndex=${pageIndex}&pageSize=9`;
 
+  const { data } = await axios.get(`/food/guest/${params}`);
+
+  if (!data.status) throw new Error(data.message);
+
+  return data.data;
+}
+
+export async function getUserFoods({
+  query,
+  pageIndex
+}: {
+  query: string;
+  pageIndex: number;
+}) {
+  const params = `?query=${query}&pageIndex=${pageIndex}&pageSize=9`;
+
   const { data } = await axios.get(`/food${params}`);
 
   if (!data.status) throw new Error(data.message);
