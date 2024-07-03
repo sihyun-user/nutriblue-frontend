@@ -1,18 +1,61 @@
 import { BookmarkIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+import { BookmarkIcon as OutlineBookmarkIcon } from '@heroicons/react/24/outline';
 
+import { type UserInfoType } from '@/types/user';
 import { IFood } from '@/types/food';
+import { useUserInfo } from '@/providers/UserProvider';
+import useCreateFoodBookmark from '@/feature/food/useCreateBookmark';
+import useDeleteFoodBookmark from '@/feature/food/useDeleteBookmark';
 
-export default function FoodCard({ food }: { food: IFood }) {
-  const { name, verified, serving_size, nutritions } = food;
+interface Props {
+  food: IFood;
+  onFoodClick: () => void;
+}
+
+export default function FoodCard({ food, onFoodClick }: Props) {
+  const { id: userId } = useUserInfo() as UserInfoType;
+  const { createFoodBookmark } = useCreateFoodBookmark();
+  const { deleteFoodBookmark } = useDeleteFoodBookmark();
+
+  const {
+    id: food_id,
+    name,
+    verified,
+    serving_size,
+    nutritions,
+    bookmark_collects
+  } = food;
+
+  function handleBookmark(e: React.MouseEvent<HTMLDivElement>) {
+    e.stopPropagation();
+
+    if (bookmark_collects.includes(userId)) {
+      deleteFoodBookmark({ food_id });
+    } else {
+      createFoodBookmark({ food_id });
+    }
+  }
 
   return (
-    <div className="relative cursor-pointer overflow-hidden rounded-lg border-2 border-white bg-white p-4 shadow-md hover:shadow-lg">
-      <div className="mb-4 flex items-center gap-3">
-        <h3 className="text-xl font-bold">{name}</h3>
-        {verified && <CheckCircleIcon className="size-6 text-green-600" />}
+    <div
+      onClick={onFoodClick}
+      className="relative cursor-pointer overflow-hidden rounded-lg border-2 border-white bg-white p-4 shadow-md hover:shadow-lg"
+    >
+      <div className="mb-4 flex w-10/12 items-center gap-3">
+        <h3 className="line-clamp-1 text-xl font-bold">{name}</h3>
+        {verified && (
+          <CheckCircleIcon className="size-6 min-w-6 text-green-600" />
+        )}
       </div>
-      <div className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-xl hover:bg-cyan-100">
-        <BookmarkIcon className="size-7 text-cyan-500" />
+      <div
+        onClick={(e) => handleBookmark(e)}
+        className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-xl hover:bg-cyan-100"
+      >
+        {bookmark_collects.includes(userId) ? (
+          <BookmarkIcon className="size-7 text-cyan-500" />
+        ) : (
+          <OutlineBookmarkIcon className="size-7 text-cyan-500" />
+        )}
       </div>
       <div className="mb-2 flex items-center gap-2">
         <div className="text-blue-400">

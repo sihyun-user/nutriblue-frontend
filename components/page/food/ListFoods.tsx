@@ -44,9 +44,11 @@ export default function ListFoods() {
       <div className="mt-6 flex min-h-[72vh] flex-col justify-between gap-10">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {data.elements.map((food: IFood) => (
-            <div onClick={() => handleOpen(food)} key={food.id}>
-              <FoodCard food={food} />
-            </div>
+            <FoodCard
+              food={food}
+              key={food.id}
+              onFoodClick={() => handleOpen(food)}
+            />
           ))}
           <FoodItem
             isOpen={isOpen}

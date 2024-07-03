@@ -25,4 +25,5 @@ export interface IFood {
     container: number;
   };
   nutritions: INutritions;
+  bookmark_collects: string[];
 }

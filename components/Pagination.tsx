@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 
 import { IPagination } from '@/types';
+import useSetParams from '@/hooks/useSetParams';
 
 interface PaginatedNumbers {
   totalPages: number;
@@ -46,21 +46,16 @@ const PaginatedNumbers = ({
 export default function Pagination({ data }: { data: IPagination }) {
   const { firstPage, lastPage, empty, totalPages, targetPage } = data;
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const pageNumberLimit = 5;
+  const { handleSetParams } = useSetParams();
+  const [pageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
 
   const handleCurrentPage = useCallback(
     (page: number) => {
-      const params = new URLSearchParams(searchParams);
-      params.set('pageIndex', page.toString());
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      handleSetParams('pageIndex', page);
     },
-    [router, searchParams, pathname]
+    [handleSetParams]
   );
 
   function nextPage() {
@@ -82,26 +77,36 @@ export default function Pagination({ data }: { data: IPagination }) {
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
-  }, [targetPage, minPageNumberLimit, maxPageNumberLimit]);
+  }, [targetPage, minPageNumberLimit, maxPageNumberLimit, pageNumberLimit]);
 
   if (!empty)
     return (
       <div className="flex items-center justify-between sm:px-6">
         <div className="flex flex-1 justify-between sm:hidden">
-          <div className="cursor-pointer items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <button
+            type="button"
+            onClick={prevPage}
+            disabled={firstPage}
+            className="cursor-pointer items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
             上一頁
-          </div>
-          <div className="ml-3 inline-flex cursor-pointer items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+          </button>
+          <button
+            type="button"
+            onClick={prevPage}
+            disabled={firstPage}
+            className="ml-3 inline-flex cursor-pointer items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
             下一頁
-          </div>
+          </button>
         </div>
         <div className="hidden sm:flex sm:flex-1 sm:justify-center">
           <nav className="isolate inline-flex -space-x-px rounded-md bg-white shadow-sm">
             <button
               type="button"
-              className="flex cursor-pointer items-center rounded-l-md p-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               onClick={prevPage}
               disabled={firstPage}
+              className="flex cursor-pointer items-center rounded-l-md p-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             >
               <span>上一頁</span>
               <ChevronLeftIcon className="size-5" />
@@ -115,9 +120,9 @@ export default function Pagination({ data }: { data: IPagination }) {
             />
             <button
               type="button"
-              className="flex cursor-pointer items-center rounded-r-md p-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               onClick={nextPage}
               disabled={lastPage}
+              className="flex cursor-pointer items-center rounded-r-md p-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             >
               <span>下一頁</span>
               <ChevronRightIcon className="size-5" />

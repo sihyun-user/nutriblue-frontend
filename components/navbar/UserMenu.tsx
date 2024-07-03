@@ -23,7 +23,7 @@ const ItemStyle =
   'flex cursor-pointer items-center gap-8 rounded p-2 text-sm transition duration-200 hover:bg-primary-100';
 
 export default function UserMenu() {
-  const user = useUserInfo();
+  const userInfo = useUserInfo();
 
   return (
     <Popover className="group relative">
@@ -33,14 +33,14 @@ export default function UserMenu() {
       </PopoverButton>
       <PopoverPanel anchor="bottom end" transition className={panelStyle}>
         <div className="p-2">
-          {user && (
+          {userInfo && (
             <div className="flex items-center gap-4">
               <Avatar isLegend />
               <div className="flex flex-col">
                 <span className="font-semibold text-primary-800">
-                  {user.name}
+                  {userInfo.name}
                 </span>
-                <span className="text-xs">{user.email}</span>
+                <span className="text-xs">{userInfo.email}</span>
               </div>
             </div>
           )}

@@ -10,6 +10,5 @@ export type UserInfoType = {
   sport_level: string;
   fitness_level: string;
   bio: string;
-  bookmark_collects: string[];
   food_collects: string[];
 };

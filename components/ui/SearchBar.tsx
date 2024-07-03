@@ -1,26 +1,21 @@
 'use client';
 
 import { useState } from 'react';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+
+import useSetParams from '@/hooks/useSetParams';
 
 export default function SearchBar() {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { handleSetParams } = useSetParams();
   const [keyword, setKeyword] = useState(searchParams.get('query') || '');
-
-  function handleSearchKeyword(query: string) {
-    const params = new URLSearchParams(searchParams);
-    params.set('query', query);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!keyword) return;
 
-    handleSearchKeyword(keyword);
+    handleSetParams('query', keyword);
   }
 
   return (

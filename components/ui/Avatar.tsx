@@ -5,11 +5,11 @@ import { useUserInfo } from '@/providers/UserProvider';
 import avatar from '@/public/avatar.jpg';
 
 export default function Avatar({ isLegend = false }: { isLegend?: boolean }) {
-  const user = useUserInfo();
+  const userInfo = useUserInfo();
   const containerSize = isLegend ? 'size-[40px]' : 'size-[32px]';
   const iconSize = isLegend ? 'size-10' : 'size-8';
 
-  return user && user.avatar ? (
+  return userInfo && userInfo.avatar ? (
     <div className={`${containerSize} overflow-hidden`}>
       <Image
         src={avatar}
