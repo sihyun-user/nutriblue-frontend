@@ -23,7 +23,7 @@ const PaginatedNumbers = ({
 }: PaginatedNumbers) => {
   return Array.from({ length: totalPages }, (num, index) => {
     const pageNumber = index + 1;
-    if (pageNumber < maxPageNumberLimit && pageNumber >= minPageNumberLimit)
+    if (pageNumber <= maxPageNumberLimit && pageNumber > minPageNumberLimit)
       return (
         <button
           type="button"
@@ -82,7 +82,7 @@ export default function Pagination({ data }: { data: IPagination }) {
   if (!empty)
     return (
       <div className="flex items-center justify-between sm:px-6">
-        <div className="flex flex-1 justify-between sm:hidden">
+        <div className="flex flex-1 items-center justify-between sm:hidden">
           <button
             type="button"
             onClick={prevPage}
@@ -91,10 +91,13 @@ export default function Pagination({ data }: { data: IPagination }) {
           >
             上一頁
           </button>
+          <span className="font-medium">
+            第 {targetPage} 頁 / 共 {totalPages} 頁
+          </span>
           <button
             type="button"
-            onClick={prevPage}
-            disabled={firstPage}
+            onClick={nextPage}
+            disabled={lastPage}
             className="ml-3 inline-flex cursor-pointer items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             下一頁
