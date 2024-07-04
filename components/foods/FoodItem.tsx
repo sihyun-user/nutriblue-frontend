@@ -10,25 +10,25 @@ import NewRecord from './NewRecord';
 import NutritionRows from './NutritionRows';
 
 interface Props {
-  isOpen: boolean;
-  onClose: () => void;
+  isSelect: boolean;
+  isClose: () => void;
   data: IFood | null;
 }
 
-export default function AddFood({ isOpen, onClose, data }: Props) {
+export default function FoodItem({ isSelect, isClose, data }: Props) {
   const [newRecord, setNewRecord] = useState(false);
   const [multiplier, setMultiplier] = useState(1);
 
   useEffect(() => {
     setNewRecord(false);
-  }, [isOpen]);
+  }, [isSelect]);
 
   if (data)
     return (
-      <Dialog title="食品的營養成分" isOpen={isOpen} onClose={onClose}>
+      <Dialog title="食品的營養成分" isOpen={isSelect} onClose={isClose}>
         <div className="mb-6 rounded-lg bg-blue-100 p-4">
           <div className="flex min-h-[40px] justify-between">
-            <div className="space-y-3">
+            <div className="w-8/12 space-y-3">
               <div>
                 <h1 className="text-xl font-semibold text-primary-800">
                   {data.name}
@@ -59,13 +59,17 @@ export default function AddFood({ isOpen, onClose, data }: Props) {
             food={data}
             newRecord={newRecord}
             closeNewRecord={() => setNewRecord(false)}
-            handleClose={onClose}
+            handleClose={isClose}
             handleMultiplier={(value) => setMultiplier(value)}
           />
         </div>
         <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
         <div className="grid grid-cols-2 gap-4">
-          <NutritionRows multiplier={multiplier} data={data.nutritions} />
+          <NutritionRows
+            container={data.serving_size.container}
+            multiplier={multiplier}
+            data={data.nutritions}
+          />
         </div>
       </Dialog>
     );

@@ -89,7 +89,7 @@ export default function NewRecord({
           variation="secondary"
           id="multiplier"
           type="number"
-          label="份數"
+          label="攝取份數"
           register={register}
           errors={errors}
         />

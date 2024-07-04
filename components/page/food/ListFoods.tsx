@@ -12,17 +12,17 @@ import FoodItem from '@/components/foods/FoodItem';
 import EmptyFood from './EmptyFood';
 
 export default function ListFoods() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSelect, setIsSelect] = useState(false);
   const [selectedFood, setSelectedFood] = useState<IFood | null>(null);
   const { data, isLoading, pageSize } = useFoods();
 
-  function handleOpen(food: IFood) {
-    setIsOpen(true);
+  function handleSelect(food: IFood) {
+    setIsSelect(true);
     setSelectedFood(food);
   }
 
   function handleClose() {
-    setIsOpen(false);
+    setIsSelect(false);
     setSelectedFood(null);
   }
 
@@ -39,12 +39,12 @@ export default function ListFoods() {
             <FoodCard
               food={food}
               key={food.id}
-              onFoodClick={() => handleOpen(food)}
+              onFoodClick={() => handleSelect(food)}
             />
           ))}
           <FoodItem
-            isOpen={isOpen}
-            onClose={() => handleClose()}
+            isSelect={isSelect}
+            isClose={() => handleClose()}
             data={selectedFood}
           />
         </div>

@@ -26,7 +26,6 @@ export default function CreateFood() {
     mode: 'onChange',
     defaultValues: {
       name: '',
-      common_name: '',
       brand_name: '',
       publiced: false,
       serving_size: {
@@ -81,13 +80,6 @@ export default function CreateFood() {
                 register={register}
                 label="食品名稱"
                 id="name"
-                errors={errors}
-              />
-              <InputRow
-                variation="secondary"
-                register={register}
-                label="其他名稱"
-                id="common_name"
                 errors={errors}
               />
               <InputRow

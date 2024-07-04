@@ -17,7 +17,6 @@ export interface IFood {
   verified: boolean;
   publiced: boolean;
   name: string;
-  common_name: string;
   brand_name: string;
   serving_size: {
     value: number;

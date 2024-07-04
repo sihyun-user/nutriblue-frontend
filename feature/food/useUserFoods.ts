@@ -25,20 +25,20 @@ export default function useUserFood() {
   }, [query, prevQuery, handleSetParams]);
 
   const { data, isLoading, isPending } = useQuery({
-    queryKey: ['lookup', query, pageIndex],
+    queryKey: ['lookups', query, pageIndex],
     queryFn: () => getUserFoods({ query, pageIndex })
   });
 
   // 預取資料
   if (pageIndex < data?.totalPages) {
     queryClient.prefetchQuery({
-      queryKey: ['lookup', query, pageIndex + 1],
+      queryKey: ['lookups', query, pageIndex + 1],
       queryFn: () => getUserFoods({ query, pageIndex: pageIndex + 1 })
     });
   }
   if (pageIndex > 1) {
     queryClient.prefetchQuery({
-      queryKey: ['lookup', query, pageIndex - 1],
+      queryKey: ['lookups', query, pageIndex - 1],
       queryFn: () => getUserFoods({ query, pageIndex: pageIndex - 1 })
     });
   }

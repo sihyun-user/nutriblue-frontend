@@ -33,8 +33,26 @@ export async function getUserFoods({
   return data.data;
 }
 
-export async function createFood(newFood: FoodFormType) {
-  const { data } = await axios.post('/food', newFood);
+export async function createFood(payload: FoodFormType) {
+  const { data } = await axios.post('/food', payload);
+
+  if (!data.status) throw new Error(data.message);
+}
+
+export async function editFood({
+  food_id,
+  newFood
+}: {
+  food_id: string;
+  newFood: FoodFormType;
+}) {
+  const { data } = await axios.patch(`/food/${food_id}`, newFood);
+
+  if (!data.status) throw new Error(data.message);
+}
+
+export async function deleteFood(food_id: string) {
+  const { data } = await axios.delete(`/food/${food_id}`);
 
   if (!data.status) throw new Error(data.message);
 }

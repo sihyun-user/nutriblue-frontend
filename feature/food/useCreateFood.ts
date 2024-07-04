@@ -12,6 +12,7 @@ export default function useCreateFood() {
     onSuccess: () => {
       toast.success('新增食品成功');
       queryClient.invalidateQueries({ queryKey: ['foods'] });
+      queryClient.invalidateQueries({ queryKey: ['lookups'] });
     },
     onError: () => {
       toast.error('新增食品失敗，請稍後再試');

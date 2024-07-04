@@ -12,17 +12,17 @@ import FoodItem from '@/components/foods/FoodItem';
 import EmptyLookup from './EmptyLookup';
 
 export default function ListFoods() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSelect, setIsSelect] = useState(false);
   const [selectedFood, setSelectedFood] = useState<IFood | null>(null);
   const { data, isLoading, pageSize } = useUserFoods();
 
-  function handleOpen(food: IFood) {
-    setIsOpen(true);
+  function handleSelect(food: IFood) {
+    setIsSelect(true);
     setSelectedFood(food);
   }
 
   function handleClose() {
-    setIsOpen(false);
+    setIsSelect(false);
     setSelectedFood(null);
   }
 
@@ -40,12 +40,13 @@ export default function ListFoods() {
               food={food}
               key={food.id}
               selectMenu
-              onFoodClick={() => handleOpen(food)}
+              isPubliced
+              onFoodClick={() => handleSelect(food)}
             />
           ))}
           <FoodItem
-            isOpen={isOpen}
-            onClose={() => handleClose()}
+            isSelect={isSelect}
+            isClose={() => handleClose()}
             data={selectedFood}
           />
         </div>

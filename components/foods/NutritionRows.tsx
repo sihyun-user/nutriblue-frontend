@@ -2,14 +2,17 @@ import { IFood, INutritions } from '@/types/food';
 import InputRow from '@/components/ui/InputRow';
 import nutritionList from '@/utils/nutritionList';
 
+import { setContainerValue } from '@/utils';
+
 interface Props {
+  container: number;
   multiplier: number;
   data: INutritions;
 }
 
-export default function NutritionRows({ multiplier, data }: Props) {
-  const setMultiplierValue = (value: number) =>
-    Math.round(value * multiplier * 10) / 10;
+export default function NutritionRows({ container, multiplier, data }: Props) {
+  const containerValue = (value: number) =>
+    setContainerValue(value * container, multiplier);
 
   return (
     <>
@@ -21,7 +24,7 @@ export default function NutritionRows({ multiplier, data }: Props) {
           disabled
           fixedRight={item.unit}
           id={`nutritions.${item.id}` as keyof IFood}
-          setValue={setMultiplierValue(data[item.id]) || 0}
+          setValue={containerValue(data[item.id]) || 0}
         />
       ))}
     </>

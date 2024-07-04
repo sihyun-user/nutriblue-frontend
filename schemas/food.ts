@@ -17,7 +17,6 @@ export const nutritionsValidator = z.object({
 
 export const foodFormSchema = z.object({
   name: requiredString(),
-  common_name: z.string(),
   brand_name: z.string(),
   publiced: requiredBoolean(),
   serving_size: z.object({
