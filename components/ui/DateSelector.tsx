@@ -14,8 +14,8 @@ const inputStyle = clsx(
 
 interface Props<T extends FieldValues> {
   id: Path<T>;
+  initDate: string;
   control: Control<T>;
-  initDate: string | Date;
 }
 
 export default function DateSelector<T extends FieldValues>({
@@ -23,12 +23,11 @@ export default function DateSelector<T extends FieldValues>({
   control,
   initDate
 }: Props<T>) {
-  const newDate = new Date();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
-  const [month, setMonth] = useState<number>(getMonth(newDate));
-  const [year, setYear] = useState<number>(getYear(newDate));
-  const [inputValue, setInputValue] = useState<string>('');
+  const [dateValue, setDateValue] = useState<string>('');
+  const [month, setMonth] = useState<number>(2024);
+  const [year, setYear] = useState<number>(1);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handlePickerSelect = (
@@ -36,20 +35,20 @@ export default function DateSelector<T extends FieldValues>({
     fieldOnChange: (value: string) => void
   ) => {
     if (date) {
-      const formatDate = format(date, 'MM/dd/yyyy');
-      setSelectedDate(date);
-      setInputValue(formatDate);
+      const formatDate = format(date, 'yyyy-MM-dd');
+      setDateValue(formatDate);
       fieldOnChange(formatDate); // 更新 useForm 的值
+      setSelectedDate(date);
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    const defaultDate = new Date(initDate);
-    setSelectedDate(defaultDate);
-    setMonth(getMonth(defaultDate));
-    setYear(getYear(defaultDate));
-    setInputValue(format(defaultDate, 'MM/dd/yyyy'));
+    const currentDate = new Date(initDate);
+    setSelectedDate(currentDate);
+    setMonth(getMonth(currentDate));
+    setYear(getYear(currentDate));
+    setDateValue(format(currentDate, 'yyyy-MM-dd'));
   }, [initDate]);
 
   useEffect(() => {
@@ -79,7 +78,7 @@ export default function DateSelector<T extends FieldValues>({
             <>
               <input {...field} type="hidden" />
               <div onClick={() => setIsOpen(!isOpen)} className={inputStyle}>
-                {inputValue}
+                {dateValue}
               </div>
               {isOpen && (
                 <DayPicker

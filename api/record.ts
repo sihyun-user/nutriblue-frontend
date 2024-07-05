@@ -15,3 +15,13 @@ export async function createRecord(newRecord: NewRecordSchemaType) {
 
   if (!data.status) throw new Error(data.message);
 }
+
+export async function getRecordForCalendar(date: string) {
+  const params = date ? `?date=${date}` : undefined;
+
+  const { data } = await axios.get(`/record/calendar${params}`);
+
+  if (!data.status) throw new Error(data.message);
+
+  return data.data;
+}

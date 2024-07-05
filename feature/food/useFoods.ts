@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-import useSetParams from '@/hooks/useSetParams';
-
 import { getFoods } from '@/api/food';
+import useSetParams from '@/hooks/useSetParams';
 
 export default function useFoods() {
   const queryClient = useQueryClient();

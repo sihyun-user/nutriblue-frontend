@@ -25,7 +25,7 @@ const navList = [
       },
       {
         name: '健康日誌',
-        href: '/health-log',
+        href: '/calendar',
         icon: <CalendarDaysIcon />
       },
       {
