@@ -23,7 +23,7 @@ export default function useFoods() {
     }
   }, [query, prevQuery, handleSetParams]);
 
-  const { data, isLoading, isPending } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['foods', query, pageIndex],
     queryFn: () => getFoods({ query, pageIndex }),
     enabled: !!query
@@ -43,5 +43,5 @@ export default function useFoods() {
     });
   }
 
-  return { data, isLoading, isPending, pageSize };
+  return { data, isLoading, pageSize };
 }

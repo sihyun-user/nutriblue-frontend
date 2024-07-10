@@ -23,7 +23,7 @@ export default function useUserFood() {
     }
   }, [query, prevQuery, handleSetParams]);
 
-  const { data, isLoading, isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['lookups', query, pageIndex],
     queryFn: () => getUserFoods({ query, pageIndex })
   });
@@ -42,5 +42,5 @@ export default function useUserFood() {
     });
   }
 
-  return { data, isLoading, isPending, pageSize };
+  return { data, isPending, pageSize };
 }

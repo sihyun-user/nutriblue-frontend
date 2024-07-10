@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { forwardRef, ForwardRefRenderFunction } from 'react';
 import {
   format,
   getDay,
@@ -10,80 +10,81 @@ import {
 import { zhTW } from 'date-fns/locale';
 import clsx from 'clsx';
 
-interface Event {
-  date: Date;
-}
-
 interface Props {
-  events: Event[];
+  dateId: string;
+  isPending: boolean;
+  events: string[];
 }
 
-export default function EventCalendar({ events }: Props) {
-  const currentDate = new Date();
-  const firstDayOfMonth = startOfMonth(currentDate);
-  const lastDaysOfMonth = endOfMonth(currentDate);
+function getCurrentDate(dateId: string) {
+  const [year, month] = dateId.split('-');
 
-  const daysInMonth = eachDayOfInterval({
-    start: firstDayOfMonth,
-    end: lastDaysOfMonth
-  });
+  return new Date(parseInt(year, 10), parseInt(month, 10) - 1, 1);
+}
 
-  const startingDayIndex = getDay(firstDayOfMonth);
-  const endingDayIndex = getDay(lastDaysOfMonth);
+const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
+  function EventCalendar({ dateId, isPending, events }: Props, ref) {
+    const currentDate = getCurrentDate(dateId);
+    const firstDayOfMonth = startOfMonth(currentDate);
+    const lastDaysOfMonth = endOfMonth(currentDate);
 
-  const eventsByDate = useMemo(() => {
-    return events.reduce((acc: { [key: string]: Event[] }, event) => {
-      const dateKey = format(event.date, 'yyyy-MM-dd');
-      if (!acc[dateKey]) {
-        acc[dateKey] = [];
-      }
-      acc[dateKey].push(event);
-      return acc;
-    }, {});
-  }, [events]);
+    const daysInMonth = eachDayOfInterval({
+      start: firstDayOfMonth,
+      end: lastDaysOfMonth
+    });
 
-  return (
-    <div className="mb-12 mt-8">
-      <div className="mb-3 font-medium text-primary-800 md:text-lg">
-        <h2>{format(currentDate, 'M月yyyy年', { locale: zhTW })}</h2>
-      </div>
-      <div className="grid grid-cols-7">
-        {Array.from({ length: startingDayIndex }, (_, index) => (
-          <div
-            key={`empty-${index}`}
-            className="flex aspect-square items-center justify-center border border-blue-100 bg-blue-200"
-          />
-        ))}
-        {daysInMonth.map((day) => {
-          const dateKey = format(day, 'yyyy-MM-dd');
-          const todaysEvents = eventsByDate[dateKey] || [];
-          return (
+    const startingSlots = getDay(firstDayOfMonth);
+
+    const totalSlots = 42; // 7*6
+    const filledSlots = startingSlots + daysInMonth.length;
+    const endingSlots = totalSlots - filledSlots;
+
+    return (
+      <div id={dateId} ref={ref} className="mb-12 mt-8">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="font-bold text-blue-600 md:text-lg">
+            {format(currentDate, 'M月yyyy年', { locale: zhTW })}
+          </h2>
+          {isPending && (
+            <div className="spinner-mini border-blue-300 border-r-blue-600" />
+          )}
+        </div>
+        <div className="grid grid-cols-7">
+          {Array.from({ length: startingSlots }, (_, index) => (
             <div
-              key={dateKey}
-              className={clsx(
-                'relative flex aspect-square items-center justify-center border border-blue-100 font-bold',
-                isToday(day) ? 'bg-blue-600 text-white' : 'bg-white'
-              )}
-            >
-              {format(day, 'd')}
-              {todaysEvents.map(() => {
-                return (
+              key={`empty-${index}`}
+              className="flex aspect-square items-center justify-center border border-blue-100 bg-blue-50"
+            />
+          ))}
+          {daysInMonth.map((day) => {
+            const dateKey = format(day, 'yyyy-MM-dd');
+            return (
+              <div
+                key={dateKey}
+                className={clsx(
+                  'relative flex aspect-square items-center justify-center border border-blue-100 font-bold',
+                  isToday(day) ? 'bg-blue-600 text-white' : 'bg-white'
+                )}
+              >
+                {format(day, 'd')}
+                {events.includes(dateKey) && (
                   <div
                     key={dateKey}
                     className="absolute bottom-1 size-1 rounded-full bg-red-400 md:bottom-2 md:size-2"
                   />
-                );
-              })}
-            </div>
-          );
-        })}
-        {Array.from({ length: endingDayIndex }, (_, index) => (
-          <div
-            key={`empty-${index}`}
-            className="flex aspect-square items-center justify-center border border-blue-100 bg-blue-200"
-          />
-        ))}
+                )}
+              </div>
+            );
+          })}
+          {Array.from({ length: endingSlots }, (_, index) => (
+            <div
+              key={`empty-${index}`}
+              className="flex aspect-square items-center justify-center border border-blue-100 bg-blue-50"
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  };
+
+export default forwardRef(EventCalendar);

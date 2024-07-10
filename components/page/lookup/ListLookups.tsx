@@ -14,7 +14,7 @@ import EmptyLookup from './EmptyLookup';
 export default function ListFoods() {
   const [isSelect, setIsSelect] = useState(false);
   const [selectedFood, setSelectedFood] = useState<IFood | null>(null);
-  const { data, isLoading, pageSize } = useUserFoods();
+  const { data, isPending, pageSize } = useUserFoods();
 
   function handleSelect(food: IFood) {
     setIsSelect(true);
@@ -26,7 +26,7 @@ export default function ListFoods() {
     setSelectedFood(null);
   }
 
-  if (isLoading) return <Spinner />;
+  if (isPending) return <Spinner />;
 
   if (!data || data.empty) return <EmptyLookup />;
 

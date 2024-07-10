@@ -23,7 +23,7 @@ export default function useBookmarks() {
     }
   }, [query, prevQuery, handleSetParams]);
 
-  const { data, isLoading, isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['bookmarks', query, pageIndex],
     queryFn: () => getBookmarks({ query, pageIndex })
   });
@@ -42,5 +42,5 @@ export default function useBookmarks() {
     });
   }
 
-  return { data, isLoading, isPending, pageSize };
+  return { data, isPending, pageSize };
 }

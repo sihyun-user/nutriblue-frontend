@@ -29,7 +29,7 @@ const config: Config = {
           900: '#456268'
         },
         blue: {
-          50: '#f5f8fc',
+          50: '#d6e4f0',
           100: '#e3eef7',
           200: '#ccdeed',
           300: '#8fb5d6',

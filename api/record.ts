@@ -16,10 +16,8 @@ export async function createRecord(newRecord: NewRecordSchemaType) {
   if (!data.status) throw new Error(data.message);
 }
 
-export async function getRecordForCalendar(date: string) {
-  const params = date ? `?date=${date}` : undefined;
-
-  const { data } = await axios.get(`/record/calendar${params}`);
+export async function getCalendar(payload: { dateId: string }) {
+  const { data } = await axios.post('/record/calendar', payload);
 
   if (!data.status) throw new Error(data.message);
 
