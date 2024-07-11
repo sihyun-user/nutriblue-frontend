@@ -115,6 +115,7 @@ export default function NewRecord({
               initDate={getValues('record_date')}
               control={control}
               id="record_date"
+              label="日期"
             />
           </div>
           <div className="mt-8 flex justify-end gap-6">

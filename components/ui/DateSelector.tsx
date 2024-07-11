@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Path, FieldValues, Control, Controller } from 'react-hook-form';
 import { format, getMonth, getYear } from 'date-fns';
+import { zhTW } from 'date-fns/locale';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import clsx from 'clsx';
@@ -14,14 +15,18 @@ const inputStyle = clsx(
 
 interface Props<T extends FieldValues> {
   id: Path<T>;
+  label?: string;
   initDate: string;
   control: Control<T>;
+  position?: 'right' | 'center';
 }
 
 export default function DateSelector<T extends FieldValues>({
   id,
-  control,
-  initDate
+  label,
+  initDate,
+  position,
+  control
 }: Props<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -69,7 +74,7 @@ export default function DateSelector<T extends FieldValues>({
 
   return (
     <div className="flex flex-col">
-      <span className="mb-2">日期</span>
+      {label && <span className="mb-2">{label}</span>}
       <div className="relative" ref={wrapperRef}>
         <Controller
           control={control}
@@ -82,7 +87,14 @@ export default function DateSelector<T extends FieldValues>({
               </div>
               {isOpen && (
                 <DayPicker
-                  className="absolute right-0 z-10 rounded-lg border border-gray-200 bg-white p-2 shadow-md"
+                  locale={zhTW}
+                  className={clsx(
+                    'absolute z-10 rounded-lg border border-gray-200 bg-white p-2 shadow-md',
+                    {
+                      'right-0': position === 'right',
+                      'left-1/2 -translate-x-1/2': position === 'center'
+                    }
+                  )}
                   mode="single"
                   defaultMonth={new Date(year, month)}
                   selected={selectedDate}

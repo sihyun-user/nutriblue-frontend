@@ -6,13 +6,13 @@ import { format } from 'date-fns';
 import EventCalendar from '@/components/page/calendar/EventCalendar';
 import useGetCalendar from '@/feature/calendar/useGetCalendar';
 
-interface Calendar {
+interface Calendars {
   dateId: string;
 }
 
 export default function ListCalendars() {
   const { calendarData, getCalendar, isPending } = useGetCalendar();
-  const [calendars, setCalendars] = useState<Calendar[]>([]);
+  const [calendars, setCalendars] = useState<Calendars[]>([]);
   const calendarRefs = useRef<{
     [key: string]: React.RefObject<HTMLDivElement>;
   }>({});
@@ -53,7 +53,7 @@ export default function ListCalendars() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const dateId = entry.target.id;
-            if (dateId in calendarData) return;
+            if (dateId in calendarData) return; // 如果數據已存在，則不調用 getCalendar
             getCalendar({ dateId });
           }
         });
@@ -61,12 +61,12 @@ export default function ListCalendars() {
       { threshold: 0 }
     );
 
-    // 註冊所有月曆元素到 observer
     Object.values(calendarRefs.current).forEach((ref) => {
-      if (ref.current) observer.observe(ref.current);
+      if (ref.current && !(ref.current.id in calendarData)) {
+        observer.observe(ref.current); // 只有當數據不存在時才觀察
+      }
     });
 
-    // 解除 observer
     return () => observer.disconnect();
   }, [calendars, calendarData, getCalendar]);
 

@@ -8,6 +8,7 @@ import {
   eachDayOfInterval
 } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
+import Link from 'next/link';
 import clsx from 'clsx';
 
 interface Props {
@@ -59,7 +60,8 @@ const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
           {daysInMonth.map((day) => {
             const dateKey = format(day, 'yyyy-MM-dd');
             return (
-              <div
+              <Link
+                href={`/calendar/${dateKey}`}
                 key={dateKey}
                 className={clsx(
                   'relative flex aspect-square items-center justify-center border border-blue-100 font-bold',
@@ -73,7 +75,7 @@ const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
                     className="absolute bottom-1 size-1 rounded-full bg-red-400 md:bottom-2 md:size-2"
                   />
                 )}
-              </div>
+              </Link>
             );
           })}
           {Array.from({ length: endingSlots }, (_, index) => (
