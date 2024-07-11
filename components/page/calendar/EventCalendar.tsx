@@ -65,7 +65,9 @@ const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
                 key={dateKey}
                 className={clsx(
                   'relative flex aspect-square items-center justify-center border border-blue-100 font-bold',
-                  isToday(day) ? 'bg-blue-600 text-white' : 'bg-white'
+                  isToday(day)
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white hover:bg-blue-300 hover:text-white'
                 )}
               >
                 {format(day, 'd')}

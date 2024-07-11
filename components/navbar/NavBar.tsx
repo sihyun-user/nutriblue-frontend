@@ -10,7 +10,7 @@ export default function NavBar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
-    const checkWindowSize = () => {
+    const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsNavOpen(true);
       } else {
@@ -18,12 +18,12 @@ export default function NavBar() {
       }
     };
 
-    checkWindowSize();
+    handleResize();
 
-    window.addEventListener('resize', checkWindowSize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', checkWindowSize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

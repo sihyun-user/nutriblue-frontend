@@ -54,7 +54,7 @@ export default function ListCalendars() {
           if (entry.isIntersecting) {
             const dateId = entry.target.id;
             if (dateId in calendarData) return; // 如果數據已存在，則不調用 getCalendar
-            getCalendar({ dateId });
+            getCalendar(dateId);
           }
         });
       },
