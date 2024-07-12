@@ -41,8 +41,12 @@ const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
     const endingSlots = totalSlots - filledSlots;
 
     return (
-      <div id={dateId} ref={ref} className="mb-12 mt-8">
-        <div className="mb-3 flex items-center justify-between">
+      <div className="mb-12 mt-8">
+        <div
+          id={dateId}
+          ref={ref}
+          className="mb-3 flex items-center justify-between"
+        >
           <h2 className="font-bold text-blue-600 md:text-lg">
             {format(currentDate, 'M月yyyy年', { locale: zhTW })}
           </h2>
