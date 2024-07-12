@@ -7,6 +7,7 @@ import { createFood as createFoodApi } from '@/api/food';
 
 export default function useCreateFood() {
   const queryClient = useQueryClient();
+
   const { mutate: createFood, isPending } = useMutation({
     mutationFn: createFoodApi,
     onSuccess: () => {

@@ -7,6 +7,7 @@ import { deleteBookmark as deleteBookmarkApi } from '@/api/bookmark';
 
 export default function useDeleteBookmark() {
   const queryClient = useQueryClient();
+
   const { mutate: deleteBookmark } = useMutation({
     mutationFn: deleteBookmarkApi,
     onSuccess: () => {

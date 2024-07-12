@@ -7,6 +7,7 @@ import { createRecord as createRecordApi } from '@/api/record';
 
 export default function useCreateRecord() {
   const queryClient = useQueryClient();
+
   const { mutate: createRecord, isPending } = useMutation({
     mutationFn: createRecordApi,
     onSuccess: () => {

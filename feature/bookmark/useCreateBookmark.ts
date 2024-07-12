@@ -7,6 +7,7 @@ import { createBookmark as createBookmarkApi } from '@/api/bookmark';
 
 export default function useCreateBookmark() {
   const queryClient = useQueryClient();
+
   const { mutate: createBookmark } = useMutation({
     mutationFn: createBookmarkApi,
     onSuccess: () => {

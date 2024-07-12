@@ -13,6 +13,7 @@ interface IEditFood {
 
 export default function useEditFood() {
   const queryClient = useQueryClient();
+
   const { mutate: editFood, isPending } = useMutation({
     mutationFn: ({ food_id, newFood }: IEditFood) =>
       editFoodApi({ food_id, newFood }),

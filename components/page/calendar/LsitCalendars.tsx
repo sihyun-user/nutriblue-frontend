@@ -4,14 +4,14 @@ import { useState, useEffect, useRef, createRef } from 'react';
 import { format } from 'date-fns';
 
 import EventCalendar from '@/components/page/calendar/EventCalendar';
-import useGetCalendar from '@/feature/calendar/useGetCalendar';
+import useCalendar from '@/feature/calendar/useCalendar';
 
 interface Calendars {
   dateId: string;
 }
 
 export default function ListCalendars() {
-  const { calendarData, getCalendar, isPending } = useGetCalendar();
+  const { calendarData, getCalendar, isPending } = useCalendar();
   const [calendars, setCalendars] = useState<Calendars[]>([]);
   const calendarRefs = useRef<{
     [key: string]: React.RefObject<HTMLDivElement>;

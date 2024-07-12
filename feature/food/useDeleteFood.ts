@@ -7,6 +7,7 @@ import { deleteFood as deleteFoodApi } from '@/api/food';
 
 export default function useDeleteFood() {
   const queryClient = useQueryClient();
+
   const { mutate: deleteFood, isPending } = useMutation({
     mutationFn: deleteFoodApi,
     onSuccess: () => {
