@@ -19,7 +19,7 @@ export const getCurrentDate = (dateId: string) => {
   );
 };
 
-export default function DateCalendar({ dateId }: Props) {
+export default function RecordsTimeLine({ dateId }: Props) {
   const [daysOffset, setDaysOffset] = useState(5);
   const currentDate = getCurrentDate(dateId);
   const firstDayOfTimeLine = subDays(currentDate, daysOffset);
@@ -47,30 +47,34 @@ export default function DateCalendar({ dateId }: Props) {
   });
 
   return (
-    <div className="mask-image mt-0 flex justify-between gap-2 overflow-hidden py-4 md:mt-4">
-      {daysInTimeLine.map((day) => {
-        const dateKey = format(day, 'yyyy-MM-dd');
-        const [year, month, date] = dateKey.split('-');
+    <div className="mx-auto w-full max-w-screen-md">
+      <div className="mask-image mt-0 flex justify-between gap-2 overflow-hidden py-4 md:mt-4">
+        {daysInTimeLine.map((day) => {
+          const dateKey = format(day, 'yyyy-MM-dd');
+          const [year, month, date] = dateKey.split('-');
 
-        return (
-          <Link
-            href={`/calendar/${dateKey}`}
-            key={dateKey}
-            className={clsx(
-              'flex h-[80px] min-w-16 flex-col items-center justify-between rounded-lg p-2 shadow-md',
-              dateKey === dateId
-                ? 'bg-blue-600'
-                : 'bg-blue-300 hover:bg-blue-400'
-            )}
-          >
-            <span className="font-semibold text-white">{date}日</span>
-            <span className="text-xs font-medium text-slate-100">
-              {month}月
-            </span>
-            <span className="text-xs font-medium text-slate-100">{year}年</span>
-          </Link>
-        );
-      })}
+          return (
+            <Link
+              href={`/calendar/${dateKey}`}
+              key={dateKey}
+              className={clsx(
+                'flex h-[80px] min-w-16 flex-col items-center justify-between rounded-lg p-2 shadow-md',
+                dateKey === dateId
+                  ? 'bg-blue-600'
+                  : 'bg-blue-300 hover:bg-blue-400'
+              )}
+            >
+              <span className="font-semibold text-white">{date}日</span>
+              <span className="text-xs font-medium text-slate-100">
+                {month}月
+              </span>
+              <span className="text-xs font-medium text-slate-100">
+                {year}年
+              </span>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

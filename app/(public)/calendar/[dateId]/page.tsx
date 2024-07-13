@@ -1,11 +1,18 @@
-import DateCalendar from 'components/page/calendar/DateCalendar';
+import RecordsTimeLine from '@/components/page/records/RecordsTimeLine';
+import RecordsTable from '@/components/page/records/RecordsTable';
 
-export default async function Page({ params }: { params: { dateId: string } }) {
+interface Params {
+  dateId: string;
+}
+
+export default async function Page({ params }: { params: Params }) {
   const { dateId } = params;
 
   return (
-    <div className="mx-auto w-full max-w-screen-md">
-      <DateCalendar dateId={dateId} />
-    </div>
+    <>
+      {dateId}
+      <RecordsTimeLine dateId={dateId} />
+      <RecordsTable dateId={dateId} />
+    </>
   );
 }
