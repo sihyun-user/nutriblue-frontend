@@ -16,6 +16,7 @@ export default function ListCalendars() {
   const calendarRefs = useRef<{
     [key: string]: React.RefObject<HTMLDivElement>;
   }>({});
+  const isFetching = useRef(false);
 
   useEffect(() => {
     const year = new Date().getFullYear();
@@ -25,11 +26,11 @@ export default function ListCalendars() {
       return { dateId };
     });
 
-    setCalendars(initialCalendars);
-
     initialCalendars.forEach((calendar) => {
       calendarRefs.current[calendar.dateId] = createRef();
     });
+
+    setCalendars(initialCalendars);
   }, []);
 
   useEffect(() => {
@@ -49,12 +50,16 @@ export default function ListCalendars() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      async (entries) => {
+      (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !isFetching.current) {
             const dateId = entry.target.id;
-            if (dateId in calendarData) return; // 如果數據已存在，則不調用 getCalendar
-            getCalendar(dateId);
+            isFetching.current = true;
+            getCalendar(dateId, {
+              onSettled: () => {
+                isFetching.current = false;
+              }
+            });
           }
         });
       },
