@@ -53,7 +53,7 @@ function generateRecordRow(record: IRecord) {
       <td className="px-6 py-4">{nutritions.carbohydrates}</td>
       <td className="px-6 py-4">{nutritions.sodium}</td>
       <td className="px-6 py-4">
-        <ReviseMenu aria-label="修改紀錄" />
+        <ReviseMenu record={record} aria-label="修改紀錄" />
       </td>
     </tr>
   );

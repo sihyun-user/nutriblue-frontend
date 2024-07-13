@@ -3,16 +3,11 @@ import axios from '@/lib/axios';
 import { NewRecordSchemaType } from '@/schemas/record';
 
 export async function getRecordsByDate(dateId: string) {
-  try {
-    const { data } = await axios.post('/record/date', { dateId });
+  const { data } = await axios.post('/record/date', { dateId });
 
-    if (!data.status) throw new Error(data.message);
+  if (!data.status) throw new Error(data.message);
 
-    return data.data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+  return data.data;
 }
 
 export async function createRecord(newRecord: NewRecordSchemaType) {
@@ -21,10 +16,22 @@ export async function createRecord(newRecord: NewRecordSchemaType) {
   if (!data.status) throw new Error(data.message);
 }
 
-export async function getCalendar(dateId: string) {
-  const { data } = await axios.post('/record/calendar', { dateId });
+export async function getCalendar(calendarId: string) {
+  const { data } = await axios.post('/record/calendar', { calendarId });
 
   if (!data.status) throw new Error(data.message);
 
   return data.data;
+}
+
+export async function updateRecord(recordId: string) {
+  const { data } = await axios.patch(`/record/${recordId}`);
+
+  if (!data.status) throw new Error(data.message);
+}
+
+export async function deleteRecord(recordId: string) {
+  const { data } = await axios.delete(`/record/${recordId}`);
+
+  if (!data.status) throw new Error(data.message);
 }

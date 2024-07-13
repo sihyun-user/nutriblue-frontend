@@ -1,13 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { format, subDays, addDays, eachDayOfInterval } from 'date-fns';
 import clsx from 'clsx';
 import Link from 'next/link';
-
-interface Props {
-  dateId: string;
-}
 
 export const getCurrentDate = (dateId: string) => {
   const [year, month, date] = dateId.split('-');
@@ -19,7 +16,8 @@ export const getCurrentDate = (dateId: string) => {
   );
 };
 
-export default function RecordsTimeLine({ dateId }: Props) {
+export default function RecordsTimeLine() {
+  const { dateId } = useParams() as { dateId: string };
   const [daysOffset, setDaysOffset] = useState(5);
   const currentDate = getCurrentDate(dateId);
   const firstDayOfTimeLine = subDays(currentDate, daysOffset);

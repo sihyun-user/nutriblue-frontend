@@ -6,20 +6,20 @@ import {
   TrashIcon
 } from '@heroicons/react/16/solid';
 
-// import { IFood } from '@/types/food';
+import { IRecord } from '@/types/record';
 // import EditFood from '@/components/foods/EditFood';
-// import useDeleteFood from '@/feature/food/useDeleteFood';
+import useDeleteRecord from '@/feature/record/useDeleteRecord';
 
-export default function ReviseMenu() {
+export default function ReviseMenu({ record }: { record: IRecord }) {
+  const { deleteRecord } = useDeleteRecord();
+
+  const { id } = record;
+
   // const [isEdit, setIsEdit] = useState(false);
 
   // const { id: food_id } = food;
 
   // const { deleteFood } = useDeleteFood();
-
-  // function handleDelete() {
-  //   deleteFood(food_id);
-  // }
 
   return (
     <>
@@ -47,7 +47,7 @@ export default function ReviseMenu() {
           <MenuItem>
             <button
               type="button"
-              // onClick={handleDelete}
+              onClick={() => deleteRecord(id)}
               className="group flex w-full items-center gap-3 rounded-lg px-2 py-1.5 data-[focus]:bg-primary-100"
             >
               <TrashIcon className="size-4" />

@@ -11,11 +11,10 @@ import EditFood from '@/components/foods/EditFood';
 import useDeleteFood from '@/feature/food/useDeleteFood';
 
 export default function ReviseMenu({ food }: { food: IFood }) {
+  const { deleteFood } = useDeleteFood();
   const [isEdit, setIsEdit] = useState(false);
 
   const { id: food_id } = food;
-
-  const { deleteFood } = useDeleteFood();
 
   function handleDelete() {
     deleteFood(food_id);

@@ -1,26 +1,15 @@
-import { useState } from 'react';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 
-import { IRecord } from '@/types/record';
-import { getRecordsByDate as getRecordsByDateApi } from '@/api/record';
-import notifyError from '@/utils/notifyError';
+import { getRecordsByDate } from '@/api/record';
 
 export default function useRecordsByDate() {
-  const queryClient = useQueryClient();
-  const currentRecords: Record<string, IRecord[]> =
-    queryClient.getQueryData(['records']) || {};
-  const [recordsData, setRecordsData] =
-    useState<Record<string, IRecord[]>>(currentRecords);
+  const { dateId } = useParams() as { dateId: string };
 
-  const { mutate: getRecordsByDate, isPending } = useMutation({
-    mutationFn: (dateId: string) => getRecordsByDateApi(dateId),
-    onSuccess: (data, variables) => {
-      const newRecords = { ...currentRecords, [variables]: data };
-      queryClient.setQueryData(['records'], newRecords);
-      setRecordsData(newRecords);
-    },
-    onError: (error) => notifyError(error)
+  const { data, isPending } = useQuery({
+    queryKey: ['records', dateId],
+    queryFn: () => getRecordsByDate(dateId)
   });
 
-  return { recordsData, getRecordsByDate, isPending };
+  return { data, isPending };
 }

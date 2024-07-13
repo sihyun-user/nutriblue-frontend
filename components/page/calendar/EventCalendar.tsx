@@ -12,20 +12,20 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 interface Props {
-  dateId: string;
+  calendarId: string;
   isPending: boolean;
   events: string[];
 }
 
-function getCurrentDate(dateId: string) {
-  const [year, month] = dateId.split('-');
+function getCurrentDate(calendarId: string) {
+  const [year, month] = calendarId.split('-');
 
   return new Date(parseInt(year, 10), parseInt(month, 10) - 1, 1);
 }
 
 const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
-  function EventCalendar({ dateId, isPending, events }: Props, ref) {
-    const currentDate = getCurrentDate(dateId);
+  function EventCalendar({ calendarId, isPending, events }: Props, ref) {
+    const currentDate = getCurrentDate(calendarId);
     const firstDayOfMonth = startOfMonth(currentDate);
     const lastDaysOfMonth = endOfMonth(currentDate);
 
@@ -43,7 +43,7 @@ const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
     return (
       <div className="mb-12 mt-8">
         <div
-          id={dateId}
+          id={calendarId}
           ref={ref}
           className="mb-3 flex items-center justify-between"
         >
