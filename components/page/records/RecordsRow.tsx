@@ -33,25 +33,34 @@ function emptyRecordRow() {
 }
 
 function generateRecordRow(record: IRecord) {
-  const {
-    food,
-    multiplier,
-    food: { nutritions }
-  } = record;
+  const { food, multiplier } = record;
+
+  if (!food) {
+    return (
+      <tr key={record.id} className="border-b bg-white hover:bg-gray-50">
+        <td colSpan={9} className="px-6 py-4 text-left">
+          食物內容已被刪除
+        </td>
+        <td className="px-6 py-4">
+          <ReviseMenu record={record} aria-label="修改紀錄" />
+        </td>
+      </tr>
+    );
+  }
 
   return (
     <tr key={record.id} className="border-b bg-white hover:bg-gray-50">
       <th scope="row" className="px-6 py-4 text-left font-medium text-gray-900">
         {food.name} / {multiplier}份
       </th>
-      <td className="px-6 py-4">{nutritions.calories}</td>
-      <td className="px-6 py-4">{nutritions.protein}</td>
-      <td className="px-6 py-4">{nutritions.fat}</td>
-      <td className="px-6 py-4">{nutritions.trans_fat}</td>
-      <td className="px-6 py-4">{nutritions.saturated_fat}</td>
-      <td className="px-6 py-4">{nutritions.sugar}</td>
-      <td className="px-6 py-4">{nutritions.carbohydrates}</td>
-      <td className="px-6 py-4">{nutritions.sodium}</td>
+      <td className="px-6 py-4">{food.nutritions.calories}</td>
+      <td className="px-6 py-4">{food.nutritions.protein}</td>
+      <td className="px-6 py-4">{food.nutritions.fat}</td>
+      <td className="px-6 py-4">{food.nutritions.trans_fat}</td>
+      <td className="px-6 py-4">{food.nutritions.saturated_fat}</td>
+      <td className="px-6 py-4">{food.nutritions.sugar}</td>
+      <td className="px-6 py-4">{food.nutritions.carbohydrates}</td>
+      <td className="px-6 py-4">{food.nutritions.sodium}</td>
       <td className="px-6 py-4">
         <ReviseMenu record={record} aria-label="修改紀錄" />
       </td>

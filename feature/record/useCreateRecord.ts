@@ -13,6 +13,7 @@ export default function useCreateRecord() {
     onSuccess: () => {
       toast.success('新增食品紀錄成功');
       queryClient.invalidateQueries({ queryKey: ['records'] });
+      queryClient.invalidateQueries({ queryKey: ['calendars'] });
     },
     onError: () => {
       toast.error('新增食品紀錄失敗，請稍後再試');

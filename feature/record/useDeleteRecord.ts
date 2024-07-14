@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 import { deleteRecord as deleteRecordApi } from '@/api/record';
 
 export default function useDeleteRecord() {
-  const { dateId } = useParams();
+  const { dateId } = useParams() as { dateId: string };
   const queryClient = useQueryClient();
 
   const { mutate: deleteRecord, isPending } = useMutation({
@@ -15,6 +15,7 @@ export default function useDeleteRecord() {
     onSuccess: () => {
       toast.success('刪除紀錄成功');
       queryClient.invalidateQueries({ queryKey: ['records', dateId] });
+      queryClient.invalidateQueries({ queryKey: ['calendars'] });
     },
     onError: () => {
       toast.error('刪除紀錄失敗，請稍後再試');

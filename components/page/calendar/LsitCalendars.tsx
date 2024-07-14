@@ -7,35 +7,38 @@ import EventCalendar from '@/components/page/calendar/EventCalendar';
 import useCalendar from '@/feature/calendar/useCalendar';
 
 interface Calendars {
-  dateId: string;
+  calendarId: string;
 }
 
 export default function ListCalendars() {
-  const { calendarData, getCalendar, isPending } = useCalendar();
   const [calendars, setCalendars] = useState<Calendars[]>([]);
+  const [currentCalendarId, setCurrentCalendarId] = useState<string>('');
+  const { calendarData, getCalendar, isPending } =
+    useCalendar(currentCalendarId);
+  const isFetched = useRef(false);
+
   const calendarRefs = useRef<{
     [key: string]: React.RefObject<HTMLDivElement>;
   }>({});
-  const isFetching = useRef(false);
 
   useEffect(() => {
     const year = new Date().getFullYear();
     const initialCalendars = Array.from({ length: 12 }).map((_, index) => {
       const monthDate = new Date(year, index, 1);
-      const dateId = format(monthDate, 'yyyy-MM');
-      return { dateId };
+      const calendarId = format(monthDate, 'yyyy-MM');
+      return { calendarId };
     });
 
     initialCalendars.forEach((calendar) => {
-      calendarRefs.current[calendar.dateId] = createRef();
+      calendarRefs.current[calendar.calendarId] = createRef();
     });
 
     setCalendars(initialCalendars);
   }, []);
 
   useEffect(() => {
-    const currentDateId = format(new Date(), 'yyyy-MM');
-    const currentMonthRef = calendarRefs.current[currentDateId];
+    const initCalendarId = format(new Date(), 'yyyy-MM');
+    const currentMonthRef = calendarRefs.current[initCalendarId];
     if (currentMonthRef && currentMonthRef.current) {
       const elementPosition =
         currentMonthRef.current.getBoundingClientRect().top + window.scrollY;
@@ -52,14 +55,10 @@ export default function ListCalendars() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !isFetching.current) {
-            const dateId = entry.target.id;
-            isFetching.current = true;
-            getCalendar(dateId, {
-              onSettled: () => {
-                isFetching.current = false;
-              }
-            });
+          if (entry.isIntersecting && !(entry.target.id in calendarData)) {
+            const calendarId = entry.target.id;
+            setCurrentCalendarId(calendarId);
+            getCalendar(calendarId);
           }
         });
       },
@@ -67,7 +66,7 @@ export default function ListCalendars() {
     );
 
     Object.values(calendarRefs.current).forEach((ref) => {
-      if (ref.current && !(ref.current.id in calendarData)) {
+      if (ref.current) {
         observer.observe(ref.current); // 只有當數據不存在時才觀察
       }
     });
@@ -77,13 +76,13 @@ export default function ListCalendars() {
 
   return (
     <div className="mx-auto mt-14 w-full max-w-2xl">
-      {calendars.map(({ dateId }) => (
+      {calendars.map(({ calendarId }) => (
         <EventCalendar
-          key={dateId}
-          ref={calendarRefs.current[dateId]}
-          dateId={dateId}
+          key={calendarId}
+          ref={calendarRefs.current[calendarId]}
+          calendarId={calendarId}
           isPending={isPending}
-          events={calendarData[dateId] || []}
+          events={calendarData[calendarId] || []}
         />
       ))}
     </div>
