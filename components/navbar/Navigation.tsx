@@ -92,6 +92,7 @@ export default function Navigation({ isNavOpen }: Props) {
             {item.navLinks.map((link) => (
               <li key={link.name}>
                 <Link
+                  scroll={false}
                   className={`flex min-h-12 w-full items-center gap-6 rounded px-2.5 font-semibold transition-colors hover:bg-primary-100 ${pathname === link.href ? 'bg-primary-200 text-primary-900' : ''}`}
                   href={link.href}
                 >

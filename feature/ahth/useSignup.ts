@@ -6,17 +6,11 @@ import { useRouter } from 'next/navigation';
 import notifyError from '@/utils/notifyError';
 import { signup as signupApi } from '@/api/auth';
 
-interface SignupData {
-  name: string;
-  email: string;
-  password: string;
-}
-
 export default function useSignup() {
   const router = useRouter();
 
   const { mutate: signup, isPending } = useMutation({
-    mutationFn: (data: SignupData) => signupApi(data),
+    mutationFn: signupApi,
     onSuccess: () => router.push('/'),
     onError: (error) => notifyError(error)
   });
