@@ -114,6 +114,7 @@ export default function NewRecord({
             <DateSelector
               initDate={getValues('record_date')}
               control={control}
+              position="right"
               id="record_date"
               label="日期"
             />

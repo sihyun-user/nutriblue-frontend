@@ -14,8 +14,10 @@ export default function useDeleteRecord() {
     mutationFn: deleteRecordApi,
     onSuccess: () => {
       toast.success('刪除紀錄成功');
+      const [year, month] = dateId.split('-');
+      const calendarId = `${year}-${month}`;
       queryClient.invalidateQueries({ queryKey: ['records', dateId] });
-      queryClient.invalidateQueries({ queryKey: ['calendars'] });
+      queryClient.invalidateQueries({ queryKey: ['calendars', calendarId] });
     },
     onError: () => {
       toast.error('刪除紀錄失敗，請稍後再試');
