@@ -13,9 +13,7 @@ interface Calendars {
 export default function ListCalendars() {
   const [calendars, setCalendars] = useState<Calendars[]>([]);
   const [currentCalendarId, setCurrentCalendarId] = useState<string>('');
-  const { calendarData, getCalendar, isPending } =
-    useCalendar(currentCalendarId);
-  const isFetched = useRef(false);
+  const { calendarData, isPending, isLoading } = useCalendar(currentCalendarId);
 
   const calendarRefs = useRef<{
     [key: string]: React.RefObject<HTMLDivElement>;
@@ -55,10 +53,9 @@ export default function ListCalendars() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !(entry.target.id in calendarData)) {
+          if (entry.isIntersecting && !isLoading) {
             const calendarId = entry.target.id;
             setCurrentCalendarId(calendarId);
-            getCalendar(calendarId);
           }
         });
       },
@@ -66,13 +63,13 @@ export default function ListCalendars() {
     );
 
     Object.values(calendarRefs.current).forEach((ref) => {
-      if (ref.current) {
+      if (ref.current && !(ref.current.id in calendarData)) {
         observer.observe(ref.current); // 只有當數據不存在時才觀察
       }
     });
 
     return () => observer.disconnect();
-  }, [calendars, calendarData, getCalendar]);
+  }, [calendars, calendarData, isLoading]);
 
   return (
     <div className="mx-auto mt-14 w-full max-w-2xl">
