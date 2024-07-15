@@ -3,7 +3,7 @@ export type UserInfoType = {
   name: string;
   email: string;
   avatar: string;
-  gender: string;
+  gender: number;
   birthday: string;
   height: number;
   weight: number;

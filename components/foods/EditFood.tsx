@@ -98,7 +98,7 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
               control={control}
               label="單位"
               id="serving_size.unit"
-              list={['g', 'ml']}
+              list={{ g: '克', ml: '毫升' }}
             />
             <InputRow
               variation="secondary"

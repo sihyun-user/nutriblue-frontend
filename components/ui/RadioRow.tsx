@@ -10,7 +10,8 @@ const radioStyle = clsx(
 interface Props<T extends FieldValues> {
   id: Path<T>;
   label: string;
-  list: string[];
+  type?: string | number;
+  list: { [key: string]: string | number };
   control: Control<T>;
 }
 
@@ -18,6 +19,7 @@ export default function RadioRow<T extends FieldValues>({
   id,
   label,
   list,
+  type = 'string',
   control
 }: Props<T>) {
   return (
@@ -30,9 +32,13 @@ export default function RadioRow<T extends FieldValues>({
         name={id}
         render={({ field }) => (
           <RadioGroup {...field} id={id} className="flex items-center gap-4">
-            {list.map((item) => (
-              <Radio key={item} value={item} className={radioStyle}>
-                {item}
+            {Object.entries(list).map(([item, value]) => (
+              <Radio
+                key={item}
+                value={type === 'number' ? +item : item}
+                className={radioStyle}
+              >
+                {value}
               </Radio>
             ))}
           </RadioGroup>
