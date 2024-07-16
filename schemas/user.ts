@@ -8,18 +8,18 @@ export const profileSchema = z.object({
   birthday: requiredString(),
   height: numValidator('欄位'),
   weight: numValidator('欄位'),
-  sport_level: requiredString(),
-  fitness_level: requiredString()
+  sportLevel: requiredString(),
+  fitnessLevel: requiredString()
 });
 export type ProfileSchemaType = z.infer<typeof profileSchema>;
 
 export const securitySchema = z
   .object({
     password: z.string().min(6, '密碼長度需大於 6 個字元'),
-    confirm_password: z.string()
+    confirmPassword: z.string()
   })
-  .refine((data) => data.password === data.confirm_password, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: '密碼和確認密碼必須相同',
-    path: ['confirm_password']
+    path: ['confirmPassword']
   });
 export type SecuritySchemaType = z.infer<typeof securitySchema>;

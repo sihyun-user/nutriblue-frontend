@@ -16,14 +16,14 @@ export async function getBookmarks({
   return data.data;
 }
 
-export async function createBookmark({ food_id }: { food_id: string }) {
-  const { data } = await axios.post(`/bookmark/${food_id}`);
+export async function createBookmark({ foodId }: { foodId: string }) {
+  const { data } = await axios.post(`/bookmark/${foodId}`);
 
   if (!data.status) throw new Error(data.message);
 }
 
-export async function deleteBookmark({ food_id }: { food_id: string }) {
-  const { data } = await axios.delete(`/bookmark/${food_id}`);
+export async function deleteBookmark({ foodId }: { foodId: string }) {
+  const { data } = await axios.delete(`/bookmark/${foodId}`);
 
   if (!data.status) throw new Error(data.message);
 }

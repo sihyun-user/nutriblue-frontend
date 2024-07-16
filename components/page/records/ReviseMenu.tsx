@@ -17,7 +17,7 @@ export default function ReviseMenu({ record }: { record: IRecord }) {
 
   // const [isEdit, setIsEdit] = useState(false);
 
-  // const { id: food_id } = food;
+  // const { id: foodId } = food;
 
   // const { deleteFood } = useDeleteFood();
 

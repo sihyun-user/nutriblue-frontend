@@ -5,8 +5,8 @@ export interface INutritions {
   carbohydrates: number;
   sugar: number;
   fat: number;
-  saturated_fat: number;
-  trans_fat: number;
+  saturatedFat: number;
+  transFat: number;
   sodium: number;
   potassium: number;
   cholesterol: number;
@@ -17,12 +17,12 @@ export interface IFood {
   verified: boolean;
   publiced: boolean;
   name: string;
-  brand_name: string;
-  serving_size: {
+  brandName: string;
+  servingSize: {
     value: number;
     unit: string;
     container: number;
   };
   nutritions: INutritions;
-  bookmark_collects: string[];
+  bookmarkCollects: string[];
 }

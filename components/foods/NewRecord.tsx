@@ -37,7 +37,7 @@ export default function NewRecord({
 }: Props) {
   const {
     id,
-    serving_size: { value, unit, container }
+    servingSize: { value, unit, container }
   } = food;
   const [containerValue, setContainerValue] = useState(0);
 
@@ -55,10 +55,10 @@ export default function NewRecord({
     resolver: zodResolver(newRecordSchema),
     mode: 'onChange',
     defaultValues: {
-      food_id: id,
+      foodId: id,
       multiplier: 1,
-      meal_name: 'breakfast',
-      record_date: format(new Date(), 'yyyy-MM-dd')
+      mealName: 'breakfast',
+      recordDate: format(new Date(), 'yyyy-MM-dd')
     }
   });
 
@@ -106,16 +106,16 @@ export default function NewRecord({
         <>
           <div className="mt-4 grid grid-cols-2 items-end gap-4">
             <SelectRows
-              id="meal_name"
+              id="mealName"
               label="餐點名稱"
               list={mealList}
               control={control}
             />
             <DateSelector
-              initDate={getValues('record_date')}
+              initDate={getValues('recordDate')}
               control={control}
               position="right"
-              id="record_date"
+              id="recordDate"
               label="日期"
             />
           </div>

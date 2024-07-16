@@ -4,6 +4,6 @@ export interface IRecord {
   id: string;
   food: IFood;
   multiplier: number;
-  meal_name: string;
-  record_date: string;
+  mealName: string;
+  recordDate: string;
 }

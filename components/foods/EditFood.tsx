@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default function CreateFood({ isSelect, isClose, food }: Props) {
-  const { id: food_id } = food;
+  const { id: foodId } = food;
 
   const {
     register,
@@ -32,12 +32,12 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
     mode: 'onChange',
     defaultValues: {
       name: food.name,
-      brand_name: food.brand_name,
+      brandName: food.brandName,
       publiced: food.publiced,
-      serving_size: {
-        value: food.serving_size.value,
-        unit: food.serving_size.unit,
-        container: food.serving_size.container
+      servingSize: {
+        value: food.servingSize.value,
+        unit: food.servingSize.unit,
+        container: food.servingSize.container
       },
       nutritions: {
         calories: food.nutritions.calories,
@@ -45,8 +45,8 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
         carbohydrates: food.nutritions.carbohydrates,
         sugar: food.nutritions.sugar,
         fat: food.nutritions.fat,
-        saturated_fat: food.nutritions.saturated_fat,
-        trans_fat: food.nutritions.trans_fat,
+        saturatedFat: food.nutritions.saturatedFat,
+        transFat: food.nutritions.transFat,
         sodium: food.nutritions.sodium,
         potassium: food.nutritions.potassium,
         cholesterol: food.nutritions.cholesterol
@@ -58,7 +58,7 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
 
   const onSubmit: SubmitHandler<FoodFormType> = (newFood) => {
     editFood(
-      { food_id, newFood },
+      { foodId, newFood },
       {
         onSettled: () => isClose()
       }
@@ -81,7 +81,7 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
               variation="secondary"
               register={register}
               label="品牌名稱"
-              id="brand_name"
+              id="brandName"
               errors={errors}
             />
           </div>
@@ -91,13 +91,13 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
               register={register}
               label="每一份量含"
               type="number"
-              id="serving_size.value"
+              id="servingSize.value"
               errors={errors}
             />
             <RadioRow
               control={control}
               label="單位"
-              id="serving_size.unit"
+              id="servingSize.unit"
               list={{ g: '克', ml: '毫升' }}
             />
             <InputRow
@@ -105,7 +105,7 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
               register={register}
               label="每包裝份數"
               type="number"
-              id="serving_size.container"
+              id="servingSize.container"
               errors={errors}
             />
           </div>

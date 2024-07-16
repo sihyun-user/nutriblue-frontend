@@ -26,9 +26,9 @@ export default function CreateFood() {
     mode: 'onChange',
     defaultValues: {
       name: '',
-      brand_name: '',
+      brandName: '',
       publiced: false,
-      serving_size: {
+      servingSize: {
         value: 0,
         unit: 'g',
         container: 1
@@ -39,8 +39,8 @@ export default function CreateFood() {
         carbohydrates: 0,
         sugar: 0,
         fat: 0,
-        saturated_fat: 0,
-        trans_fat: 0,
+        saturatedFat: 0,
+        transFat: 0,
         sodium: 0,
         potassium: 0,
         cholesterol: 0
@@ -86,7 +86,7 @@ export default function CreateFood() {
                 variation="secondary"
                 register={register}
                 label="品牌名稱"
-                id="brand_name"
+                id="brandName"
                 errors={errors}
               />
             </div>
@@ -96,13 +96,13 @@ export default function CreateFood() {
                 register={register}
                 label="每一份量含"
                 type="number"
-                id="serving_size.value"
+                id="servingSize.value"
                 errors={errors}
               />
               <RadioRow
                 control={control}
                 label="單位"
-                id="serving_size.unit"
+                id="servingSize.unit"
                 list={{ g: '克', ml: '毫升' }}
               />
               <InputRow
@@ -110,7 +110,7 @@ export default function CreateFood() {
                 register={register}
                 label="每包裝份數"
                 type="number"
-                id="serving_size.container"
+                id="servingSize.container"
                 errors={errors}
               />
             </div>

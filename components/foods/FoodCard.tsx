@@ -27,22 +27,22 @@ export default function FoodCard({
   const { deleteBookmark } = useDeleteFoodBookmark();
 
   const {
-    id: food_id,
+    id: foodId,
     name,
     verified,
     publiced,
-    serving_size: { value, container, unit },
+    servingSize: { value, container, unit },
     nutritions: { calories, protein, carbohydrates, sugar, fat, sodium },
-    bookmark_collects
+    bookmarkCollects
   } = food;
 
   function handleBookmark(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation();
 
-    if (bookmark_collects.includes(userId)) {
-      deleteBookmark({ food_id });
+    if (bookmarkCollects.includes(userId)) {
+      deleteBookmark({ foodId });
     } else {
-      createBookmark({ food_id });
+      createBookmark({ foodId });
     }
   }
 
@@ -80,7 +80,7 @@ export default function FoodCard({
           onClick={(e) => handleBookmark(e)}
           className="absolute right-2 top-2 flex size-10 items-center justify-center rounded-xl hover:bg-cyan-100"
         >
-          {bookmark_collects.includes(userId) ? (
+          {bookmarkCollects.includes(userId) ? (
             <BookmarkIcon className="size-7 text-cyan-500" />
           ) : (
             <OutlineBookmarkIcon className="size-7 text-cyan-500" />

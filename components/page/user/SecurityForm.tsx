@@ -21,7 +21,7 @@ export default function SecurityForm() {
     mode: 'onChange',
     defaultValues: {
       password: '',
-      confirm_password: ''
+      confirmPassword: ''
     }
   });
 
@@ -53,7 +53,7 @@ export default function SecurityForm() {
         label="確認新密碼"
         placeholder="請再次輸入新密碼"
         type="password"
-        id="confirm_password"
+        id="confirmPassword"
         errors={errors}
       />
       <BaseButton className="min-w-[80px]" type="submit" disabled={isPending}>

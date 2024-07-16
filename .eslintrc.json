@@ -48,7 +48,6 @@
     "import"
   ],
   "rules": {
-    "camelcase": "off",
     "no-console": "error",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",

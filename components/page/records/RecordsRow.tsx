@@ -11,7 +11,7 @@ type MealType = 'breakfast' | 'lunch' | 'dinner';
 function groupRecordsByMeal(records: IRecord[]) {
   return records.reduce(
     (acc, record) => {
-      const mealType = record.meal_name as MealType;
+      const mealType = record.mealName as MealType;
       if (!acc[mealType]) {
         acc[mealType] = [];
       }
@@ -56,8 +56,8 @@ function generateRecordRow(record: IRecord) {
       <td className="px-6 py-4">{food.nutritions.calories}</td>
       <td className="px-6 py-4">{food.nutritions.protein}</td>
       <td className="px-6 py-4">{food.nutritions.fat}</td>
-      <td className="px-6 py-4">{food.nutritions.trans_fat}</td>
-      <td className="px-6 py-4">{food.nutritions.saturated_fat}</td>
+      <td className="px-6 py-4">{food.nutritions.transFat}</td>
+      <td className="px-6 py-4">{food.nutritions.saturatedFat}</td>
       <td className="px-6 py-4">{food.nutritions.sugar}</td>
       <td className="px-6 py-4">{food.nutritions.carbohydrates}</td>
       <td className="px-6 py-4">{food.nutritions.sodium}</td>

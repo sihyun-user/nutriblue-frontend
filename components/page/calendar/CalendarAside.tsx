@@ -12,7 +12,7 @@ import DialogSmall from '@/components/dialog/DialogSmall';
 import DateSelector from '@/components/ui/DateSelector';
 
 interface CalendarForm {
-  select_date: string;
+  selectDate: string;
 }
 
 export default function CalendarAside() {
@@ -22,12 +22,12 @@ export default function CalendarAside() {
 
   const { reset, getValues, handleSubmit, control } = useForm<CalendarForm>({
     defaultValues: {
-      select_date: format(new Date(), 'yyyy-MM-dd')
+      selectDate: format(new Date(), 'yyyy-MM-dd')
     }
   });
 
   const onSubmit: SubmitHandler<CalendarForm> = (data) => {
-    router.push(`${pathname}/${data.select_date}`);
+    router.push(`${pathname}/${data.selectDate}`);
   };
 
   function handleClose() {
@@ -59,10 +59,10 @@ export default function CalendarAside() {
             <CalendarDaysIcon className="size-6" />
             <h3 className="mb-2 font-medium text-primary-800">選擇日期</h3>
             <DateSelector
-              initDate={getValues('select_date')}
+              initDate={getValues('selectDate')}
               control={control}
               position="center"
-              id="select_date"
+              id="selectDate"
             />
           </div>
           <div className="flex w-full justify-end gap-4 border-t border-primary-300 p-2">

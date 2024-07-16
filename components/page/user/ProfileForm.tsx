@@ -48,8 +48,8 @@ export default function ProfileForm() {
       birthday: userInfo?.birthday,
       height: userInfo?.weight,
       weight: userInfo?.height,
-      sport_level: userInfo?.sport_level,
-      fitness_level: userInfo?.fitness_level
+      sportLevel: userInfo?.sportLevel,
+      fitnessLevel: userInfo?.fitnessLevel
     }
   });
 
@@ -112,13 +112,13 @@ export default function ProfileForm() {
       </div>
       <div className="grid grid-cols-2 gap-5">
         <SelectRows
-          id="sport_level"
+          id="sportLevel"
           label="運動量"
           list={sportLeveLList}
           control={control}
         />
         <SelectRows
-          id="fitness_level"
+          id="fitnessLevel"
           label="健身目標"
           list={fitnessLeveLList}
           control={control}

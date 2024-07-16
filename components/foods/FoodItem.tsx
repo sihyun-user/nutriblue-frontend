@@ -33,9 +33,9 @@ export default function FoodItem({ isSelect, isClose, data }: Props) {
                 <h1 className="text-xl font-semibold text-primary-800">
                   {data.name}
                 </h1>
-                {data.brand_name && (
+                {data.brandName && (
                   <span className="mt-1 text-sm font-medium">
-                    ({data.brand_name})
+                    ({data.brandName})
                   </span>
                 )}
               </div>
@@ -66,7 +66,7 @@ export default function FoodItem({ isSelect, isClose, data }: Props) {
         <h6 className="mb-3 text-lg font-semibold">營養成分</h6>
         <div className="grid grid-cols-2 gap-4">
           <NutritionRows
-            container={data.serving_size.container}
+            container={data.servingSize.container}
             multiplier={multiplier}
             data={data.nutritions}
           />

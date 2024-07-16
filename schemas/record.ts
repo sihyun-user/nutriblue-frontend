@@ -1,16 +1,16 @@
 import { z } from 'zod';
 
 export const newRecordSchema = z.object({
-  food_id: z.string(),
+  foodId: z.string(),
   multiplier: z.number({ message: '請輸入攝取份數' }),
-  meal_name: z.string(),
-  record_date: z.string()
+  mealName: z.string(),
+  recordDate: z.string()
 });
 export type NewRecordSchemaType = z.infer<typeof newRecordSchema>;
 
 export const updateRecordSchema = z.object({
   multiplier: z.number({ message: '請輸入攝取份數' }),
-  meal_name: z.string(),
-  record_date: z.string()
+  mealName: z.string(),
+  recordDate: z.string()
 });
 export type UpdateRecordSchemaType = z.infer<typeof updateRecordSchema>;

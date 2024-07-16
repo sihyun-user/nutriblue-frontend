@@ -12,8 +12,8 @@ export default function useCreateRecord() {
   const { mutate: createRecord, isPending } = useMutation({
     mutationFn: createRecordApi,
     onSuccess: (variables, context) => {
-      const { record_date } = context as NewRecordSchemaType;
-      const [year, month] = record_date.split('-');
+      const { recordDate } = context as NewRecordSchemaType;
+      const [year, month] = recordDate.split('-');
       const calendarId = `${year}-${month}`;
 
       toast.success('新增食品紀錄成功');

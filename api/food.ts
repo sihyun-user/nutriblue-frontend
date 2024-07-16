@@ -40,19 +40,19 @@ export async function createFood(payload: FoodFormType) {
 }
 
 export async function editFood({
-  food_id,
+  foodId,
   newFood
 }: {
-  food_id: string;
+  foodId: string;
   newFood: FoodFormType;
 }) {
-  const { data } = await axios.patch(`/food/${food_id}`, newFood);
+  const { data } = await axios.patch(`/food/${foodId}`, newFood);
 
   if (!data.status) throw new Error(data.message);
 }
 
-export async function deleteFood(food_id: string) {
-  const { data } = await axios.delete(`/food/${food_id}`);
+export async function deleteFood(foodId: string) {
+  const { data } = await axios.delete(`/food/${foodId}`);
 
   if (!data.status) throw new Error(data.message);
 }
