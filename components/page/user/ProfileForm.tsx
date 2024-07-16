@@ -37,7 +37,6 @@ export default function ProfileForm() {
     register,
     handleSubmit,
     getValues,
-    // reset,
     control,
     formState: { errors }
   } = useForm<ProfileSchemaType>({

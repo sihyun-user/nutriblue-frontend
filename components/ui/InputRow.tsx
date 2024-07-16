@@ -29,6 +29,7 @@ interface Props<T extends FieldValues> {
   id: Path<T>;
   label?: string;
   type?: string;
+  placeholder?: string;
   required?: boolean;
   fixedRight?: string;
   variation?: string;
@@ -43,6 +44,7 @@ export default function InputRow<T extends FieldValues>({
   label,
   variation = 'primary',
   type = 'text',
+  placeholder,
   disabled = false,
   fixedRight,
   setValue,
@@ -71,6 +73,7 @@ export default function InputRow<T extends FieldValues>({
         <Input
           className={variation ? variations[variation] : ''}
           type={type}
+          placeholder={placeholder}
           id={id}
           disabled={disabled}
           value={setValue}

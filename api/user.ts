@@ -1,6 +1,9 @@
 import axios from '@/lib/axios';
 
-import { type ProfileSchemaType } from '@/schemas/user';
+import {
+  type ProfileSchemaType,
+  type SecuritySchemaType
+} from '@/schemas/user';
 
 export async function getUser() {
   const { data } = await axios.get('/user');
@@ -18,10 +21,7 @@ export async function updateUser(payload: ProfileSchemaType) {
   return data.data;
 }
 
-export async function updatePassword(payload: {
-  old_password: string;
-  new_password: string;
-}) {
+export async function updatePassword(payload: SecuritySchemaType) {
   const { data } = await axios.patch('/user/password', payload);
 
   if (!data.status) throw new Error(data.message);

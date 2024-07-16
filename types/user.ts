@@ -9,6 +9,5 @@ export type UserInfoType = {
   weight: number;
   sport_level: string;
   fitness_level: string;
-  bio: string;
   food_collects: string[];
 };
