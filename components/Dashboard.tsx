@@ -13,7 +13,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col gap-12">
       <div>
-        <h3 className="mb-4 ml-4 font-semibold">摘要</h3>
+        <h3 className="mb-4 ml-4 font-semibold">每日摘要</h3>
         <div className="overflow-hidden rounded-lg shadow-md">
           <div className="flex items-center justify-between bg-blue-300 px-4 py-2 text-sm font-bold text-blue-600 shadow-orange-50">
             <span>每日健康紀錄</span>
@@ -92,7 +92,7 @@ export default function Dashboard() {
       </div>
       <div>
         <header className="mb-4 ml-4 flex items-center justify-between">
-          <h3 className="font-semibold">日記</h3>
+          <h3 className="font-semibold">每日營養分析</h3>
           <div className="flex gap-2">
             <ArrowPathIcon className="size-5" />
             <Bars3BottomLeftIcon className="size-5" />

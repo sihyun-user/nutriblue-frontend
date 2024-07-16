@@ -11,7 +11,7 @@ import { useUserInfo } from '@/providers/UserProvider';
 import Avatar from '@/components/ui/Avatar';
 
 const buttonStyle = clsx(
-  'flex h-[44px] w-[72px] cursor-pointer items-center justify-center gap-2 rounded-lg text-primary-600',
+  'flex h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg text-primary-600',
   'transition duration-300 focus:outline-none data-[active]:bg-black/10 data-[hover]:bg-black/10'
 );
 

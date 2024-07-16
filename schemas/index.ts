@@ -13,7 +13,7 @@ export const requiredNumber = () =>
     invalid_type_error: '欄位未填寫正確'
   });
 export const requiredBoolean = () =>
-  z.boolean({ required_error: '欄位未填寫正確' });
+  z.boolean({ required_error: '此欄位為必填欄位' });
 
 export const numValidator = (field: string, minLength = 0) =>
   requiredNumber().refine(

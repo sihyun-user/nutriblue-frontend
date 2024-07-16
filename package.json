@@ -9,7 +9,7 @@
     "prod": "next build && next start",
     "lint": "next lint",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
-    "format": "prettier --write --config .prettierrc.json '**/*.{js,jsx,ts,tsx}'"
+    "format": "prettier --config .prettierrc.json --write '**/*.{js,jsx,ts,tsx}'"
   },
   "husky": {
     "hooks": {

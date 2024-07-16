@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { useUserInfo } from '@/providers/UserProvider';
 import Avatar from '@/components/ui/Avatar';
+import { CameraIcon } from '@heroicons/react/20/solid';
 
 const navList = [
   {
@@ -25,7 +26,10 @@ export default function UserMenu() {
     return (
       <>
         <div className="flex flex-col items-center">
-          <Avatar size="legend" />
+          <div className="relative">
+            <Avatar size="legend" />
+            <CameraIcon className="absolute bottom-2 right-1 size-7 cursor-pointer rounded-full bg-blue-100 p-1 text-blue-400" />
+          </div>
           <h4 className="text-xl font-semibold text-blue-400">
             {userInfo.name}
           </h4>

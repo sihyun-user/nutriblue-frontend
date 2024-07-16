@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Dashboard from '@/components/Dashboard';
 
 export const metadata: Metadata = {
-  title: '每日摘要'
+  title: '首頁'
 };
 
 export default function Home() {
