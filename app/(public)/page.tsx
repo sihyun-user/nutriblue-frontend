@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
+
 import Dashboard from '@/components/Dashboard';
+
+export const metadata: Metadata = {
+  title: '每日摘要'
+};
 
 export default function Home() {
   return (

@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
+
 import ProfileForm from '@/components/page/user/ProfileForm';
+
+export const metadata: Metadata = {
+  title: '個人資訊'
+};
 
 export default function Page() {
   return (

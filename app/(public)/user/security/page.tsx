@@ -1,4 +1,10 @@
+import type { Metadata } from 'next';
+
 import SecurityForm from '@/components/page/user/SecurityForm';
+
+export const metadata: Metadata = {
+  title: '修改密碼'
+};
 
 export default function Page() {
   return (

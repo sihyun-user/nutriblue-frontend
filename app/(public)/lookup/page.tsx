@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
+
 import SearchBar from '@/components/ui/SearchBar';
 import ListLookups from '@/components/page/lookup/ListLookups';
 import CreateFood from '@/components/foods/CreateFood';
+
+export const metadata: Metadata = {
+  title: '我的資料庫'
+};
 
 export default async function Page() {
   return (

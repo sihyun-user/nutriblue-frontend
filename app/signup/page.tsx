@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
+
 import SignupClient from '@/components/page/auth/SignupClient';
 
-export default function Auth() {
+export const metadata: Metadata = {
+  title: '註冊'
+};
+
+export default function Page() {
   return (
     <>
       <header className="absolute top-0 flex h-[80px] w-full items-center justify-center">

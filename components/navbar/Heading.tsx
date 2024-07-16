@@ -1,6 +1,7 @@
 import { Bars3Icon } from '@heroicons/react/24/solid';
 
 import HeadingMenu from './HeadingMenu';
+import Logo from '../ui/Logo';
 
 interface HeaderProps {
   onIconClick: () => void;
@@ -14,7 +15,9 @@ export default function Heading({ onIconClick }: HeaderProps) {
           className="block size-6 cursor-pointer md:pointer-events-none md:opacity-0"
           onClick={onIconClick}
         />
-        <div className="flex justify-center">Logo</div>
+        <div className="flex justify-center">
+          <Logo />
+        </div>
         <HeadingMenu />
       </div>
     </header>

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import {
   HeartIcon,
   ArchiveBoxIcon,
-  BookOpenIcon,
   CalendarDaysIcon,
   MagnifyingGlassIcon,
   BookmarkIcon,
@@ -24,14 +23,9 @@ const navList = [
         icon: <ArchiveBoxIcon />
       },
       {
-        name: '健康日誌',
+        name: '營養日誌',
         href: '/calendar',
         icon: <CalendarDaysIcon />
-      },
-      {
-        name: '寫日記',
-        href: '/diary',
-        icon: <BookOpenIcon />
       },
       {
         name: '我的資料庫',
