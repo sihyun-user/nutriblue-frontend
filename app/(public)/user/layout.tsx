@@ -1,4 +1,4 @@
-import UserMenu from '@/components/user/UserMenu';
+import UserMenu from '@/components/page/user/UserMenu';
 
 export default function UserLayout({
   children
