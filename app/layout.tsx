@@ -12,7 +12,7 @@ const notoSans = notoSansTC({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASEURL || 'http://localhost:5173'
+    process.env.NEXT_PUBLIC_BASEURL || 'http://localhost:3000'
   ),
   title: {
     default: 'NutriBlue - 飲食日記與全面營養資訊平台',

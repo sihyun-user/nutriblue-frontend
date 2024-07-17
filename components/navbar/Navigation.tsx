@@ -19,7 +19,7 @@ const navList = [
     navLinks: [
       {
         name: '首頁',
-        href: '/',
+        href: '/home',
         icon: <HomeIcon />
       },
       {

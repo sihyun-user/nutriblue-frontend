@@ -3,6 +3,7 @@
 import { Toaster } from 'react-hot-toast';
 
 export default function toaster() {
+  const timeoutSec = Number(process.env.NEXT_TIMEOUT_PUBLIC_SEC) || 3000;
   return (
     <Toaster
       position="top-center"
@@ -11,10 +12,10 @@ export default function toaster() {
       containerStyle={{ margin: '8px' }}
       toastOptions={{
         success: {
-          duration: 3000
+          duration: timeoutSec
         },
         error: {
-          duration: 3000
+          duration: timeoutSec
         },
         style: {
           fontSize: '16px',

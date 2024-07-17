@@ -2,6 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 import { login as loginApi } from '@/api/auth';
 import notifyError from '@/utils/notifyError';
@@ -11,7 +12,10 @@ export default function useLogin() {
 
   const { mutate: login, isPending } = useMutation({
     mutationFn: loginApi,
-    onSuccess: () => router.push('/'),
+    onSuccess: () => {
+      toast.success('登入成功');
+      router.push('/home');
+    },
     onError: (error) => notifyError(error)
   });
 
