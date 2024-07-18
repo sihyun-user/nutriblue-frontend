@@ -13,8 +13,8 @@ export default function useLogin() {
   const { mutate: login, isPending } = useMutation({
     mutationFn: loginApi,
     onSuccess: () => {
+      router.replace('/home');
       toast.success('登入成功');
-      router.push('/home');
     },
     onError: (error) => notifyError(error)
   });

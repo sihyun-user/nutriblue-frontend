@@ -45,6 +45,8 @@ api.interceptors.response.use(
       } catch {
         // 處理刷新令牌錯誤或重定向到登入頁面
         window.location.href = '/login';
+        Cookies.remove('token');
+        Cookies.remove('refreshToken');
       }
     }
 
