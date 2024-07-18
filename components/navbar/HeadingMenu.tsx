@@ -8,10 +8,11 @@ import Link from 'next/link';
 import clsx from 'clsx';
 
 import { useUserInfo } from '@/providers/UserProvider';
+import useLogout from '@/feature/ahth/useLogout';
 import Avatar from '@/components/ui/Avatar';
 
 const buttonStyle = clsx(
-  'flex h-[44px] cursor-pointer items-center justify-center gap-2 rounded-lg text-primary-600',
+  'flex h-[44px] w-[72px] cursor-pointer items-center justify-center gap-2 rounded-lg text-primary-600',
   'transition duration-300 focus:outline-none data-[active]:bg-black/10 data-[hover]:bg-black/10'
 );
 
@@ -25,6 +26,7 @@ const ItemStyle =
 
 export default function HeadingMenu() {
   const userInfo = useUserInfo();
+  const { logout } = useLogout();
 
   return (
     <Popover className="group relative">
@@ -52,7 +54,7 @@ export default function HeadingMenu() {
             <UserIcon className="size-6" />
             <span className="font-semibold text-primary-800">會員中心</span>
           </Link>
-          <div className={ItemStyle}>
+          <div className={ItemStyle} onClick={() => logout()}>
             <ArrowRightStartOnRectangleIcon className="size-6" />
             <span className="font-semibold text-primary-800">登出</span>
           </div>

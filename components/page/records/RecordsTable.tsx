@@ -3,14 +3,15 @@
 import { PlusIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 
-import BaseButton from '@/components/ui/BaseButton';
 import useRecordsByDate from '@/feature/calendar/useRecordsByDate';
+import BaseButton from '@/components/ui/BaseButton';
+import Spinner from '@/components/Spinner';
 import RecorddRow from './RecordsRow';
 
 export default function RecordsTable() {
   const { data, isPending } = useRecordsByDate();
 
-  if (isPending) return <div className="spinner-mini" />;
+  if (isPending) return <Spinner />;
 
   if (data)
     return (

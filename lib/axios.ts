@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const baseURL = `${process.env.NEXT_PUBLIC_BASE_API}/api/v1`;
 
@@ -8,7 +9,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = Cookies.get('token');
     const modifiedConfig = { ...config };
 
     if (token) {
@@ -29,7 +30,7 @@ api.interceptors.response.use(
       originalRequest.set_retry = true;
 
       try {
-        const refreshToken = localStorage.getItem('refreshToken');
+        const refreshToken = Cookies.get('refreshToken');
 
         const { data } = await axios.post(`${baseURL}/auth/refreshToken`, {
           refreshToken
@@ -37,7 +38,7 @@ api.interceptors.response.use(
 
         const { token } = data.data;
 
-        localStorage.setItem('token', token);
+        Cookies.set('token', token);
 
         originalRequest.headers.Authorization = `Bearer ${token}`;
         return axios(originalRequest);
