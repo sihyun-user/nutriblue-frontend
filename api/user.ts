@@ -28,3 +28,26 @@ export async function updatePassword(payload: SecuritySchemaType) {
 
   return data.data;
 }
+
+export async function updateAvatar(avatar: string) {
+  const { data } = await axios.post('/user/avatar', { avatar });
+
+  if (!data.status) throw new Error(data.message);
+
+  return data.data;
+}
+
+export async function uploadImage(file: File) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const { data } = await axios.post('/user/upload-image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+
+  if (!data.status) throw new Error(data.message);
+
+  return data.data;
+}
