@@ -31,14 +31,14 @@ export default function HeadingMenu() {
   return (
     <Popover className="group relative">
       <PopoverButton className={buttonStyle}>
-        <Avatar />
+        <Avatar size={32} />
         <ChevronDownIcon className="size-3" />
       </PopoverButton>
       <PopoverPanel anchor="bottom end" transition className={panelStyle}>
         <div className="p-2">
           {userInfo && (
             <div className="flex items-center gap-4">
-              <Avatar size="medium" />
+              <Avatar size={40} />
               <div className="flex flex-col">
                 <span className="font-semibold text-primary-800">
                   {userInfo.name}

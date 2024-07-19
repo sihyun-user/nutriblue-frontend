@@ -59,13 +59,13 @@ export default function UserMenu() {
     return (
       <>
         <div className="flex flex-col items-center">
-          <div className="relative">
+          <div className="relative mb-4">
             {(isUploading || isUpdating) && (
               <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
                 <div className="spinner-mini size-6 border-blue-300 border-r-blue-600" />
               </div>
             )}
-            <Avatar opacity={isUploading || isUpdating} size="legend" />
+            <Avatar opacity={isUploading || isUpdating} size={105} />
             <label htmlFor="upload-avatar">
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <input
@@ -76,13 +76,13 @@ export default function UserMenu() {
                 id="upload-avatar"
                 onChange={(e) => handleAvatarUpload(e)}
               />
-              <CameraIcon className="absolute bottom-2 right-1 size-7 cursor-pointer rounded-full bg-blue-100 p-1 text-blue-400" />
+              <CameraIcon className="absolute bottom-1 right-1 size-7 cursor-pointer rounded-full bg-blue-100 p-1 text-blue-400" />
             </label>
           </div>
           <h4 className="text-xl font-semibold text-blue-400">
             {userInfo.name}
           </h4>
-          <h5 className="mb-6 text-blue-400">sihyun@gmail.com</h5>
+          <h5 className="mb-6 text-blue-400">{userInfo.email}</h5>
         </div>
         <div className="flex flex-col items-center gap-4">
           {navList.map((item) => (
