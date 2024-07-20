@@ -14,10 +14,10 @@ export default function ReviseMenu({ food }: { food: IFood }) {
   const { deleteFood } = useDeleteFood();
   const [isEdit, setIsEdit] = useState(false);
 
-  const { id: foodId } = food;
+  const { id } = food;
 
   function handleDelete() {
-    deleteFood(foodId);
+    deleteFood(id);
   }
 
   return (

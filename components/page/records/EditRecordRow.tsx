@@ -3,15 +3,17 @@
 import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
 
-import { IFood } from '@/types/food';
-import { newRecordSchema, type NewRecordSchemaType } from '@/schemas/record';
+import { IRecord } from '@/types/record';
+import {
+  updateRecordSchema,
+  type UpdateRecordSchemaType
+} from '@/schemas/record';
+import useUpdateRecord from '@/feature/record/useUpdateRecord';
 import BaseButton from '@/components/ui/BaseButton';
 import InputRow from '@/components/ui/InputRow';
 import SelectRows from '@/components/ui/SelectRows';
 import DateSelector from '@/components/ui/DateSelector';
-import useCreateRecord from '@/feature/record/useCreateRecord';
 
 const mealList = [
   { id: 'breakfast', name: '早餐' },
@@ -21,63 +23,55 @@ const mealList = [
 ];
 
 interface Props {
-  food: IFood;
-  newRecord: boolean;
-  closeNewRecord: () => void;
+  record: IRecord;
   handleClose: () => void;
   handleMultiplier: (value: number) => void;
 }
 
-export default function NewRecord({
-  food,
-  newRecord,
-  closeNewRecord,
+export default function EditRecordRow({
+  record,
   handleClose,
   handleMultiplier
 }: Props) {
+  const { id: recordId, food, multiplier, mealName, recordDate } = record;
   const {
-    id,
     servingSize: { value, unit, container }
   } = food;
+
   const [containerValue, setContainerValue] = useState(0);
 
-  const { createRecord, isPending } = useCreateRecord();
+  const { updateRecord, isPending } = useUpdateRecord();
 
   const {
     register,
     handleSubmit,
     getValues,
-    reset,
     watch,
     control,
     formState: { errors }
-  } = useForm<NewRecordSchemaType>({
-    resolver: zodResolver(newRecordSchema),
+  } = useForm<UpdateRecordSchemaType>({
+    resolver: zodResolver(updateRecordSchema),
     mode: 'onChange',
     defaultValues: {
-      foodId: id,
-      multiplier: 1,
-      mealName: 'breakfast',
-      recordDate: format(new Date(), 'yyyy-MM-dd')
+      recordId,
+      multiplier,
+      mealName,
+      recordDate
     }
   });
 
-  const multiplier = watch('multiplier');
+  const newMultiplier = watch('multiplier');
 
   useEffect(() => {
-    const newValue = value * container * multiplier;
+    const newValue = value * container * newMultiplier;
     const calculatedValue = Math.round(newValue);
     setContainerValue(calculatedValue);
 
-    handleMultiplier(multiplier);
-  }, [multiplier, handleMultiplier, value, container]);
+    handleMultiplier(newMultiplier);
+  }, [newMultiplier, handleMultiplier, value, container]);
 
-  useEffect(() => {
-    if (!newRecord) reset();
-  }, [reset, newRecord]);
-
-  const onSubmit: SubmitHandler<NewRecordSchemaType> = (data) => {
-    createRecord(data, {
+  const onSubmit: SubmitHandler<UpdateRecordSchemaType> = (data) => {
+    updateRecord(data, {
       onSettled: () => handleClose()
     });
   };
@@ -102,7 +96,7 @@ export default function NewRecord({
           fixedRight={unit}
         />
       </div>
-      {newRecord && (
+      {record && (
         <>
           <div className="mt-4 grid grid-cols-2 items-end gap-4">
             <SelectRows
@@ -120,11 +114,11 @@ export default function NewRecord({
             />
           </div>
           <div className="mt-8 flex justify-end gap-6">
-            <BaseButton variation="gray" onClick={closeNewRecord}>
-              取消
+            <BaseButton variation="gray" onClick={() => handleClose()}>
+              取消修改
             </BaseButton>
             <BaseButton type="submit" disabled={isPending}>
-              確定
+              確定修改
             </BaseButton>
           </div>
         </>

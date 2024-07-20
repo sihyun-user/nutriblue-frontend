@@ -1,6 +1,6 @@
 import React from 'react';
 import { IRecord } from '@/types/record';
-import ReviseMenu from '@/components/page/records/ReviseMenu';
+import RecordReviseMenu from '@/components/page/records/RecordReviseMenu';
 
 interface Props {
   records: IRecord[];
@@ -39,10 +39,10 @@ function generateRecordRow(record: IRecord) {
     return (
       <tr key={record.id} className="border-b bg-white hover:bg-gray-50">
         <td colSpan={9} className="px-6 py-4 text-left">
-          食物內容已被刪除
+          [食品內容已被刪除]
         </td>
         <td className="px-6 py-4">
-          <ReviseMenu record={record} aria-label="修改紀錄" />
+          <RecordReviseMenu record={record} aria-label="修改紀錄" />
         </td>
       </tr>
     );
@@ -62,7 +62,7 @@ function generateRecordRow(record: IRecord) {
       <td className="px-6 py-4">{food.nutritions.carbohydrates}</td>
       <td className="px-6 py-4">{food.nutritions.sodium}</td>
       <td className="px-6 py-4">
-        <ReviseMenu record={record} aria-label="修改紀錄" />
+        <RecordReviseMenu record={record} aria-label="修改紀錄" />
       </td>
     </tr>
   );

@@ -1,6 +1,6 @@
 import axios from '@/lib/axios';
 
-import { NewRecordSchemaType } from '@/schemas/record';
+import { NewRecordSchemaType, UpdateRecordSchemaType } from '@/schemas/record';
 
 export async function getRecordsByDate(dateId: string) {
   const { data } = await axios.post('/record/date', { dateId });
@@ -10,8 +10,8 @@ export async function getRecordsByDate(dateId: string) {
   return data.data;
 }
 
-export async function createRecord(newRecord: NewRecordSchemaType) {
-  const { data } = await axios.post(`/record`, newRecord);
+export async function createRecord(payload: NewRecordSchemaType) {
+  const { data } = await axios.post('/record', payload);
 
   if (!data.status) throw new Error(data.message);
 }
@@ -24,8 +24,10 @@ export async function getCalendar(calendarId: string) {
   return data.data;
 }
 
-export async function updateRecord(recordId: string) {
-  const { data } = await axios.patch(`/record/${recordId}`);
+export async function updateRecord(payload: UpdateRecordSchemaType) {
+  const { recordId, ...paramData } = payload;
+
+  const { data } = await axios.patch(`/record/${recordId}`, paramData);
 
   if (!data.status) throw new Error(data.message);
 }

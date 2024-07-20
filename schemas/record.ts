@@ -9,6 +9,7 @@ export const newRecordSchema = z.object({
 export type NewRecordSchemaType = z.infer<typeof newRecordSchema>;
 
 export const updateRecordSchema = z.object({
+  recordId: z.string(),
   multiplier: z.number({ message: '請輸入攝取份數' }),
   mealName: z.string(),
   recordDate: z.string()

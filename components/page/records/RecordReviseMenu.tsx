@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import {
   EllipsisVerticalIcon,
@@ -7,19 +7,18 @@ import {
 } from '@heroicons/react/16/solid';
 
 import { IRecord } from '@/types/record';
-// import EditFood from '@/components/foods/EditFood';
 import useDeleteRecord from '@/feature/record/useDeleteRecord';
+import EditRecordForm from './EditRecordForm';
 
-export default function ReviseMenu({ record }: { record: IRecord }) {
+export default function RecordReviseMenu({ record }: { record: IRecord }) {
   const { deleteRecord } = useDeleteRecord();
+  const [isEdit, setIsEdit] = useState(false);
 
   const { id, food } = record;
 
-  // const [isEdit, setIsEdit] = useState(false);
-
-  // const { id: foodId } = food;
-
-  // const { deleteFood } = useDeleteFood();
+  function handleDeleteRecord() {
+    deleteRecord(id);
+  }
 
   return (
     <>
@@ -38,7 +37,7 @@ export default function ReviseMenu({ record }: { record: IRecord }) {
               <MenuItem>
                 <button
                   type="button"
-                  // onClick={() => setIsEdit(true)}
+                  onClick={() => setIsEdit(true)}
                   className="group flex w-full items-center gap-3 rounded-lg px-2 py-1.5 data-[focus]:bg-primary-100"
                 >
                   <PencilIcon className="size-4" />
@@ -51,7 +50,7 @@ export default function ReviseMenu({ record }: { record: IRecord }) {
           <MenuItem>
             <button
               type="button"
-              onClick={() => deleteRecord(id)}
+              onClick={() => handleDeleteRecord()}
               className="group flex w-full items-center gap-3 rounded-lg px-2 py-1.5 data-[focus]:bg-primary-100"
             >
               <TrashIcon className="size-4" />
@@ -60,11 +59,11 @@ export default function ReviseMenu({ record }: { record: IRecord }) {
           </MenuItem>
         </MenuItems>
       </Menu>
-      {/* <EditFood
-        food={food}
-        isSelect={isEdit}
+      <EditRecordForm
+        isEdit={isEdit}
         isClose={() => setIsEdit(false)}
-      /> */}
+        record={record}
+      />
     </>
   );
 }

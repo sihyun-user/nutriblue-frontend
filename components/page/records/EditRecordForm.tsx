@@ -1,31 +1,31 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { PlusIcon, CheckCircleIcon } from '@heroicons/react/20/solid';
+import { useEffect, useState } from 'react';
+import { CheckCircleIcon } from '@heroicons/react/20/solid';
 
-import { IFood } from '@/types/food';
+import { IRecord } from '@/types/record';
 import Dialog from '@/components/dialog/Dialog';
-import BaseButton from '@/components/ui/BaseButton';
-import RecordRow from './RecordRow';
-import NutritionRows from './NutritionRows';
+import NutritionRows from '@/components/foods/NutritionRows';
+import EditRecordRow from './EditRecordRow';
 
 interface Props {
-  isSelect: boolean;
+  isEdit: boolean;
   isClose: () => void;
-  food: IFood | null;
+  record: IRecord;
 }
 
-export default function FoodItem({ isSelect, isClose, food }: Props) {
-  const [newRecord, setNewRecord] = useState(false);
-  const [multiplier, setMultiplier] = useState(1);
+export default function EditRecordForm({ isEdit, isClose, record }: Props) {
+  const [multiplier, setMultiplier] = useState(2);
+
+  const { food, multiplier: initMultiplier } = record;
 
   useEffect(() => {
-    setNewRecord(false);
-  }, [isSelect]);
+    setMultiplier(initMultiplier);
+  }, [initMultiplier]);
 
   if (food)
     return (
-      <Dialog title="食品的營養成分" isOpen={isSelect} onClose={isClose}>
+      <Dialog title="食品的營養成分" isOpen={isEdit} onClose={isClose}>
         <div className="mb-6 rounded-lg bg-blue-100 p-4">
           <div className="flex min-h-[40px] justify-between">
             <div className="w-8/12 space-y-3">
@@ -48,17 +48,9 @@ export default function FoodItem({ isSelect, isClose, food }: Props) {
                 </div>
               )}
             </div>
-            {!newRecord && (
-              <BaseButton onClick={() => setNewRecord(true)}>
-                <PlusIcon className="size-5" />
-                新增紀錄
-              </BaseButton>
-            )}
           </div>
-          <RecordRow
-            food={food}
-            record={newRecord}
-            closeRecord={() => setNewRecord(false)}
+          <EditRecordRow
+            record={record}
             handleClose={isClose}
             handleMultiplier={(value) => setMultiplier(value)}
           />

@@ -45,7 +45,7 @@ export default function ListFoods() {
           <FoodItem
             isSelect={isSelect}
             isClose={() => handleClose()}
-            data={selectedFood}
+            food={selectedFood}
           />
         </div>
         <Pagination data={data} />
