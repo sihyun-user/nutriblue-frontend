@@ -17,6 +17,7 @@ export default function useDeleteRecord() {
       const [year, month] = dateId.split('-');
       const calendarId = `${year}-${month}`;
       queryClient.invalidateQueries({ queryKey: ['records', dateId] });
+      queryClient.invalidateQueries({ queryKey: ['healthyReport'] });
       queryClient.invalidateQueries({ queryKey: ['calendars', calendarId] });
     },
     onError: () => {

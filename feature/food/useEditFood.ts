@@ -22,6 +22,7 @@ export default function useEditFood() {
       queryClient.invalidateQueries({ queryKey: ['foods'] });
       queryClient.invalidateQueries({ queryKey: ['lookups'] });
       queryClient.invalidateQueries({ queryKey: ['records'] });
+      queryClient.invalidateQueries({ queryKey: ['healthyReport'] });
     },
     onError: () => {
       toast.error('修改食品失敗，請稍後再試');
