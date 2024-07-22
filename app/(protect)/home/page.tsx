@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import Dashboard from '@/components/Dashboard';
+import DashboardClient from '@/components/page/home/DashboardClient';
 
 export const metadata: Metadata = {
   title: '首頁'
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="mx-auto max-w-3xl">
-      <Dashboard />
+      <DashboardClient />
     </div>
   );
 }

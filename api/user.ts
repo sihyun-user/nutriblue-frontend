@@ -51,3 +51,11 @@ export async function uploadImage(file: File) {
 
   return data.data;
 }
+
+export async function getHealthyReportByDate() {
+  const { data } = await axios.get('/user/healthy-report');
+
+  if (!data.status) throw new Error(data.message);
+
+  return data.data;
+}

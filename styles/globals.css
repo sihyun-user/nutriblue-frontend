@@ -84,3 +84,9 @@ body {
 .mask-image {
   mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}

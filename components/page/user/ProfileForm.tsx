@@ -87,7 +87,7 @@ export default function ProfileForm() {
           label="性別"
           id="gender"
           type="number"
-          list={{ 0: '男', 1: '女' }}
+          list={{ 0: '女', 1: '男' }}
         />
       </div>
       <div className="grid grid-cols-2 gap-5">
