@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CheckCircleIcon } from '@heroicons/react/20/solid';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
 import { IRecord } from '@/types/record';
 import Dialog from '@/components/dialog/Dialog';

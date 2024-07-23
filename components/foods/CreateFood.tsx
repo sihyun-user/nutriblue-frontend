@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlusIcon } from '@heroicons/react/20/solid';
+import { PlusIcon } from '@heroicons/react/24/solid';
 
 import { foodFormSchema, type FoodFormType } from '@/schemas/food';
 import useCreateFood from '@/feature/food/useCreateFood';

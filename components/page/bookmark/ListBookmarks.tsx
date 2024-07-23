@@ -33,7 +33,7 @@ export default function ListFoods() {
   return (
     <>
       <PageResults data={data} pageSize={pageSize} />
-      <div className="mt-6 flex min-h-[72vh] flex-col justify-between gap-10">
+      <div className="mt-6 flex min-h-[70vh] flex-col justify-between gap-10">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {data.elements.map((food: IFood) => (
             <FoodCard

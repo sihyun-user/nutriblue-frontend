@@ -1,5 +1,6 @@
 import { UserProvider } from '@/providers/UserProvider';
 import NavBar from '@/components/navbar/NavBar';
+import GoTop from '@/components/ui/GoTop';
 
 export default function RootLayout({
   children
@@ -9,6 +10,7 @@ export default function RootLayout({
   return (
     <UserProvider>
       <NavBar />
+      <GoTop />
       <section className="container-page">{children}</section>
     </UserProvider>
   );

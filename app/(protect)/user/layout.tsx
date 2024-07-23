@@ -6,7 +6,7 @@ export default function UserLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="m-auto flex min-h-[calc(100vh-97px)] w-full max-w-[1000px] flex-col rounded-lg bg-white md:flex-row">
+    <div className="min-page-screen m-auto flex w-full max-w-[1000px] flex-col rounded-lg bg-white md:flex-row">
       <div className="mb-4 flex-1 border-r border-gray-200 p-6 md:mb-0">
         <UserMenu />
       </div>

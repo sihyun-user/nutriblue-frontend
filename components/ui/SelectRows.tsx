@@ -1,6 +1,6 @@
 import { Path, FieldValues, Control, Controller } from 'react-hook-form';
 import { Field, Label, Select } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 
 const selectStyle = clsx(

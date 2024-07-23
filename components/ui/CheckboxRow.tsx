@@ -2,7 +2,7 @@
 
 import { Path, FieldValues, Control, Controller } from 'react-hook-form';
 import { Field, Checkbox, Label } from '@headlessui/react';
-import { CheckIcon } from '@heroicons/react/20/solid';
+import { CheckIcon } from '@heroicons/react/24/solid';
 
 interface Props<T extends FieldValues> {
   id: Path<T>;

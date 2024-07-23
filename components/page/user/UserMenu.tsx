@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { CameraIcon } from '@heroicons/react/20/solid';
+import { CameraIcon } from '@heroicons/react/24/solid';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 

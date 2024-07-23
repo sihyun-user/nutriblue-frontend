@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PlusIcon, CheckCircleIcon } from '@heroicons/react/20/solid';
+import { PlusIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
 import { IFood } from '@/types/food';
 import Dialog from '@/components/dialog/Dialog';

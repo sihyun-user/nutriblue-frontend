@@ -22,7 +22,7 @@ export default function CircularProgress({
         />
         <circle
           className={clsx(
-            'progress-ring__circle stroke-current',
+            'progress-ring-circle stroke-current',
             caloriespercent > 100 ? 'text-red-400' : 'text-blue-400'
           )}
           strokeWidth="8"

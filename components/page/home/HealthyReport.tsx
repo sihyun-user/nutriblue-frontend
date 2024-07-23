@@ -1,6 +1,6 @@
 'use client';
 
-import { PlusIcon, MinusIcon, Bars2Icon } from '@heroicons/react/20/solid';
+import { PlusIcon, MinusIcon, Bars2Icon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 
 import BaseButton from '@/components/ui/BaseButton';
