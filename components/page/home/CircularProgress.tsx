@@ -1,11 +1,14 @@
 import clsx from 'clsx';
 
 interface Props {
-  percent: number;
-  balance: number;
+  caloriespercent: number;
+  caloriesBalance: number;
 }
 
-export default function CircularProgress({ percent, balance }: Props) {
+export default function CircularProgress({
+  caloriespercent,
+  caloriesBalance
+}: Props) {
   return (
     <div className="relative size-40">
       <svg className="size-full" viewBox="0 0 100 100">
@@ -20,7 +23,7 @@ export default function CircularProgress({ percent, balance }: Props) {
         <circle
           className={clsx(
             'progress-ring__circle stroke-current',
-            percent > 100 ? 'text-red-400' : 'text-blue-400'
+            caloriespercent > 100 ? 'text-red-400' : 'text-blue-400'
           )}
           strokeWidth="8"
           strokeLinecap="round"
@@ -29,7 +32,7 @@ export default function CircularProgress({ percent, balance }: Props) {
           r="40"
           fill="transparent"
           strokeDasharray="251.2"
-          strokeDashoffset={`calc(251.2px - (251.2px * ${percent}) / 100)`}
+          strokeDashoffset={`calc(251.2px - (251.2px * ${caloriespercent}) / 100)`}
         />
         <text
           style={{ fill: '#636565' }}
@@ -50,7 +53,7 @@ export default function CircularProgress({ percent, balance }: Props) {
           textAnchor="middle"
           alignmentBaseline="middle"
         >
-          {balance}
+          {caloriesBalance}
         </text>
         <text
           x="50"

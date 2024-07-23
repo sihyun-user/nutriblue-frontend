@@ -59,3 +59,11 @@ export async function getHealthyReportByDate() {
 
   return data.data;
 }
+
+export async function getAnalyzeResultsByDate() {
+  const { data } = await axios.get('/user/analyze-results');
+
+  if (!data.status) throw new Error(data.message);
+
+  return data.data;
+}
