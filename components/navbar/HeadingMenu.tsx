@@ -30,36 +30,44 @@ export default function HeadingMenu() {
 
   return (
     <Popover className="group relative">
-      <PopoverButton className={buttonStyle}>
-        <Avatar size={32} />
-        <ChevronDownIcon className="size-3" />
-      </PopoverButton>
-      <PopoverPanel anchor="bottom end" transition className={panelStyle}>
-        <div className="p-2">
-          {userInfo && (
-            <div className="flex items-center gap-4">
-              <Avatar size={40} />
-              <div className="flex flex-col">
-                <span className="font-semibold text-primary-800">
-                  {userInfo.name}
-                </span>
-                <span className="text-xs">{userInfo.email}</span>
+      {({ close }) => (
+        <>
+          <PopoverButton className={buttonStyle}>
+            <Avatar size={32} />
+            <ChevronDownIcon className="size-3" />
+          </PopoverButton>
+          <PopoverPanel anchor="bottom end" transition className={panelStyle}>
+            <div className="p-2">
+              {userInfo && (
+                <div className="flex items-center gap-4">
+                  <Avatar size={40} />
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-primary-800">
+                      {userInfo.name}
+                    </span>
+                    <span className="text-xs">{userInfo.email}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+            <hr className="my-2 block text-primary-100" />
+            <div className="space-y-2">
+              <Link
+                href="/user/profile"
+                className={ItemStyle}
+                onClick={() => close()}
+              >
+                <UserIcon className="size-6" />
+                <span className="font-semibold text-primary-800">會員中心</span>
+              </Link>
+              <div className={ItemStyle} onClick={() => logout()}>
+                <ArrowRightStartOnRectangleIcon className="size-6" />
+                <span className="font-semibold text-primary-800">登出</span>
               </div>
             </div>
-          )}
-        </div>
-        <hr className="my-2 block text-primary-100" />
-        <div className="space-y-2">
-          <Link href="/user/profile" className={ItemStyle}>
-            <UserIcon className="size-6" />
-            <span className="font-semibold text-primary-800">會員中心</span>
-          </Link>
-          <div className={ItemStyle} onClick={() => logout()}>
-            <ArrowRightStartOnRectangleIcon className="size-6" />
-            <span className="font-semibold text-primary-800">登出</span>
-          </div>
-        </div>
-      </PopoverPanel>
+          </PopoverPanel>
+        </>
+      )}
     </Popover>
   );
 }
