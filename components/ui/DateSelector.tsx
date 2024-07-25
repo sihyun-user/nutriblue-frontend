@@ -87,6 +87,9 @@ export default function DateSelector<T extends FieldValues>({
               </div>
               {isOpen && (
                 <DayPicker
+                  captionLayout="dropdown-buttons"
+                  fromYear={1900}
+                  toYear={new Date().getFullYear()}
                   locale={zhTW}
                   className={clsx(
                     'absolute z-10 rounded-lg border border-gray-200 bg-white p-2 shadow-md',

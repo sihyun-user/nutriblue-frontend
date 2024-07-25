@@ -46,7 +46,7 @@ export default function RecordsTimeLine() {
 
   return (
     <div className="mx-auto w-full max-w-screen-md">
-      <div className="mask-image mt-0 flex justify-between gap-2 overflow-hidden py-4 md:mt-4">
+      <div className="mask-image-row mt-0 flex justify-between gap-2 overflow-hidden py-4 md:mt-4">
         {daysInTimeLine.map((day) => {
           const dateKey = format(day, 'yyyy-MM-dd');
           const [year, month, date] = dateKey.split('-');

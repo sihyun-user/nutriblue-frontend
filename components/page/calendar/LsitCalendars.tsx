@@ -6,11 +6,16 @@ import { format } from 'date-fns';
 import EventCalendar from '@/components/page/calendar/EventCalendar';
 import useCalendar from '@/feature/calendar/useCalendar';
 
-interface Calendars {
-  calendarId: string;
+interface Props {
+  calendarYear: number | null;
+  calendarMonth: number | null;
 }
 
-export default function ListCalendars() {
+type Calendars = {
+  calendarId: string;
+};
+
+export default function ListCalendars({ calendarYear, calendarMonth }: Props) {
   const [calendars, setCalendars] = useState<Calendars[]>([]);
   const [currentCalendarId, setCurrentCalendarId] = useState<string>('');
   const { calendarData, isPending, isLoading } = useCalendar(currentCalendarId);
@@ -20,7 +25,7 @@ export default function ListCalendars() {
   }>({});
 
   useEffect(() => {
-    const year = new Date().getFullYear();
+    const year = calendarYear || new Date().getFullYear();
     const initialCalendars = Array.from({ length: 12 }).map((_, index) => {
       const monthDate = new Date(year, index, 1);
       const calendarId = format(monthDate, 'yyyy-MM');
@@ -32,10 +37,13 @@ export default function ListCalendars() {
     });
 
     setCalendars(initialCalendars);
-  }, []);
+  }, [calendarYear]);
 
   useEffect(() => {
-    const initCalendarId = format(new Date(), 'yyyy-MM');
+    const initCalendarId =
+      calendarYear && calendarMonth
+        ? `${calendarYear}-${String(calendarMonth).padStart(2, '0')}`
+        : format(new Date(), 'yyyy-MM');
     const currentMonthRef = calendarRefs.current[initCalendarId];
     if (currentMonthRef && currentMonthRef.current) {
       const elementPosition =
@@ -47,7 +55,7 @@ export default function ListCalendars() {
         behavior: 'auto'
       });
     }
-  }, [calendars]);
+  }, [calendars, calendarYear, calendarMonth]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

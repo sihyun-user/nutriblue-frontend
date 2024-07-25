@@ -1,39 +1,33 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { format } from 'date-fns';
 import { PlusIcon, CalendarDaysIcon } from '@heroicons/react/24/solid';
-import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import BaseButton from '@/components/ui/BaseButton';
 import DialogSmall from '@/components/dialog/DialogSmall';
-import DateSelector from '@/components/ui/DateSelector';
+import YearMonthSelector from './YearMonthSelector';
 
-interface CalendarForm {
-  selectDate: string;
+interface Props {
+  onCalendarYearMonth: (year: number, month: number) => void;
 }
 
-export default function CalendarAside() {
-  const router = useRouter();
-  const pathname = usePathname();
+export default function CalendarAside({ onCalendarYearMonth }: Props) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
-  const { reset, getValues, handleSubmit, control } = useForm<CalendarForm>({
-    defaultValues: {
-      selectDate: format(new Date(), 'yyyy-MM-dd')
-    }
-  });
-
-  const onSubmit: SubmitHandler<CalendarForm> = (data) => {
-    router.push(`${pathname}/${data.selectDate}`);
+  const handleYearMonthChange = (year: number, month: number) => {
+    setSelectedYear(year);
+    setSelectedMonth(month);
   };
 
-  function handleClose() {
-    reset();
-    setIsOpen(false);
-  }
+  const handleConfirm = () => {
+    if (selectedYear && selectedMonth) {
+      onCalendarYearMonth(selectedYear, selectedMonth);
+      setIsOpen(false);
+    }
+  };
 
   return (
     <>
@@ -53,32 +47,30 @@ export default function CalendarAside() {
           </BaseButton>
         </Link>
       </div>
-      <DialogSmall isOpen={isOpen} onClose={() => handleClose()}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-center gap-2 p-6">
-            <CalendarDaysIcon className="size-6" />
-            <h3 className="mb-2 font-medium text-primary-800">選擇日期</h3>
-            <DateSelector
-              initDate={getValues('selectDate')}
-              control={control}
-              position="center"
-              id="selectDate"
-            />
-          </div>
-          <div className="flex w-full justify-end gap-4 border-t border-primary-300 p-2">
-            <BaseButton
-              onClick={() => handleClose()}
-              className="w-16"
-              rounded
-              variation="gray"
-            >
-              取消
-            </BaseButton>
-            <BaseButton type="submit" className="w-16" rounded variation="cyan">
-              確認
-            </BaseButton>
-          </div>
-        </form>
+      <DialogSmall isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <div className="flex flex-col items-center gap-2 p-6">
+          <CalendarDaysIcon className="size-6" />
+          <h3 className="mb-2 font-medium text-primary-800">選擇日期</h3>
+          <YearMonthSelector onYearMonthChange={handleYearMonthChange} />
+        </div>
+        <div className="flex w-full justify-end gap-4 border-t border-primary-300 p-2">
+          <BaseButton
+            onClick={() => setIsOpen(false)}
+            className="w-16"
+            rounded
+            variation="gray"
+          >
+            取消
+          </BaseButton>
+          <BaseButton
+            className="w-16"
+            rounded
+            variation="cyan"
+            onClick={handleConfirm}
+          >
+            確認
+          </BaseButton>
+        </div>
       </DialogSmall>
     </>
   );
