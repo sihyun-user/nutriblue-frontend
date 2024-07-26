@@ -8,7 +8,6 @@ import {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
   BookmarkIcon,
-  ShoppingBagIcon,
   FolderIcon
 } from '@heroicons/react/24/solid';
 import { usePathname } from 'next/navigation';
@@ -56,11 +55,6 @@ const navList = [
         name: '食品書籤',
         href: '/bookmark',
         icon: <BookmarkIcon />
-      },
-      {
-        name: '進階版',
-        href: '/premium',
-        icon: <ShoppingBagIcon />
       }
     ]
   }

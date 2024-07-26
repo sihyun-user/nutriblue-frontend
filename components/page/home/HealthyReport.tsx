@@ -1,6 +1,7 @@
 'use client';
 
 import { PlusIcon, MinusIcon, Bars2Icon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
 import clsx from 'clsx';
 
 import BaseButton from '@/components/ui/BaseButton';
@@ -28,6 +29,9 @@ export default function HealthyReport() {
             caloriesBalance={data ? data.caloriesBalance : 0}
           />
           <div className="flex flex-col justify-end gap-3 sm:flex-row md:hidden">
+            <BaseButton variation="gray">
+              <Link href="/user/profile">修改營養目標</Link>
+            </BaseButton>
             <BaseButton variation="secondary">
               <PlusIcon className="size-5" />
               新增運動
@@ -40,6 +44,9 @@ export default function HealthyReport() {
         </div>
         <div className="flex flex-1 flex-col gap-7">
           <div className="hidden justify-end gap-3 md:flex">
+            <BaseButton variation="gray">
+              <Link href="/user/profile">修改營養目標</Link>
+            </BaseButton>
             <BaseButton variation="secondary">
               <PlusIcon className="size-5" />
               新增運動
@@ -90,7 +97,7 @@ export default function HealthyReport() {
                 width: `${data ? Math.min(data.caloriespercent || 0, 100) : 0}%`
               }}
             >
-              <span className="absolute right-0 top-6 flex h-7 min-w-7 translate-x-3 items-center justify-center rounded-md bg-blue-400 px-1 text-xs font-medium text-white">
+              <span className="absolute right-0 top-6 flex h-7 min-w-7 translate-x-4 items-center justify-center rounded-md bg-blue-400 px-1 text-xs font-medium text-white">
                 {data ? data.foodCaloriesTake : 0}
                 <div className="absolute -top-1 left-1/2 size-2 translate-x-[-4px] rotate-45 bg-blue-400" />
               </span>

@@ -1,6 +1,6 @@
 interface Props {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 export default function Overlay({ open, onClose }: Props) {

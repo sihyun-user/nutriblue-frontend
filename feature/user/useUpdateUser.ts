@@ -14,6 +14,7 @@ export default function useUpdateUser() {
     onSuccess: () => {
       toast.success('更新個人資訊成功');
       queryClient.invalidateQueries({ queryKey: ['user'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
     onError: (error) => notifyError(error)
   });

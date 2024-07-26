@@ -13,7 +13,7 @@ export default function useSignup() {
   const { mutate: signup, isPending } = useMutation({
     mutationFn: signupApi,
     onSuccess: () => {
-      router.replace('/home');
+      router.replace('/home?showDialog=true');
       toast.success('註冊成功');
     },
     onError: (error) => notifyError(error)
