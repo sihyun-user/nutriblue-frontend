@@ -42,7 +42,7 @@ const navList = [
         icon: <MagnifyingGlassIcon />
       },
       {
-        name: '博客',
+        name: '營養專欄',
         href: '/blog',
         icon: <HeartIcon />
       }

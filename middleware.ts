@@ -7,11 +7,6 @@ export function middleware(request: NextRequest) {
   const isAuthPage = pathname === '/login' || pathname === '/signup';
   const refreshToken = request.cookies.get('refreshToken');
 
-  if (pathname === '/') {
-    url.pathname = '/login';
-    return NextResponse.redirect(url);
-  }
-
   if (refreshToken && isAuthPage) {
     url.pathname = '/home';
     return NextResponse.redirect(url);
@@ -26,5 +21,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/login', '/signup', '/protected/:path*']
+  matcher: ['/login', '/signup', '/protected/:path*']
 };
