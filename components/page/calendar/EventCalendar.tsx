@@ -14,7 +14,10 @@ import clsx from 'clsx';
 interface Props {
   calendarId: string;
   isPending: boolean;
-  events: string[];
+  events: {
+    recordsData: string[];
+    sportRecordsData: string[];
+  };
 }
 
 function getCurrentDate(calendarId: string) {
@@ -75,12 +78,20 @@ const EventCalendar: ForwardRefRenderFunction<HTMLDivElement, Props> =
                 )}
               >
                 {format(day, 'd')}
-                {events.includes(dateKey) && (
-                  <div
-                    key={dateKey}
-                    className="absolute bottom-1 size-1 rounded-full bg-red-400 md:bottom-2 md:size-2"
-                  />
-                )}
+                <div className="absolute bottom-1 flex space-x-1 md:bottom-2">
+                  {events?.recordsData?.includes(dateKey) && (
+                    <div
+                      key={`record-${dateKey}`}
+                      className="size-1 rounded-full bg-red-400 md:size-2"
+                    />
+                  )}
+                  {events?.sportRecordsData?.includes(dateKey) && (
+                    <div
+                      key={`sport-record-${dateKey}`}
+                      className="size-1 rounded-full bg-green-400 md:size-2"
+                    />
+                  )}
+                </div>
               </Link>
             );
           })}

@@ -67,3 +67,11 @@ export async function getAnalyzeResultsByDate() {
 
   return data.data;
 }
+
+export async function getCalendar(calendarId: string) {
+  const { data } = await axios.post('/user/calendar', { calendarId });
+
+  if (!data.status) throw new Error(data.message);
+
+  return data.data;
+}

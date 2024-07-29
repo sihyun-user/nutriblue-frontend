@@ -81,15 +81,17 @@ export default function ListCalendars({ calendarYear, calendarMonth }: Props) {
 
   return (
     <div className="mx-auto mt-14 w-full max-w-2xl">
-      {calendars.map(({ calendarId }) => (
-        <EventCalendar
-          key={calendarId}
-          ref={calendarRefs.current[calendarId]}
-          calendarId={calendarId}
-          isPending={isPending}
-          events={calendarData[calendarId] || []}
-        />
-      ))}
+      {calendars.map(({ calendarId }) => {
+        return (
+          <EventCalendar
+            key={calendarId}
+            ref={calendarRefs.current[calendarId]}
+            calendarId={calendarId}
+            isPending={isPending}
+            events={calendarData[calendarId] || []}
+          />
+        );
+      })}
     </div>
   );
 }

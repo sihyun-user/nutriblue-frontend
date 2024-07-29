@@ -16,14 +16,6 @@ export async function createRecord(payload: NewRecordSchemaType) {
   if (!data.status) throw new Error(data.message);
 }
 
-export async function getCalendar(calendarId: string) {
-  const { data } = await axios.post('/record/calendar', { calendarId });
-
-  if (!data.status) throw new Error(data.message);
-
-  return data.data;
-}
-
 export async function updateRecord(payload: UpdateRecordSchemaType) {
   const { recordId, ...paramData } = payload;
 
