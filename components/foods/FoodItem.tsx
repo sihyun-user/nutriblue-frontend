@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PlusIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+import { PlusIcon } from '@heroicons/react/24/solid';
 
 import { IFood } from '@/types';
 import Dialog from '@/components/dialog/Dialog';
 import BaseButton from '@/components/ui/BaseButton';
+import VerifyFood from '@/components/ui/VerifyFood';
 import RecordRow from './RecordRow';
 import NutritionRows from './NutritionRows';
 
@@ -39,14 +40,7 @@ export default function FoodItem({ isSelect, isClose, food }: Props) {
                   </span>
                 )}
               </div>
-              {food.verified && (
-                <div className="group flex cursor-pointer items-center gap-1">
-                  <CheckCircleIcon className="size-5 text-green-600" />
-                  <span className="text-xs font-medium text-green-600 group-hover:text-green-700">
-                    了解更多
-                  </span>
-                </div>
-              )}
+              {food.verified && <VerifyFood />}
             </div>
             {!newRecord && (
               <BaseButton onClick={() => setNewRecord(true)}>

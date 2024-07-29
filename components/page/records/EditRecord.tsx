@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import VerifyFood from '@/components/ui/VerifyFood';
 
 import { IRecord } from '@/types';
 import Dialog from '@/components/dialog/Dialog';
@@ -39,14 +39,7 @@ export default function EditRecord({ isEdit, isClose, record }: Props) {
                   </span>
                 )}
               </div>
-              {food.verified && (
-                <div className="group flex cursor-pointer items-center gap-1">
-                  <CheckCircleIcon className="size-5 text-green-600" />
-                  <span className="text-xs font-medium text-green-600 group-hover:text-green-700">
-                    了解更多
-                  </span>
-                </div>
-              )}
+              {food.verified && <VerifyFood />}
             </div>
           </div>
           <EditRecordRow
