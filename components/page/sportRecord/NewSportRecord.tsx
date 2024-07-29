@@ -10,9 +10,9 @@ import {
 } from '@/schemas/sportRecord';
 import useCreateSportRecord from '@/feature/sportRecord/useCreateSportRecord';
 import Dialog from '@/components/dialog/Dialog';
-import BaseButton from '../ui/BaseButton';
-import InputRow from '../ui/InputRow';
-import DateSelector from '../ui/DateSelector';
+import BaseButton from '../../ui/BaseButton';
+import InputRow from '../../ui/InputRow';
+import DateSelector from '../../ui/DateSelector';
 
 export default function NewSportRecord() {
   const {

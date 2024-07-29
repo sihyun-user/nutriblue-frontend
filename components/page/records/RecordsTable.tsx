@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 import useRecordsByDate from '@/feature/record/useRecordsByDate';
 import useSportRecordsByDate from '@/feature/sportRecord/useSportRecordsByDate';
-import NewSportRecord from '@/components/sportRecord/NewSportRecord';
-import SportRecordRow from '@/components/sportRecord/SportRecordRow';
+import NewSportRecord from '@/components/page/sportRecord/NewSportRecord';
+import SportRecordRow from '@/components/page/sportRecord/SportRecordRow';
 import BaseButton from '@/components/ui/BaseButton';
 import Spinner from '@/components/Spinner';
 import RecorddRow from './RecordsRow';

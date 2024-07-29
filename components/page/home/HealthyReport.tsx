@@ -4,7 +4,7 @@ import { PlusIcon, MinusIcon, Bars2Icon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-import NewSportRecord from '@/components/sportRecord/NewSportRecord';
+import NewSportRecord from '@/components/page/sportRecord/NewSportRecord';
 import BaseButton from '@/components/ui/BaseButton';
 import useHealthyReport from '@/feature/user/useHealthyReport';
 import CircularProgress from './CircularProgress';
