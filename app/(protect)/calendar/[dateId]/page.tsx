@@ -1,5 +1,5 @@
-import RecordsTimeLine from '@/components/page/records/RecordsTimeLine';
-import RecordsTable from '@/components/page/records/RecordsTable';
+import RecordsTimeLine from '@/components/page/record/RecordsTimeLine';
+import RecordsTable from '@/components/page/record/RecordsTable';
 
 export async function generateMetadata({
   params

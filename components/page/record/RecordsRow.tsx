@@ -1,6 +1,6 @@
 import React from 'react';
 import { IRecord } from '@/types';
-import RecordReviseMenu from '@/components/page/records/RecordReviseMenu';
+import RecordReviseMenu from '@/components/page/record/RecordReviseMenu';
 
 interface Props {
   records: IRecord[];
