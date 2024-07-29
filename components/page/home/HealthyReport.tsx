@@ -30,9 +30,9 @@ export default function HealthyReport() {
             caloriesBalance={data ? data.caloriesBalance : 0}
           />
           <div className="flex flex-col justify-end gap-3 sm:flex-row md:hidden">
-            <BaseButton variation="gray">
-              <Link href="/user/profile">修改營養目標</Link>
-            </BaseButton>
+            <Link href="/user/profile">
+              <BaseButton variation="gray">修改營養目標</BaseButton>
+            </Link>
             <NewSportRecord />
             <BaseButton variation="secondary">
               <PlusIcon className="size-5" />
@@ -42,9 +42,9 @@ export default function HealthyReport() {
         </div>
         <div className="flex flex-1 flex-col gap-7">
           <div className="hidden justify-end gap-3 md:flex">
-            <BaseButton variation="gray">
-              <Link href="/user/profile">修改營養目標</Link>
-            </BaseButton>
+            <Link href="/user/profile">
+              <BaseButton variation="gray">修改營養目標</BaseButton>
+            </Link>
             <NewSportRecord />
             <BaseButton variation="secondary">
               <PlusIcon className="size-5" />

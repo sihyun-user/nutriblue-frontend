@@ -29,9 +29,11 @@ export default function DialogCreateGoal({ isOpen }: Props) {
                   </h3>
                 </div>
                 <div className="flex w-full justify-end gap-4 border-t border-primary-300 p-2">
-                  <BaseButton className="w-16" rounded variation="cyan">
-                    <Link href="/user/profile">前往</Link>
-                  </BaseButton>
+                  <Link href="/user/profile">
+                    <BaseButton className="w-16" rounded variation="cyan">
+                      前往
+                    </BaseButton>
+                  </Link>
                 </div>
               </DialogPanel>
             </div>
