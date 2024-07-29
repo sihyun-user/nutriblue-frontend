@@ -33,11 +33,11 @@ function emptyRecordRow() {
 }
 
 function generateRecordRow(record: IRecord) {
-  const { food, multiplier } = record;
+  const { id, food, multiplier } = record;
 
   if (!food) {
     return (
-      <tr key={record.id} className="border-b bg-white hover:bg-gray-50">
+      <tr key={id} className="border-b bg-white hover:bg-gray-50">
         <td colSpan={9} className="px-6 py-4 text-left">
           [食品內容已被刪除]
         </td>

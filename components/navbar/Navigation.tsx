@@ -40,12 +40,12 @@ const navList = [
         name: '搜尋營養資料庫',
         href: '/food',
         icon: <MagnifyingGlassIcon />
-      },
-      {
-        name: '營養專欄',
-        href: '/blog',
-        icon: <HeartIcon />
       }
+      // {
+      //   name: '營養專欄',
+      //   href: '/blog',
+      //   icon: <HeartIcon />
+      // }
     ]
   },
   {

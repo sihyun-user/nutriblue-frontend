@@ -43,7 +43,7 @@ export default function CalendarAside({ onCalendarYearMonth }: Props) {
         <Link href="/food">
           <BaseButton className="shadow" rounded variation="secondary">
             <PlusIcon className="size-5" />
-            新增紀錄
+            新增食品紀錄
           </BaseButton>
         </Link>
       </div>

@@ -3,29 +3,29 @@
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { type NewRecordSchemaType } from '@/schemas/record';
-import { createRecord as createRecordApi } from '@/api/record';
+import { type NewSportRecordSchemaType } from '@/schemas/sportRecord';
+import { createSportRecord as createSportRecordApi } from '@/api/sportRecord';
 
-export default function useCreateRecord() {
+export default function useCreateSportRecord() {
   const queryClient = useQueryClient();
 
-  const { mutate: createRecord, isPending } = useMutation({
-    mutationFn: createRecordApi,
+  const { mutate: createSportRecord, isPending } = useMutation({
+    mutationFn: createSportRecordApi,
     onSuccess: (variables, context) => {
-      const { recordDate } = context as NewRecordSchemaType;
+      const { recordDate } = context as NewSportRecordSchemaType;
       const [year, month] = recordDate.split('-');
       const calendarId = `${year}-${month}`;
 
-      toast.success('新增食品紀錄成功');
+      toast.success('新增健康紀錄成功');
       queryClient.invalidateQueries({ queryKey: ['records'] });
       queryClient.invalidateQueries({ queryKey: ['sportRecords'] });
       queryClient.invalidateQueries({ queryKey: ['healthyReport'] });
       queryClient.invalidateQueries({ queryKey: ['calendars', calendarId] });
     },
     onError: () => {
-      toast.error('新增食品紀錄失敗，請稍後再試');
+      toast.error('新增健康紀錄失敗，請稍後再試');
     }
   });
 
-  return { createRecord, isPending };
+  return { createSportRecord, isPending };
 }

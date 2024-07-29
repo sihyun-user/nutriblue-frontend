@@ -4,16 +4,16 @@ import { useParams } from 'next/navigation';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
-import { deleteRecord as deleteRecordApi } from '@/api/record';
+import { updateSportRecord as updateSportRecordApi } from '@/api/sportRecord';
 
-export default function useDeleteRecord() {
+export default function useUpdateSportRecord() {
   const { dateId } = useParams() as { dateId: string };
   const queryClient = useQueryClient();
 
-  const { mutate: deleteRecord, isPending } = useMutation({
-    mutationFn: deleteRecordApi,
+  const { mutate: updateSportRecord, isPending } = useMutation({
+    mutationFn: updateSportRecordApi,
     onSuccess: () => {
-      toast.success('刪除食品紀錄成功');
+      toast.success('更新健康紀錄成功');
       const [year, month] = dateId.split('-');
       const calendarId = `${year}-${month}`;
       queryClient.invalidateQueries({ queryKey: ['records', dateId] });
@@ -22,9 +22,9 @@ export default function useDeleteRecord() {
       queryClient.invalidateQueries({ queryKey: ['calendars', calendarId] });
     },
     onError: () => {
-      toast.error('刪除食品失敗，請稍後再試');
+      toast.error('更新健康紀錄失敗，請稍後再試');
     }
   });
 
-  return { deleteRecord, isPending };
+  return { updateSportRecord, isPending };
 }

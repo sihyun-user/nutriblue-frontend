@@ -4,6 +4,7 @@ import { PlusIcon, MinusIcon, Bars2Icon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import clsx from 'clsx';
 
+import NewSportRecord from '@/components/sportRecord/NewSportRecord';
 import BaseButton from '@/components/ui/BaseButton';
 import useHealthyReport from '@/feature/user/useHealthyReport';
 import CircularProgress from './CircularProgress';
@@ -32,13 +33,10 @@ export default function HealthyReport() {
             <BaseButton variation="gray">
               <Link href="/user/profile">修改營養目標</Link>
             </BaseButton>
+            <NewSportRecord />
             <BaseButton variation="secondary">
               <PlusIcon className="size-5" />
-              新增運動
-            </BaseButton>
-            <BaseButton variation="secondary">
-              <PlusIcon className="size-5" />
-              新增食品
+              新增食品紀錄
             </BaseButton>
           </div>
         </div>
@@ -47,13 +45,10 @@ export default function HealthyReport() {
             <BaseButton variation="gray">
               <Link href="/user/profile">修改營養目標</Link>
             </BaseButton>
+            <NewSportRecord />
             <BaseButton variation="secondary">
               <PlusIcon className="size-5" />
-              新增運動
-            </BaseButton>
-            <BaseButton variation="secondary">
-              <PlusIcon className="size-5" />
-              新增食品
+              新增食品紀錄
             </BaseButton>
           </div>
           <div className="flex gap-5 sm:gap-10">
@@ -73,13 +68,15 @@ export default function HealthyReport() {
               </div>
               <MinusIcon className="mt-2 size-4" />
               <div className="flex flex-col gap-1">
-                <span className="sm:text-2xl">0</span>
+                <span className="sm:text-2xl">
+                  {data ? data.sportCaloriesTake : 0}
+                </span>
                 <span className="text-xs sm:text-sm">運動</span>
               </div>
               <Bars2Icon className="mt-2 size-4" />
               <div className="flex flex-col gap-1">
                 <span className="sm:text-2xl">
-                  {data ? data.foodCaloriesTake - 0 : 0}
+                  {data ? data.foodCaloriesTake - data.sportCaloriesTake : 0}
                 </span>
                 <span className="text-xs sm:text-sm">淨值</span>
               </div>

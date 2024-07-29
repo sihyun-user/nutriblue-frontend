@@ -22,6 +22,7 @@ export default function useEditFood() {
       queryClient.invalidateQueries({ queryKey: ['foods'] });
       queryClient.invalidateQueries({ queryKey: ['lookups'] });
       queryClient.invalidateQueries({ queryKey: ['records'] });
+      queryClient.invalidateQueries({ queryKey: ['sportRecords'] });
       queryClient.invalidateQueries({ queryKey: ['healthyReport'] });
     },
     onError: () => {

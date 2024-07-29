@@ -124,7 +124,7 @@ export default function RecordRow({
               取消
             </BaseButton>
             <BaseButton type="submit" disabled={isPending}>
-              確定
+              確認
             </BaseButton>
           </div>
         </>

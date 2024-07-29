@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getCalendar } from '@/api/record';
 
-export default function useRecordsByDate(calendarId: string) {
+export default function useCalendar(calendarId: string) {
   const queryClient = useQueryClient();
   const currentData: Record<string, string[]> =
     queryClient.getQueryData(['calendars', calendarId]) || {};

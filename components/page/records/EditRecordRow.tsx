@@ -118,7 +118,7 @@ export default function EditRecordRow({
               取消修改
             </BaseButton>
             <BaseButton type="submit" disabled={isPending}>
-              確定修改
+              確認修改
             </BaseButton>
           </div>
         </>

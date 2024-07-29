@@ -138,7 +138,7 @@ export default function CreateFood({ isSelect, isClose, food }: Props) {
             </CheckboxRow>
           </div>
         </div>
-        <div className="mt-9">
+        <div className="mt-8">
           <BaseButton type="submit" disabled={isPending}>
             確認
           </BaseButton>
