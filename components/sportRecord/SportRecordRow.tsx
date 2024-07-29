@@ -1,16 +1,12 @@
-interface ISportRecords {
-  id: string;
-  sportName: string;
-  sportTime: string;
-  sportValue: number;
-}
+import { ISportRecord } from '@/types';
+import SportRecordReviseMenu from './SportRecordReviseMenu';
 
 interface Props {
-  sportRecords: ISportRecords[];
+  sportRecords: ISportRecord[];
 }
 
-function sportRecordRow(sportRecords: ISportRecords) {
-  const { id, sportName, sportTime, sportValue } = sportRecords;
+function sportRecordRow(sportRecord: ISportRecord) {
+  const { id, sportName, sportTime, sportValue } = sportRecord;
 
   return (
     <tr key={id} className="border-b bg-white hover:bg-gray-50">
@@ -19,7 +15,12 @@ function sportRecordRow(sportRecords: ISportRecords) {
       </td>
       <td className="px-6 py-4">{sportTime}</td>
       <td className="px-6 py-4">{sportValue}</td>
-      <td className="px-6 py-4">修改</td>
+      <td className="px-6 py-4">
+        <SportRecordReviseMenu
+          sportRecord={sportRecord}
+          aria-label="修改紀錄"
+        />
+      </td>
     </tr>
   );
 }

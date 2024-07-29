@@ -17,7 +17,7 @@ export default function useDeleteFood() {
       queryClient.invalidateQueries({ queryKey: ['records'] });
       queryClient.invalidateQueries({ queryKey: ['sportRecords'] });
       queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
-      queryClient.invalidateQueries({ queryKey: ['healthyReport'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
     },
     onError: () => {
       toast.error('刪除食品失敗，請稍後再試');

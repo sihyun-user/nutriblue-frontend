@@ -6,18 +6,22 @@ import {
   TrashIcon
 } from '@heroicons/react/16/solid';
 
-import { IRecord } from '@/types/record';
-import useDeleteRecord from '@/feature/record/useDeleteRecord';
-import EditRecord from './EditRecord';
+import { ISportRecord } from '@/types';
+import useDeleteSportRecord from '@/feature/sportRecord/useDeleteSportRecord';
+import EditSportRecord from './EditSportRecord';
 
-export default function RecordReviseMenu({ record }: { record: IRecord }) {
-  const { deleteRecord } = useDeleteRecord();
+interface Props {
+  sportRecord: ISportRecord;
+}
+
+export default function SportRecordReviseMenu({ sportRecord }: Props) {
+  const { deleteSportRecord } = useDeleteSportRecord();
   const [isEdit, setIsEdit] = useState(false);
 
-  const { id, food } = record;
+  const { id } = sportRecord;
 
-  function handleDeleteRecord() {
-    deleteRecord(id);
+  function handleDeleteSportRecord() {
+    deleteSportRecord(id);
   }
 
   return (
@@ -32,25 +36,21 @@ export default function RecordReviseMenu({ record }: { record: IRecord }) {
           anchor="bottom end"
           className="mt-2 w-[105px] origin-top-right rounded-xl border bg-white p-2 shadow-lg transition duration-100 ease-out focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
         >
-          {food && (
-            <>
-              <MenuItem>
-                <button
-                  type="button"
-                  onClick={() => setIsEdit(true)}
-                  className="group flex w-full items-center gap-3 rounded-lg px-2 py-1.5 data-[focus]:bg-primary-100"
-                >
-                  <PencilIcon className="size-4" />
-                  編輯
-                </button>
-              </MenuItem>
-              <div className="my-1 h-px bg-primary-200" />
-            </>
-          )}
           <MenuItem>
             <button
               type="button"
-              onClick={() => handleDeleteRecord()}
+              onClick={() => setIsEdit(true)}
+              className="group flex w-full items-center gap-3 rounded-lg px-2 py-1.5 data-[focus]:bg-primary-100"
+            >
+              <PencilIcon className="size-4" />
+              編輯
+            </button>
+          </MenuItem>
+          <div className="my-1 h-px bg-primary-200" />
+          <MenuItem>
+            <button
+              type="button"
+              onClick={() => handleDeleteSportRecord()}
               className="group flex w-full items-center gap-3 rounded-lg px-2 py-1.5 data-[focus]:bg-primary-100"
             >
               <TrashIcon className="size-4" />
@@ -59,10 +59,10 @@ export default function RecordReviseMenu({ record }: { record: IRecord }) {
           </MenuItem>
         </MenuItems>
       </Menu>
-      <EditRecord
+      <EditSportRecord
         isEdit={isEdit}
         isClose={() => setIsEdit(false)}
-        record={record}
+        sportRecord={sportRecord}
       />
     </>
   );

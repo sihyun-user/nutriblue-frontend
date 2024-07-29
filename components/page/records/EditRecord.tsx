@@ -14,7 +14,7 @@ interface Props {
   record: IRecord;
 }
 
-export default function EditRecordForm({ isEdit, isClose, record }: Props) {
+export default function EditRecord({ isEdit, isClose, record }: Props) {
   const [multiplier, setMultiplier] = useState(2);
 
   const { food, multiplier: initMultiplier } = record;

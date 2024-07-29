@@ -18,7 +18,7 @@ export default function useUpdateSportRecord() {
       const calendarId = `${year}-${month}`;
       queryClient.invalidateQueries({ queryKey: ['records', dateId] });
       queryClient.invalidateQueries({ queryKey: ['sportRecords', dateId] });
-      queryClient.invalidateQueries({ queryKey: ['healthyReport'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       queryClient.invalidateQueries({ queryKey: ['calendars', calendarId] });
     },
     onError: () => {

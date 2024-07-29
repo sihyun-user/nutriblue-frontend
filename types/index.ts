@@ -7,3 +7,11 @@ export interface IPagination {
   totalPages: number;
   targetPage: number;
 }
+
+export interface ISportRecord {
+  id: string;
+  sportName: string;
+  sportTime: string;
+  sportValue: number;
+  recordDate: string;
+}

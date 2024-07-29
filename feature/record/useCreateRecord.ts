@@ -19,7 +19,7 @@ export default function useCreateRecord() {
       toast.success('新增食品紀錄成功');
       queryClient.invalidateQueries({ queryKey: ['records'] });
       queryClient.invalidateQueries({ queryKey: ['sportRecords'] });
-      queryClient.invalidateQueries({ queryKey: ['healthyReport'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       queryClient.invalidateQueries({ queryKey: ['calendars', calendarId] });
     },
     onError: () => {
