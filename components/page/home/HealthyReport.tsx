@@ -34,10 +34,12 @@ export default function HealthyReport() {
               <BaseButton variation="gray">修改營養目標</BaseButton>
             </Link>
             <NewSportRecord />
-            <BaseButton variation="secondary">
-              <PlusIcon className="size-5" />
-              新增食品紀錄
-            </BaseButton>
+            <Link href="/foods">
+              <BaseButton variation="secondary">
+                <PlusIcon className="size-5" />
+                新增食品紀錄
+              </BaseButton>
+            </Link>
           </div>
         </div>
         <div className="flex flex-1 flex-col gap-7">
@@ -46,10 +48,12 @@ export default function HealthyReport() {
               <BaseButton variation="gray">修改營養目標</BaseButton>
             </Link>
             <NewSportRecord />
-            <BaseButton variation="secondary">
-              <PlusIcon className="size-5" />
-              新增食品紀錄
-            </BaseButton>
+            <Link href="/foods">
+              <BaseButton variation="secondary">
+                <PlusIcon className="size-5" />
+                新增食品紀錄
+              </BaseButton>
+            </Link>
           </div>
           <div className="flex gap-5 sm:gap-10">
             <div className="flex flex-col gap-1">
