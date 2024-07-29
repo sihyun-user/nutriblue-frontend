@@ -6,7 +6,7 @@ import {
   TrashIcon
 } from '@heroicons/react/16/solid';
 
-import { IRecord } from '@/types/record';
+import { IRecord } from '@/types';
 import useDeleteRecord from '@/feature/record/useDeleteRecord';
 import EditRecord from './EditRecord';
 

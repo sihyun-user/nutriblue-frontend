@@ -1,8 +1,8 @@
 import { BookmarkIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 import { BookmarkIcon as OutlineBookmarkIcon } from '@heroicons/react/24/outline';
 
-import { type UserInfoType } from '@/types/user';
-import { IFood } from '@/types/food';
+import { type UserInfoType } from '@/types';
+import { IFood } from '@/types';
 import { useUserInfo } from '@/providers/UserProvider';
 import { setContainerValue } from '@/utils';
 import useCreateFoodBookmark from '@/feature/bookmark/useCreateBookmark';

@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 
-import { IFood } from '@/types/food';
+import { IFood } from '@/types';
 import { newRecordSchema, type NewRecordSchemaType } from '@/schemas/record';
 import BaseButton from '@/components/ui/BaseButton';
 import InputRow from '@/components/ui/InputRow';

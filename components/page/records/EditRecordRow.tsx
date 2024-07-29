@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { IRecord } from '@/types/record';
+import { IRecord } from '@/types';
 import {
   updateRecordSchema,
   type UpdateRecordSchemaType

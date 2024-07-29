@@ -3,7 +3,7 @@
 import { useEffect, createContext, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { type UserInfoType } from '@/types/user';
+import { type UserInfoType } from '@/types';
 import useUser from '@/feature/user/useUser';
 import FullPageSpinner from '@/components/FullPageSpinner';
 

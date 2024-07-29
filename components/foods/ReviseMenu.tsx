@@ -6,7 +6,7 @@ import {
   TrashIcon
 } from '@heroicons/react/16/solid';
 
-import { IFood } from '@/types/food';
+import { IFood } from '@/types';
 import EditFood from '@/components/foods/EditFood';
 import useDeleteFood from '@/feature/food/useDeleteFood';
 

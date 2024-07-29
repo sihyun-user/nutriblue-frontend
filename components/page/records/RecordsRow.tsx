@@ -1,5 +1,5 @@
 import React from 'react';
-import { IRecord } from '@/types/record';
+import { IRecord } from '@/types';
 import RecordReviseMenu from '@/components/page/records/RecordReviseMenu';
 
 interface Props {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { IFood } from '@/types/food';
+import { IFood } from '@/types';
 import useBookmarks from '@/feature/bookmark/useBookmarks';
 import Spinner from '@/components/Spinner';
 import PageResults from '@/components/PageResults';

@@ -1,4 +1,4 @@
-import { IFood, INutritions } from '@/types/food';
+import { IFood, INutritions } from '@/types';
 import InputRow from '@/components/ui/InputRow';
 import nutritionList from '@/utils/nutritionList';
 

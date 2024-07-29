@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { IFood } from '@/types/food';
+import { IFood } from '@/types';
 import { foodFormSchema, type FoodFormType } from '@/schemas/food';
 import useEditFood from '@/feature/food/useEditFood';
 import InputRow from '@/components/ui/InputRow';

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
-import { IRecord } from '@/types/record';
+import { IRecord } from '@/types';
 import Dialog from '@/components/dialog/Dialog';
 import NutritionRows from '@/components/foods/NutritionRows';
 import EditRecordRow from './EditRecordRow';
