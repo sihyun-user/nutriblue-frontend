@@ -20,7 +20,6 @@ export default function Avatar({ size, opacity = false }: Props) {
       <Image
         src={userInfo.avatar}
         quality={60}
-        priority
         fill
         sizes="100%"
         className="object-cover"
