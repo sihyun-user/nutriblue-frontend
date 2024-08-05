@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <div className="mx-auto w-full max-w-6xl">
-      <div className="mb-8 flex items-center md:block">
+      <div className="mb-8 flex items-center justify-center md:block">
         <SearchBar />
       </div>
       <ListBookmark />

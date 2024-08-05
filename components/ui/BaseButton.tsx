@@ -39,7 +39,7 @@ export default function BaseButton({
       disabled={disabled}
       onClick={onClick}
       className={clsx(
-        'flex h-10 min-w-[60px] items-center justify-center gap-1 rounded px-3 text-sm transition-all duration-200',
+        'flex h-10 min-w-[60px] items-center justify-center gap-1 whitespace-nowrap rounded px-3 text-sm transition-all duration-200',
         className,
         variationStyle,
         { 'rounded-full': rounded },

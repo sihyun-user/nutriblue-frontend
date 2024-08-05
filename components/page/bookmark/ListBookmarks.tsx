@@ -11,7 +11,7 @@ import FoodCard from '@/components/foods/FoodCard';
 import FoodItem from '@/components/foods/FoodItem';
 import EmptyBookmark from './EmptyBookmark';
 
-export default function ListFoods() {
+export default function ListBookmarks() {
   const [isSelect, setIsSelect] = useState(false);
   const [selectedFood, setSelectedFood] = useState<IFood | null>(null);
   const { data, isPending, pageSize } = useBookmarks();

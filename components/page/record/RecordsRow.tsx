@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { IRecord } from '@/types';
+import { setContainerValue } from '@/utils';
 import RecordReviseMenu from '@/components/page/record/RecordReviseMenu';
 
 interface Props {
@@ -34,6 +36,7 @@ function emptyRecordRow() {
 
 function generateRecordRow(record: IRecord) {
   const { id, food, multiplier } = record;
+  const { name, nutritions } = food;
 
   if (!food) {
     return (
@@ -51,16 +54,32 @@ function generateRecordRow(record: IRecord) {
   return (
     <tr key={record.id} className="border-b bg-white hover:bg-gray-50">
       <th scope="row" className="px-6 py-4 text-left font-medium text-gray-900">
-        {food.name} / {multiplier}份
+        {name} / {multiplier}份
       </th>
-      <td className="px-6 py-4">{food.nutritions.calories}</td>
-      <td className="px-6 py-4">{food.nutritions.protein}</td>
-      <td className="px-6 py-4">{food.nutritions.fat}</td>
-      <td className="px-6 py-4">{food.nutritions.transFat}</td>
-      <td className="px-6 py-4">{food.nutritions.saturatedFat}</td>
-      <td className="px-6 py-4">{food.nutritions.sugar}</td>
-      <td className="px-6 py-4">{food.nutritions.carbohydrates}</td>
-      <td className="px-6 py-4">{food.nutritions.sodium}</td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.calories, multiplier)}
+      </td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.protein, multiplier)}
+      </td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.fat, multiplier)}
+      </td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.transFat, multiplier)}
+      </td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.saturatedFat, multiplier)}
+      </td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.sugar, multiplier)}
+      </td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.carbohydrates, multiplier)}
+      </td>
+      <td className="px-6 py-4">
+        {setContainerValue(nutritions.sodium, multiplier)}
+      </td>
       <td className="px-6 py-4">
         <RecordReviseMenu record={record} aria-label="修改紀錄" />
       </td>

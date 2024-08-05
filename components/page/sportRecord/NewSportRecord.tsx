@@ -94,7 +94,7 @@ export default function NewSportRecord() {
               <InputRow
                 variation="secondary"
                 register={register}
-                label="運動時間(ex: 30分鐘)"
+                label="運動時間"
                 id="sportTime"
                 errors={errors}
               />

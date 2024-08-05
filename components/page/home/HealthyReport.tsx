@@ -24,17 +24,19 @@ export default function HealthyReport() {
         )}
       </div>
       <div className="flex flex-col gap-8 bg-primary-50 px-4 pb-14 pt-3 sm:gap-12 md:flex-row">
-        <div className="flex items-center justify-between">
+        <div className="flex items-start justify-between">
           <CircularProgress
             caloriespercent={data ? data.caloriespercent : 0}
             caloriesBalance={data ? data.caloriesBalance : 0}
           />
           <div className="flex flex-col justify-end gap-3 sm:flex-row md:hidden">
             <Link href="/user/profile">
-              <BaseButton variation="gray">修改營養目標</BaseButton>
+              <BaseButton variation="gray" className="w-[132px] md:w-auto">
+                修改營養目標
+              </BaseButton>
             </Link>
             <NewSportRecord />
-            <Link href="/foods">
+            <Link href="/food">
               <BaseButton variation="secondary">
                 <PlusIcon className="size-5" />
                 新增食品紀錄
@@ -48,7 +50,7 @@ export default function HealthyReport() {
               <BaseButton variation="gray">修改營養目標</BaseButton>
             </Link>
             <NewSportRecord />
-            <Link href="/foods">
+            <Link href="/food">
               <BaseButton variation="secondary">
                 <PlusIcon className="size-5" />
                 新增食品紀錄
@@ -90,7 +92,7 @@ export default function HealthyReport() {
             <div
               className={clsx(
                 'relative h-3 rounded-full',
-                data && data.caloriespercent > 100
+                data && data.caloriespercent >= 100
                   ? 'bg-red-400'
                   : 'bg-blue-400'
               )}
