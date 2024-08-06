@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<img width="500" src="https://firebasestorage.googleapis.com/v0/b/nutriblue-99be9.appspot.com/o/images%2Fnutriblue-home.PNG?alt=media&token=7b52b13a-6678-4cec-acfe-cb23f72ef851
+" />
 
-First, run the development server:
+## 測試帳號
+
+```bash
+Account： user@gmail.com
+Password： user1234
+```
+
+### 取得專案
+
+```bash
+git clone https://github.com/sihyun-user/nutriblue-frontend.git
+```
+
+### 安裝套件
+
+```bash
+npm install
+```
+
+### 運行專案
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 開啟專案
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+在瀏覽器網址列輸入以下即可看到畫面
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+http://localhost:3000/
+```
 
-## Learn More
+## 環境變數說明
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```env
+NEXT_TIMEOUT_PUBLIC_SEC= #3000 react-hot-toast 出現時長
+NEXT_PUBLIC_BASEURL= # 請參照後台專案的 localhost: https://nutriblue.vercel.app
+NEXT_PUBLIC_BASE_API= # api 域名，請參照後台專案的 localhost:https://nutriblue-backend.onrender.com
+```
