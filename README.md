@@ -12,6 +12,12 @@ Account： user@gmail.com
 Password： user1234
 ```
 
+## 安裝
+
+以下將會引導你如何安裝此專案到你的電腦上。
+
+Node.js 版本建議為：`18.16.0` 以上
+
 ### 取得專案
 
 ```bash
@@ -41,7 +47,12 @@ http://localhost:3000/
 ### 環境變數說明
 
 ```env
-NEXT_TIMEOUT_PUBLIC_SEC= #3000 react-hot-toast 出現時長
-NEXT_PUBLIC_BASEURL= # 請參照後台專案的 localhost: https://nutriblue.vercel.app
-NEXT_PUBLIC_BASE_API= # api 域名，請參照後台專案的 localhost:https://nutriblue-backend.onrender.com
+# react-hot-toast 出現時長
+NEXT_TIMEOUT_PUBLIC_SEC=3000
+
+# 前台域名，請參照前台專案的 localhost: https://nutriblue.vercel.app
+NEXT_PUBLIC_BASEURL=
+
+# 後台 API 域名，請參照後台專案的 localhost:https://nutriblue-backend.onrender.com
+NEXT_PUBLIC_BASE_API=
 ```
