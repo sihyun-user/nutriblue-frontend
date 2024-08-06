@@ -5,7 +5,7 @@ NutriBlue 是您的飲食日記和營養指南的最佳夥伴。通過紀錄每�
 
 DEMO: https://nutriblue.vercel.app
 
-## 測試帳號
+### 測試帳號
 
 ```bash
 Account： user@gmail.com
@@ -38,7 +38,7 @@ npm run dev
 http://localhost:3000/
 ```
 
-## 環境變數說明
+### 環境變數說明
 
 ```env
 NEXT_TIMEOUT_PUBLIC_SEC= #3000 react-hot-toast 出現時長
