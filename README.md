@@ -30,6 +30,11 @@ git clone https://github.com/sihyun-user/nutriblue-frontend.git
 npm install
 ```
 
+### 環境變數設定
+
+請在終端機輸入 cp .env.example .env 來複製 .env.example 檔案，並依據 .env 內容調整相關欄位。
+
+
 ### 運行專案
 
 ```bash
