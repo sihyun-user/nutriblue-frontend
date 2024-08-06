@@ -1,6 +1,9 @@
 
-<img width="500" src="https://firebasestorage.googleapis.com/v0/b/nutriblue-99be9.appspot.com/o/images%2Fnutriblue-home.PNG?alt=media&token=7b52b13a-6678-4cec-acfe-cb23f72ef851
-" />
+# NutriBlue - 飲食日記與全面營養資訊平台
+
+NutriBlue 是您的飲食日記和營養指南的最佳夥伴。通過紀錄每日飲食習慣，了解每餐的營養成分，並查詢大量健康食品資料庫，幫助您做出更明智的飲食選擇，達成健康生活目標。立即加入我們，開啟您的健康飲食之旅！
+
+DEMO: https://nutriblue.vercel.app
 
 ## 測試帳號
 
