@@ -9,7 +9,7 @@ DEMO: https://nutriblue.vercel.app
 
 ```bash
 Account： user@gmail.com
-Password： user123456
+Password： user1234
 ```
 
 ## 安裝
