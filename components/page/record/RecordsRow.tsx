@@ -36,7 +36,6 @@ function emptyRecordRow() {
 
 function generateRecordRow(record: IRecord) {
   const { id, food, multiplier } = record;
-  const { name, nutritions } = food;
 
   if (!food) {
     return (
@@ -50,6 +49,8 @@ function generateRecordRow(record: IRecord) {
       </tr>
     );
   }
+
+  const { name, nutritions } = food;
 
   return (
     <tr key={record.id} className="border-b bg-white hover:bg-gray-50">
