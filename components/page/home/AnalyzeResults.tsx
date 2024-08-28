@@ -34,7 +34,7 @@ export default function AnalyzeResults() {
                 style={{ width: `${data ? data.datePercents.protein : 0}%` }}
               >
                 <span className="absolute -right-2 top-3 text-lg font-medium text-blue-400">
-                  {data ? data.dateCurrentTake.protein : 0}
+                  {data ? Math.min(data.dateCurrentTake.protein || 0, 100) : 0}
                 </span>
               </div>
             </div>
@@ -50,7 +50,9 @@ export default function AnalyzeResults() {
                   'relative h-3 rounded-full bg-blue-400',
                   data && data.dateCurrentTake.fat > 0 ? 'px-1' : ''
                 )}
-                style={{ width: `${data ? data.datePercents.fat : 0}%` }}
+                style={{
+                  width: `${data ? Math.min(data.datePercents.fat || 0, 100) : 0}%`
+                }}
               >
                 <span className="absolute -right-2 top-3 text-lg font-medium text-blue-400">
                   {data ? data.dateCurrentTake.fat : 0}
@@ -72,7 +74,7 @@ export default function AnalyzeResults() {
                   data && data.dateCurrentTake.carbohydrates > 0 ? 'px-1' : ''
                 )}
                 style={{
-                  width: `${data ? data.datePercents.carbohydrates : 0}%`
+                  width: `${data ? Math.min(data.datePercents.carbohydrates || 0, 100) : 0}%`
                 }}
               >
                 <span className="absolute -right-2 top-3 text-lg font-medium text-blue-400">
@@ -93,7 +95,7 @@ export default function AnalyzeResults() {
                   data && data.dateCurrentTake.saturatedFat > 0 ? 'px-1' : ''
                 )}
                 style={{
-                  width: `${data ? data.datePercents.saturatedFat : 0}%`
+                  width: `${data ? Math.min(data.datePercents.saturatedFat || 0, 100) : 0}%`
                 }}
               >
                 <span className="absolute -right-2 top-3 text-lg font-medium text-cyan-400">
@@ -115,7 +117,9 @@ export default function AnalyzeResults() {
                   'relative h-3 rounded-full bg-cyan-400',
                   data && data.dateCurrentTake.sugar > 0 ? 'px-1' : ''
                 )}
-                style={{ width: `${data ? data.datePercents.sugar : 0}%` }}
+                style={{
+                  width: `${data ? Math.min(data.datePercents.sugar || 0, 100) : 0}%`
+                }}
               >
                 <span className="absolute -right-2 top-3 text-lg font-medium text-cyan-400">
                   {data ? data.dateCurrentTake.sugar : 0}
@@ -134,7 +138,9 @@ export default function AnalyzeResults() {
                   'relative h-3 rounded-full bg-cyan-400',
                   data && data.dateCurrentTake.transFat > 0 ? 'px-1' : ''
                 )}
-                style={{ width: `${data ? data.datePercents.transFat : 0}%` }}
+                style={{
+                  width: `${data ? Math.min(data.datePercents.transFat || 0, 100) : 0}%`
+                }}
               >
                 <span className="absolute -right-2 top-3 text-lg font-medium text-cyan-400">
                   {data ? data.dateCurrentTake.transFat : 0}
@@ -156,7 +162,7 @@ export default function AnalyzeResults() {
                   data && data.dateCurrentTake.sodium > 0 ? 'px-1' : ''
                 )}
                 style={{
-                  width: `${data ? data.datePercents.sodium : 0}%`
+                  width: `${data ? Math.min(data.datePercents.sodium || 0, 100) : 0}%`
                 }}
               >
                 <span className="absolute -right-2 top-3 text-lg font-medium text-gray-400">
