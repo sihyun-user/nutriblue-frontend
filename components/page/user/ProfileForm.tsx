@@ -46,8 +46,8 @@ export default function ProfileForm() {
       name: userInfo?.name,
       gender: userInfo?.gender,
       birthday: userInfo?.birthday,
-      height: userInfo?.weight,
-      weight: userInfo?.height,
+      height: userInfo?.height,
+      weight: userInfo?.weight,
       sportLevel: userInfo?.sportLevel,
       fitnessLevel: userInfo?.fitnessLevel
     }
