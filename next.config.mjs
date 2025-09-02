@@ -9,8 +9,15 @@ const nextConfig = {
         pathname: '/nutriblue-99be9.appspot.com/images/**'
       }
     ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BASE_API}/api/v1/:path*`
+      }
+    ];
   }
-  // output: 'export'
 };
 
 export default nextConfig;
